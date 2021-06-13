@@ -2,23 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MyGameDll
 {
 
 
-    public class GameEnum
+    public enum Layer
     {
-        public enum Layer
-        {
-            Chess = 7,
+        Chess = 7,
 
-            Node = 6,
-
-        }
-
-
+        Node = 6,
 
     }
+
+    public enum ChessEnum
+    {
+        None = 0,
+
+        ChessGun = 1,
+
+    }
+
+
 }
