@@ -49,8 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\AbstractChess .cs" />
+    <Compile Include="Abstract\AbstractNode.cs" />
+    <Compile Include="ChessController.cs" />
     <Compile Include="Chess\ChessGun.cs" />
     <Compile Include="GameEnum.cs" />
+    <Compile Include="Node\NormolNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

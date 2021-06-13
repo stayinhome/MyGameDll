@@ -24,5 +24,9 @@ namespace MyGameDll
 
     }
 
+    public enum NodeEnum
+    {
+        Normol = 0,
+    }
 
 }

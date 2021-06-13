@@ -7,13 +7,17 @@ namespace MyGameDll.Chess
 {
     class ChessGun : AbstractChess
     {
-        ChessGun()
+
+
+        void Start()
         {
             ChessType = ChessEnum.ChessGun;
             Attack = 2;
             Defent = 2;
             Operater = 2;
             View = 2;
+
+
         }
 
 
