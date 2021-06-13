@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using MyGameDll.Abstract;
+using UnityEngine;
 
 namespace MyGameDll
 {
@@ -29,6 +30,11 @@ namespace MyGameDll
         /// 视野
         /// </summary>
         public int View = 0;
+
+        /// <summary>
+        /// 当前所在节点
+        /// </summary>
+        public GameObject CurNode = null;
 
 
     }

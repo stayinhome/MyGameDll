@@ -53,6 +53,7 @@
     <Compile Include="ChessController.cs" />
     <Compile Include="Chess\ChessGun.cs" />
     <Compile Include="GameEnum.cs" />
+    <Compile Include="Node\CommanderNode.cs" />
     <Compile Include="Node\NormolNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

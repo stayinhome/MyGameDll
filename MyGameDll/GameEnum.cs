@@ -27,6 +27,8 @@ namespace MyGameDll
     public enum NodeEnum
     {
         Normol = 0,
+
+        Commander =1,
     }
 
 }

@@ -6,19 +6,35 @@ using UnityEngine;
 
 namespace MyGameDll.Abstract
 {
-    class AbstractNode : MonoBehaviour
+    public class AbstractNode : MonoBehaviour
     {
 
         /// <summary>
         /// 类型
         /// </summary>
-        public NodeEnum ChessType { get; set; } = NodeEnum.Normol;
+        public NodeEnum NodeType { get; set; } = NodeEnum.Normol;
 
         /// <summary>
-        /// 攻击力
+        /// 临接节点
         /// </summary>
-        public List<AbstractNode> NextNode = new List<AbstractNode>();
+        public List<GameObject> NextNode = new List<GameObject>();
 
+        /// <summary>
+        /// 是否是临接节点
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        public bool IsNextNode(GameObject node)
+        {
+            foreach(GameObject item in NextNode)
+            {
+                if(item == node)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
 
     }

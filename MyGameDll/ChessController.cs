@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MyGameDll;
 using System;
+using MyGameDll.Abstract;
 
 public class ChessController : MonoBehaviour
 {
@@ -35,11 +36,12 @@ public class ChessController : MonoBehaviour
                         }
                     case Layer.Node:
                         {
-                            if (HaveSelectChess)
+                            if (HaveSelectChess && ob.GetComponent<AbstractNode>().IsNextNode(SelectChess.GetComponent<AbstractChess>().CurNode))
                             {
                                 if (SelectChess.GetComponent<AbstractChess>().Operater-- > 0)
                                 {
                                     SelectChess.transform.position = ob.transform.position;
+                                    SelectChess.GetComponent<AbstractChess>().CurNode = ob;
                                 }
                             }
                             break;
