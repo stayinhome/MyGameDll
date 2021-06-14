@@ -36,6 +36,10 @@ namespace MyGameDll
         /// </summary>
         public GameObject CurNode = null;
 
+        public virtual void RefreshMe()
+        {
+
+        }
 
     }
 }

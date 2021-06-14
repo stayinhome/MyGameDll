@@ -20,6 +20,11 @@ namespace MyGameDll.Chess
 
         }
 
+        public override void RefreshMe()
+        {
+            base.RefreshMe();
+            Operater = 2;
+        }
 
 
     }

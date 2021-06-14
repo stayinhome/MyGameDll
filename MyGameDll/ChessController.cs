@@ -36,6 +36,7 @@ public class ChessController : MonoBehaviour
                         }
                     case Layer.Node:
                         {
+                            //DoMove
                             if (HaveSelectChess && ob.GetComponent<AbstractNode>().IsNextNode(SelectChess.GetComponent<AbstractChess>().CurNode))
                             {
                                 if (SelectChess.GetComponent<AbstractChess>().Operater-- > 0)
