@@ -5,7 +5,7 @@ using MyGameDll;
 using System;
 using MyGameDll.Abstract;
 
-public class ChessController : MonoBehaviour
+public class Controller : MonoBehaviour
 {
     public GameObject SelectChess;
 
@@ -41,9 +41,12 @@ public class ChessController : MonoBehaviour
                             {
                                 if (SelectChess.GetComponent<AbstractChess>().Operater-- > 0)
                                 {
-                                    SelectChess.transform.position = ob.transform.position;
+                                    SelectChess.transform.position = new Vector3(ob.transform.position.x, ob.transform.position.y, SelectChess.transform.position.z);
                                     SelectChess.GetComponent<AbstractChess>().CurNode = ob;
                                 }
+                            }else if (!HaveSelectChess)
+                            {
+
                             }
                             break;
                         }

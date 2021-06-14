@@ -11,12 +11,12 @@ namespace MyGameDll
 
         public void DoRefresh()
         {
-            GameObject go = GameObject.FindGameObjectWithTag("Node");
+            GameObject go = GameObject.FindGameObjectWithTag("Chess");
             if(go != null)
             {
                 foreach (Transform child in go.transform)
                 {
-                    Debug.Log(child.gameObject.name);
+                    child.gameObject.GetComponent<AbstractChess>().RefreshMe();
                 }
             }
         }
