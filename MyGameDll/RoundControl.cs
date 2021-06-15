@@ -14,10 +14,7 @@ namespace MyGameDll
             GameObject go = GameObject.FindGameObjectWithTag("Chess");
             if(go != null)
             {
-                foreach (Transform child in go.transform)
-                {
-                    child.gameObject.GetComponent<AbstractChess>().RefreshMe();
-                }
+                go.BroadcastMessage("RefreshMe");
             }
         }
     }
