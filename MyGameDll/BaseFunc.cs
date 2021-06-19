@@ -13,7 +13,8 @@ namespace MyGameDll
 
         public static void ShowButton(GameObject go,ButtonEnum Type)
         {
-            GameObject Ngo = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+
+            GameObject Ngo = GameObject.Instantiate<> (PrimitiveType.Sphere);
             Ngo.transform.position = new Vector3(go.transform.position.x + 10, go.transform.position.y + 10, go.transform.position.z);
             Ngo.AddComponent<AbstractButton>().Type = Type;
         }
