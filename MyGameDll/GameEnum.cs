@@ -31,4 +31,12 @@ namespace MyGameDll
         Commander =1,
     }
 
+    public enum ButtonEnum
+    {
+        None = 0,
+
+        Development = 1,
+
+    }
+
 }

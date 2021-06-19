@@ -1,9 +1,10 @@
-﻿using MyGameDll.Abstract;
+﻿using InformationManagement;
+using MyGameDll.Abstract;
 using UnityEngine;
 
 namespace MyGameDll
 {
-    public abstract class AbstractChess : MonoBehaviour
+    public abstract class AbstractChess : MonoBehaviour, ISpeakInterface
     {
         /// <summary>
         /// 类型
@@ -41,5 +42,9 @@ namespace MyGameDll
 
         }
 
+        public virtual string Speak(SpeakEnvironment environment)
+        {
+            return "Hello World";
+        }
     }
 }

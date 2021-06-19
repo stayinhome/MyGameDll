@@ -46,6 +46,10 @@ public class Controller : MonoBehaviour
                                 }
                             }else if (!HaveSelectChess)
                             {
+                                if(ob.tag == "Commander")
+                                {
+
+                                }
 
                             }
                             break;
