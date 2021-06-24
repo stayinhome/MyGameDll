@@ -23,7 +23,9 @@ public class Controller : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject ob = GetObject();
+            IniState();
+
+            GameObject ob = BaseFunc.GetObjectByClick();
             if(ob != null)
             {
                 Layer type = (Layer)ob.layer;
@@ -44,10 +46,12 @@ public class Controller : MonoBehaviour
                                     SelectChess.transform.position = new Vector3(ob.transform.position.x, ob.transform.position.y, SelectChess.transform.position.z);
                                     SelectChess.GetComponent<AbstractChess>().CurNode = ob;
                                 }
-                            }else if (!HaveSelectChess)
+                            }
+                            else if (!HaveSelectChess)
                             {
                                 if(ob.tag == "Commander")
                                 {
+                                    BaseFunc.ShowButton(ob, ButtonEnum.Development);
 
                                 }
 
@@ -70,23 +74,13 @@ public class Controller : MonoBehaviour
 
     }
 
-
-
-    private GameObject GetObject()
+    public void IniState()
     {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, Vector2.up, 100);
-        if (hit.collider != null)
-        {
-            GameObject ob = hit.collider.gameObject;
-            return ob;
+        BaseFunc.SetButtonStateByTag("Development", false);
 
-        }
-        else
-        {
-            return null;
-        }
     }
+
+
 
 
 

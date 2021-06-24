@@ -8,10 +8,6 @@ namespace MyGameDll.Abstract
         public ButtonEnum Type = ButtonEnum.None;
 
 
-        void Start()
-        {
-
-        }
 
 
     }
