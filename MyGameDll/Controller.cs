@@ -23,7 +23,7 @@ public class Controller : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            IniState();
+            //IniState();
 
             GameObject ob = BaseFunc.GetObjectByClick();
             if(ob != null)
@@ -70,13 +70,11 @@ public class Controller : MonoBehaviour
         }
 
 
-
-
     }
 
     public void IniState()
     {
-        BaseFunc.SetButtonStateByTag("Development", false);
+        BaseFunc.SetButtonStateByName("Development", false);
 
     }
 

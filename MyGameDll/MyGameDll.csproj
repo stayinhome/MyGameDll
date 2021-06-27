@@ -16,9 +16,9 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Debug\</OutputPath>
+    <OutputPath>..\..\..\UnityProject\Assets\Plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -48,7 +48,8 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.8f1c1\Editor\Data\Managed\UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\RefrenDll\UnityEngine.dll</HintPath>
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.8f1c1\Editor\Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +59,7 @@
     <Compile Include="BaseFunc.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Chess\ChessGun.cs" />
+    <Compile Include="DevelopmentButton.cs" />
     <Compile Include="GameEnum.cs" />
     <Compile Include="Node\CommanderNode.cs" />
     <Compile Include="Node\NormolNode.cs" />

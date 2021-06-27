@@ -21,8 +21,8 @@ namespace MyGameDll
                     break;
             }
 
-            Vector3 NewPosition = new Vector3(go.transform.position.x + 10, go.transform.position.y + 10, go.transform.position.z);
-            SetButtonStateByTag(ButtonType, true, NewPosition);
+            Vector3 NewPosition = new Vector3(go.transform.position.x + 1, go.transform.position.y + 1, go.transform.position.z);
+            SetButtonStateByName(ButtonType, true, NewPosition);
 
         }
 
@@ -44,16 +44,63 @@ namespace MyGameDll
 
         public static void SetButtonStateByTag(string TagName,bool? Active = null,Vector3? Position = null)
         {
-            GameObject ButtenGo = GameObject.FindGameObjectWithTag(TagName);
-            if (Active.HasValue)
+            GameObject Button = GameObject.FindGameObjectWithTag(TagName);
+
+
+        }
+
+        public static void SetButtonStateByName(string ButtonName, bool? Active = null, Vector3? Position = null)
+        {
+            GameObject ButtonList = GameObject.Find("ButtonList");
+            if(ButtonList != null)
             {
-                ButtenGo.SetActive(Active.Value);
-            }
-            if (Position.HasValue)
-            {
-                ButtenGo.transform.position = Position.Value;
+                GameObject Buttengo = ButtonList.transform.Find(ButtonName).gameObject;
+                if (Buttengo != null)
+                {
+                    if (Active.HasValue)
+                    {
+                        Buttengo.SetActive(Active.Value);
+                    }
+                    if (Position.HasValue)
+                    {
+                        Buttengo.transform.position = Position.Value;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Buttengo is null");
+                }
             }
 
+        }
+
+        public static void SetCanvasButtonStateByName(string CanvasName,string ButtonName, bool? Active = null, Vector3? Position = null)
+        {
+            GameObject Canvas = GameObject.Find(CanvasName);
+            if (Canvas != null)
+            {
+                GameObject Buttengo = Canvas.transform.Find(ButtonName).gameObject;
+                if(Buttengo != null)
+                {
+                    if (Active.HasValue)
+                    {
+                        Buttengo.SetActive(Active.Value);
+                    }
+                    if (Position.HasValue)
+                    {
+                        Buttengo.transform.position = Position.Value;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Buttengo is null");
+                }
+
+            }
+            else
+            {
+                Debug.Log("Buttengo is null");
+            }
         }
 
 
