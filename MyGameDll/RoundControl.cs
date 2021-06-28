@@ -14,7 +14,14 @@ namespace MyGameDll
             GameObject go = GameObject.FindGameObjectWithTag("Chess");
             if(go != null)
             {
-                go.BroadcastMessage("RefreshMe");
+                try
+                {
+                    go.BroadcastMessage("RefreshMe");
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e.ToString());
+                }
             }
         }
     }
