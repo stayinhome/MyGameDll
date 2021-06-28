@@ -9,10 +9,10 @@ namespace MyGameDll
     public class CameraControl : MonoBehaviour
     {
 
-        public float Speed = 0.0f;
+        public float Speed = 1.0f;
 
 
-        void Upadte()
+        void Update()
         {
             if (Input.GetMouseButton(0))
             {
