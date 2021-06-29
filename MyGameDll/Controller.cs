@@ -9,6 +9,8 @@ public class Controller : MonoBehaviour
 {
     public GameObject SelectChess;
 
+    public GameObject SelectNode;
+
     public bool HaveSelectChess
     {
         get
@@ -38,6 +40,7 @@ public class Controller : MonoBehaviour
                         }
                     case Layer.Node:
                         {
+                            SelectNode = ob;
                             //DoMove
                             if (HaveSelectChess && ob.GetComponent<AbstractNode>().IsNextNode(SelectChess.GetComponent<AbstractChess>().CurNode))
                             {
@@ -63,6 +66,7 @@ public class Controller : MonoBehaviour
             }
             else
             {
+                SelectNode = null;
                 SelectChess = null;
             }
 

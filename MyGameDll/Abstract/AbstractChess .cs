@@ -1,10 +1,11 @@
 ﻿using InformationManagement;
 using MyGameDll.Abstract;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyGameDll
 {
-    public abstract class AbstractChess : MonoBehaviour, ISpeakInterface
+    public abstract class AbstractChess : MonoBehaviour
     {
         /// <summary>
         /// 类型
@@ -37,14 +38,17 @@ namespace MyGameDll
         /// </summary>
         public GameObject CurNode = null;
 
+        /// <summary>
+        /// 成员
+        /// </summary>
+        public List<AbstractRole> Member = new List<AbstractRole>();
+
+
         public virtual void RefreshMe()
         {
 
         }
 
-        public virtual string Speak(SpeakEnvironment environment)
-        {
-            return "Hello World";
-        }
+
     }
 }
