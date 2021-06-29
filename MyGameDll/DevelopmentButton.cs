@@ -12,7 +12,7 @@ public class DevelopmentButton : MonoBehaviour
             GameObject ob = BaseFunc.GetObjectByClick();
             if(ob == this.gameObject)
             {
-                Debug.Log("I's me");
+                BaseFunc.SetCanvasButtonStateByName("Canvas", "TeamPanel", true);
 
                 this.gameObject.SetActive(false);
             }

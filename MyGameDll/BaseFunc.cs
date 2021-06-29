@@ -74,12 +74,12 @@ namespace MyGameDll
 
         }
 
-        public static void SetCanvasButtonStateByName(string CanvasName,string ButtonName, bool? Active = null, Vector3? Position = null)
+        public static void SetCanvasButtonStateByName(string CanvasName,string ObjectName, bool? Active = null, Vector3? Position = null)
         {
             GameObject Canvas = GameObject.Find(CanvasName);
             if (Canvas != null)
             {
-                GameObject Buttengo = Canvas.transform.Find(ButtonName).gameObject;
+                GameObject Buttengo = Canvas.transform.Find(ObjectName).gameObject;
                 if(Buttengo != null)
                 {
                     if (Active.HasValue)
