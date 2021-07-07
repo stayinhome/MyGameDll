@@ -19,6 +19,12 @@ namespace MyGameDll.Abstract
         /// </summary>
         public List<GameObject> NextNode = new List<GameObject>();
 
+
+        /// <summary>
+        /// 当前存在队伍
+        /// </summary>
+        public List<GameObject> CurTeam = new List<GameObject>();
+
         /// <summary>
         /// 是否是临接节点
         /// </summary>
@@ -26,13 +32,18 @@ namespace MyGameDll.Abstract
         /// <returns></returns>
         public bool IsNextNode(GameObject node)
         {
-            foreach(GameObject item in NextNode)
+            if(node!= null)
             {
-                if(item == node)
+                foreach (GameObject item in NextNode)
                 {
-                    return true;
+                    if (item == node)
+                    {
+                        return true;
+                    }
                 }
             }
+
+
             return false;
         }
 

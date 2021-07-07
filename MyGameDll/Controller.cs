@@ -42,12 +42,14 @@ public class Controller : MonoBehaviour
                         {
                             SelectNode = ob;
                             //DoMove
-                            if (HaveSelectChess && ob.GetComponent<AbstractNode>().IsNextNode(SelectChess.GetComponent<AbstractChess>().CurNode))
+                            if (HaveSelectChess && ob.GetComponent<AbstractNode>().IsNextNode(SelectChess.GetComponent<AbstractTeam>().CurNode))
                             {
-                                if (SelectChess.GetComponent<AbstractChess>().Operater-- > 0)
+                                if (SelectChess.GetComponent<AbstractTeam>().Operater-- > 0)
                                 {
+                                    SelectChess.GetComponent<AbstractTeam>().CurNode.GetComponent<AbstractNode>().CurTeam.Remove(SelectChess);
                                     SelectChess.transform.position = new Vector3(ob.transform.position.x, ob.transform.position.y, SelectChess.transform.position.z);
-                                    SelectChess.GetComponent<AbstractChess>().CurNode = ob;
+                                    SelectNode.GetComponent<AbstractNode>().CurTeam.Add(SelectChess);
+                                    SelectChess.GetComponent<AbstractTeam>().CurNode = ob;
                                 }
                             }
                             else if (!HaveSelectChess)

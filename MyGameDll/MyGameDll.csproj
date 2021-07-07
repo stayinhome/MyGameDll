@@ -48,15 +48,16 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.8f1c1\Editor\Data\Managed\UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.8f1c1\Editor\Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\RefrenDll\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\AbstractButton.cs" />
-    <Compile Include="Abstract\AbstractChess .cs" />
-    <Compile Include="Abstract\AbstractNode.cs" />
-    <Compile Include="Abstract\AbstractRole.cs" />
+    <Compile Include="GlobalObject.cs" />
+    <Compile Include="Model\Abstract\AbstractButton.cs" />
+    <Compile Include="Model\Abstract\AbstractTeam.cs" />
+    <Compile Include="Model\Abstract\AbstractNode.cs" />
+    <Compile Include="Model\Abstract\AbstractRole.cs" />
     <Compile Include="BaseFunc.cs" />
     <Compile Include="CameraControl.cs" />
     <Compile Include="Controller.cs" />

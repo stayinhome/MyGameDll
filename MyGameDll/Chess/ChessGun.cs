@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MyGameDll.Chess
 {
-    class ChessGun : AbstractChess
+    class ChessGun : AbstractTeam
     {
 
 

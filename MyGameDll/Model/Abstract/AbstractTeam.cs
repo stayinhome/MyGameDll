@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MyGameDll
 {
-    public abstract class AbstractChess : MonoBehaviour
+    public abstract class AbstractTeam : MonoBehaviour
     {
         /// <summary>
         /// 类型
