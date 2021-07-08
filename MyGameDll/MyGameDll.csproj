@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExitButton.cs" />
     <Compile Include="GlobalObject.cs" />
     <Compile Include="Model\Abstract\AbstractButton.cs" />
     <Compile Include="Model\Abstract\AbstractTeam.cs" />
@@ -64,6 +65,8 @@
     <Compile Include="Chess\ChessGun.cs" />
     <Compile Include="DevelopmentButton.cs" />
     <Compile Include="GameEnum.cs" />
+    <Compile Include="MyEventManager\EvenData.cs" />
+    <Compile Include="MyEventManager\MyEventManager.cs" />
     <Compile Include="Node\CommanderNode.cs" />
     <Compile Include="Node\NormolNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
