@@ -4,12 +4,23 @@ using UnityEngine;
 using MyGameDll;
 using System;
 using MyGameDll.Abstract;
+using MyGameDll.MyEventManager;
 
 public class Controller : MonoBehaviour
 {
     public GameObject SelectChess;
 
-    public GameObject SelectNode;
+    private GameObject _SelectNode;
+    public GameObject SelectNode
+    {
+        get { return _SelectNode; }
+        set
+        {
+            _SelectNode = value;
+            MyEventManager.Instance.DispatchEvent(MyEventType.SelectNodeChange,value);
+        }
+    }
+
 
     public bool HaveSelectChess
     {
