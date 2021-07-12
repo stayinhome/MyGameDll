@@ -48,11 +48,12 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.8f1c1\Editor\Data\Managed\UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\RefrenDll\UnityEngine.dll</HintPath>
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.8f1c1\Editor\Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button\TeamCreat.cs" />
     <Compile Include="ExitButton.cs" />
     <Compile Include="GlobalObject.cs" />
     <Compile Include="Model\Abstract\AbstractButton.cs" />
