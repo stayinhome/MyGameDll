@@ -16,7 +16,7 @@ namespace MyGameDll
 
     }
 
-    public enum ChessEnum
+    public enum TeamEnum
     {
         None = 0,
 
@@ -39,4 +39,21 @@ namespace MyGameDll
 
     }
 
+    public enum CampEnum
+    {
+        None = 0,
+
+        frieng = 1,
+
+        enemy =2,
+
+
+    }
+
+    public enum PanelType
+    {
+        GamePanel = 0,
+
+        TeamPanel = 1,
+    }
 }

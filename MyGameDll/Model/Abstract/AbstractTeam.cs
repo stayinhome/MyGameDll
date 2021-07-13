@@ -10,7 +10,7 @@ namespace MyGameDll
         /// <summary>
         /// 类型
         /// </summary>
-        public ChessEnum ChessType { get; set; } = ChessEnum.None;
+        public TeamEnum TeamType { get; set; } = TeamEnum.None;
 
         /// <summary>
         /// 攻击力
@@ -37,6 +37,11 @@ namespace MyGameDll
         /// 当前所在节点
         /// </summary>
         public GameObject CurNode = null;
+
+        /// <summary>
+        /// 阵营
+        /// </summary>
+        public CampEnum Camp = CampEnum.None;
 
         /// <summary>
         /// 成员

@@ -11,12 +11,11 @@ namespace MyGameDll.Chess
 
         void Start()
         {
-            ChessType = ChessEnum.ChessGun;
+            TeamType = TeamEnum.ChessGun;
             Attack = 2;
             Defent = 2;
             Operater = 2;
             View = 2;
-
 
         }
 

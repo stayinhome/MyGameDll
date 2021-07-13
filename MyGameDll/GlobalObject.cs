@@ -10,11 +10,49 @@ namespace MyGameDll
 {
     public class GlobalObject : MonoBehaviour
     {
-        public GameObject CurSelectChess;
+        public static PanelType CurPanel
+        {
+            get
+            {
+                return GameObject.Find("GlobalObject").GetComponent<GlobalObject>()._CurPanel;
+            }
+            set
+            {
+                GameObject.Find("GlobalObject").GetComponent<GlobalObject>()._CurPanel = value;
+            }
+        }
 
-        public GameObject CurSelectNode;
+        public static GameObject CurSelectChess
+        {
+            get
+            {
+                return GameObject.Find("GlobalObject").GetComponent<GlobalObject>()._CurSelectChess;
+            }
+            set
+            {
+                GameObject.Find("GlobalObject").GetComponent<GlobalObject>()._CurSelectChess = value;
+            }
+        }
 
-        public List<AbstractNode> listNode = new List<AbstractNode>();
+        public static GameObject CurSelectNode
+        {
+            get
+            {
+                return GameObject.Find("GlobalObject").GetComponent<GlobalObject>()._CurSelectNode;
+            }
+            set
+            {
+                GameObject.Find("GlobalObject").GetComponent<GlobalObject>()._CurSelectNode = value;
+            }
+        }
+
+        public  GameObject _CurSelectChess;
+
+        public  GameObject _CurSelectNode;
+
+        public  PanelType _CurPanel = PanelType.GamePanel;
+
+        public  List<AbstractNode> listNode = new List<AbstractNode>();
 
         void Start()
         {
@@ -24,7 +62,7 @@ namespace MyGameDll
 
         public void SelectNode_Change(GameObject go)
         {
-            CurSelectNode = go;
+            _CurSelectNode = go;
         }
     }
 }

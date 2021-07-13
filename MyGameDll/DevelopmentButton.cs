@@ -13,6 +13,7 @@ public class DevelopmentButton : MonoBehaviour
             if(ob == this.gameObject)
             {
                 BaseFunc.SetCanvasButtonStateByName("Canvas", "TeamPanel", true);
+                GlobalObject.CurPanel = PanelType.TeamPanel;
 
                 this.gameObject.SetActive(false);
             }

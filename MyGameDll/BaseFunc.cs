@@ -8,8 +8,9 @@ using UnityEngine;
 
 namespace MyGameDll
 {
-    internal class BaseFunc
+    internal class BaseFunc : MonoBehaviour
     {
+
 
         public static void ShowButton(GameObject go,ButtonEnum Type)
         {
@@ -101,6 +102,14 @@ namespace MyGameDll
             {
                 Debug.Log("Buttengo is null");
             }
+        }
+
+        public static void CreatTeam(GameObject Node , AbstractTeam TeamData = null)
+        {
+            GameObject layerPrefab = Resources.Load("Prefab/ChessGun") as GameObject;
+            GameObject go = Instantiate(layerPrefab, GameObject.Find("Chess").transform, true);
+            go.transform.localPosition = Node.transform.localPosition;
+            go.GetComponent<AbstractTeam>().CurNode = Node;
         }
 
 

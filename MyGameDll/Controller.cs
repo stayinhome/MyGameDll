@@ -8,6 +8,7 @@ using MyGameDll.MyEventManager;
 
 public class Controller : MonoBehaviour
 {
+
     public GameObject SelectChess;
 
     private GameObject _SelectNode;
@@ -31,61 +32,64 @@ public class Controller : MonoBehaviour
     }
 
 
+
     // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
             //IniState();
-
-            GameObject ob = BaseFunc.GetObjectByClick();
-            if(ob != null)
+            if(GlobalObject.CurPanel == PanelType.GamePanel)
             {
-                Layer type = (Layer)ob.layer;
-                switch (type)
+                GameObject ob = BaseFunc.GetObjectByClick();
+                if (ob != null)
                 {
-                    case Layer.Chess:
-                        {
-                            SelectChess = ob;
-                            break;
-                        }
-                    case Layer.Node:
-                        {
-                            SelectNode = ob;
-                            //DoMove
-                            if (HaveSelectChess && ob.GetComponent<AbstractNode>().IsNextNode(SelectChess.GetComponent<AbstractTeam>().CurNode))
+                    Layer type = (Layer)ob.layer;
+                    switch (type)
+                    {
+                        case Layer.Chess:
                             {
-                                if (SelectChess.GetComponent<AbstractTeam>().Operater-- > 0)
-                                {
-                                    SelectChess.GetComponent<AbstractTeam>().CurNode.GetComponent<AbstractNode>().CurTeam.Remove(SelectChess);
-                                    SelectChess.transform.position = new Vector3(ob.transform.position.x, ob.transform.position.y, SelectChess.transform.position.z);
-                                    SelectNode.GetComponent<AbstractNode>().CurTeam.Add(SelectChess);
-                                    SelectChess.GetComponent<AbstractTeam>().CurNode = ob;
-                                }
+                                SelectChess = ob;
+                                break;
                             }
-                            else if (!HaveSelectChess)
+                        case Layer.Node:
                             {
-                                if(ob.tag == "Commander")
+                                SelectNode = ob;
+                                //DoMove
+                                if (HaveSelectChess && ob.GetComponent<AbstractNode>().IsNextNode(SelectChess.GetComponent<AbstractTeam>().CurNode))
                                 {
-                                    BaseFunc.ShowButton(ob, ButtonEnum.Development);
+                                    if (SelectChess.GetComponent<AbstractTeam>().Operater-- > 0)
+                                    {
+                                        SelectChess.GetComponent<AbstractTeam>().CurNode.GetComponent<AbstractNode>().CurTeam.Remove(SelectChess);
+                                        SelectChess.transform.position = new Vector3(ob.transform.position.x, ob.transform.position.y, SelectChess.transform.position.z);
+                                        SelectNode.GetComponent<AbstractNode>().CurTeam.Add(SelectChess);
+                                        SelectChess.GetComponent<AbstractTeam>().CurNode = ob;
+                                    }
+                                }
+                                else if (!HaveSelectChess)
+                                {
+                                    if (ob.tag == "Commander")
+                                    {
+                                        BaseFunc.ShowButton(ob, ButtonEnum.Development);
+
+                                    }
 
                                 }
-
+                                break;
                             }
-                            break;
-                        }
+                    }
+
                 }
+                else
+                {
+                    SelectNode = null;
+                    SelectChess = null;
+                }
+            }
 
-            }
-            else
-            {
-                SelectNode = null;
-                SelectChess = null;
-            }
 
 
         }
-
 
     }
 

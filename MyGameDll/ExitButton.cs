@@ -12,6 +12,8 @@ namespace MyGameDll
 
         public void DoExit()
         {
+            GlobalObject.CurPanel = PanelType.GamePanel;
+
             ob.SetActive(false);
         }
     }
