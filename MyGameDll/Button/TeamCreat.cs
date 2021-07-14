@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyGameDll.Chess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,15 @@ namespace MyGameDll.Button
     {
         public void Creat()
         {
-            BaseFunc.CreatTeam(GlobalObject.CurSelectNode);
+            ChessGun team = new ChessGun();
+            team.Camp = CampEnum.friend;
+
+            BaseFunc.CreatTeam(GlobalObject.CurSelectNode, team);
 
             GameObject.Find("TeamPanel").SetActive(false);
+
+            GlobalObject.CurPanel = PanelType.GamePanel;
+
         }
 
     }

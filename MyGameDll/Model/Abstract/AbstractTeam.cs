@@ -5,33 +5,85 @@ using UnityEngine;
 
 namespace MyGameDll
 {
-    public abstract class AbstractTeam : MonoBehaviour
+    public class AbstractTeam : MonoBehaviour
     {
+
+        public int TeamID = 0;
+
         /// <summary>
         /// 类型
         /// </summary>
         public TeamEnum TeamType { get; set; } = TeamEnum.None;
 
         /// <summary>
+        /// 基础数值
+        /// </summary>
+        public int BaseNumber = 0;
+        /// <summary>
         /// 攻击力
         /// </summary>
-        public int Attack = 0;
+        public int Attack
+        {
+            get
+            {
+                return BaseNumber;
+            }
 
+        }
+        
         /// <summary>
         /// 防御力
         /// </summary>
-        public int Defent = 0;
+        public int Defent
+        {
+            get
+            {
+                return BaseNumber;
+            }
 
+        }
 
+        /// <summary>
+        /// 基础行动点
+        /// </summary>
+        public int BaseOperater = 0;
+
+        public int _Operater = 0;
         /// <summary>
         /// 行动点
         /// </summary>
-        public int Operater = 0;
+        public int Operater
+        {
+            get
+            {
+                return _Operater;
+            }
 
+            set
+            {
+                if(BaseOperater == 0)
+                {
+                    BaseOperater = value;
+                }
+                _Operater = value;
+            }
+        }
+
+        /// <summary>
+        /// 基础视野
+        /// </summary>
+        public int BaseView = 0;
         /// <summary>
         /// 视野
         /// </summary>
-        public int View = 0;
+        public int View
+        {
+            get
+            {
+                return BaseView;
+            }
+
+        }
 
         /// <summary>
         /// 当前所在节点

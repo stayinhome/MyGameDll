@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MyGameDll.MyEventManager
 {
-    public delegate void SelectNode_Change(GameObject go = null);
+    public delegate void Event_Delegate(object render,EvenData evenData);
 
 
     public class MyEventManager 
@@ -25,50 +25,56 @@ namespace MyGameDll.MyEventManager
             }
         }
 
-        public List<SelectNodeChangeEventData> selectNodeChangeEvents = new List<SelectNodeChangeEventData>();
+        public Dictionary<MyEventType, Event_Delegate> Events = new Dictionary<MyEventType, Event_Delegate>();
 
-        public void AddListener(MyEventType eventType , SelectNode_Change selectNode_Change)
+        public void AddListener(MyEventType eventType , Event_Delegate event_Delegate)
         {
-            SelectNodeChangeEventData eventData = selectNodeChangeEvents.Find(p => p.EventType == eventType);
-            if(eventData == null)
+            if(!Events.ContainsKey(eventType))
             {
-                eventData = new SelectNodeChangeEventData();
-                eventData.EventType = eventType;
-                eventData.callback = selectNode_Change;
-                selectNodeChangeEvents.Add(eventData);
+                Events.Add(eventType, event_Delegate);
             }
             else
             {
-                eventData.callback += selectNode_Change;
+                Events[eventType] += event_Delegate;
             }
 
         }
 
-        public void RemoveListener(MyEventType eventType, SelectNode_Change selectNode_Change)
+        public void RemoveListener(MyEventType eventType)
         {
-            SelectNodeChangeEventData eventData = selectNodeChangeEvents.Find(p => p.EventType == eventType);
-
-
-            if (eventData != null)
+            if (Events.ContainsKey(eventType))
             {
-                eventData.callback -= selectNode_Change;
-                if (eventData.callback == null)
-                    selectNodeChangeEvents.Remove(eventData);
+                Events.Remove(eventType);
             }
         }
 
-        public void DispatchEvent(MyEventType _eventType, GameObject _data = null)
+        public void RemoveListener(MyEventType eventType, Event_Delegate event_Delegate)
         {
-            SelectNodeChangeEventData eventData = selectNodeChangeEvents.Find(a => a.EventType == _eventType);
-            if (eventData == null)
+            if (Events.ContainsKey(eventType))
+            {
+                Events[eventType] -= event_Delegate;
+            }
+        }
+
+        public void DispatchEvent(MyEventType _eventType, object render, EvenData evenData)
+        {
+            if (!Events.ContainsKey(_eventType))
             {
                 Debug.Log("Not Found Event:" + _eventType);
             }
             else
             {
-                eventData.callback(_data);
+                Events[_eventType](render, evenData);
             }
         }
+
+
+    }
+
+
+    public class EvenData
+    {
+        public GameObject gameObject;
 
 
     }
@@ -78,6 +84,8 @@ namespace MyGameDll.MyEventManager
     public enum MyEventType
     {
         SelectNodeChange = 1,
+
+        SelectChessChange = 2,
     }
 
 }

@@ -11,8 +11,23 @@ namespace MyGameDll
 
         public void DoRefresh()
         {
+            Battle();
+
+            RefreshOperation();
+        }
+
+        public void Battle()
+        {
+
+            List<GameObject> list =  GameObject.Find("GlobalObject").GetComponent<GlobalObject>().listNode;
+
+
+        }
+
+        public void RefreshOperation()
+        {
             GameObject go = GameObject.FindGameObjectWithTag("Chess");
-            if(go != null)
+            if (go != null)
             {
                 try
                 {

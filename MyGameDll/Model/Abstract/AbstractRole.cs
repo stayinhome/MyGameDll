@@ -10,10 +10,17 @@ namespace MyGameDll.Abstract
 {
     public abstract class AbstractRole : MonoBehaviour, ISpeakInterface
     {
+        public int RoleID = 0;
+
         /// <summary>
         /// 名字
         /// </summary>
-        public string Name { get; } 
+        public string Name { get; }
+
+        /// <summary>
+        /// 角色类型
+        /// </summary>
+        public RoleTypeEnum RoleType = RoleTypeEnum.None;
 
 
         public virtual SpeakResult Speak(SpeakEnvironment environment)

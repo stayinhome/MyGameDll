@@ -110,6 +110,17 @@ namespace MyGameDll
             GameObject go = Instantiate(layerPrefab, GameObject.Find("Chess").transform, true);
             go.transform.localPosition = Node.transform.localPosition;
             go.GetComponent<AbstractTeam>().CurNode = Node;
+            if (TeamData != null)
+            {
+                go.GetComponent<AbstractTeam>().TeamType = TeamData.TeamType;
+                go.GetComponent<AbstractTeam>().BaseNumber = TeamData.BaseNumber;
+                go.GetComponent<AbstractTeam>().BaseOperater = TeamData.BaseOperater;
+                go.GetComponent<AbstractTeam>().BaseView = TeamData.BaseView;
+                go.GetComponent<AbstractTeam>().Camp = TeamData.Camp;
+                go.GetComponent<AbstractTeam>().Member = TeamData.Member;
+            }
+            Node.GetComponent<AbstractNode>().CurTeam.Add(go);
+
         }
 
 

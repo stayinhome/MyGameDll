@@ -43,7 +43,7 @@ namespace MyGameDll
     {
         None = 0,
 
-        frieng = 1,
+        friend = 1,
 
         enemy =2,
 
@@ -55,5 +55,10 @@ namespace MyGameDll
         GamePanel = 0,
 
         TeamPanel = 1,
+    }
+
+    public enum RoleTypeEnum
+    {
+        None = 0,
     }
 }

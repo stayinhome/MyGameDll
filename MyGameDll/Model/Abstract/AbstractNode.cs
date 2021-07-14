@@ -9,6 +9,8 @@ namespace MyGameDll.Abstract
     public class AbstractNode : MonoBehaviour
     {
 
+        public int NodeID = 0;
+
         /// <summary>
         /// 类型
         /// </summary>
@@ -23,7 +25,24 @@ namespace MyGameDll.Abstract
         /// <summary>
         /// 当前存在队伍
         /// </summary>
-        public List<GameObject> CurTeam = new List<GameObject>();
+        public TeamList CurTeam = new TeamList();
+
+
+        void Start()
+        {
+            CurTeam.addTeam_Event += AddTeam_Event;
+            CurTeam.removeTeam_Event += RemoveTeam_Event;
+        }
+
+        private void AddTeam_Event()
+        {
+            GameObject.Find("GlobalObject").GetComponent<GlobalObject>().listNode.Add(gameObject);
+        }
+
+        private void RemoveTeam_Event()
+        {
+            GameObject.Find("GlobalObject").GetComponent<GlobalObject>().listNode.Remove(gameObject);
+        }
 
         /// <summary>
         /// 是否是临接节点

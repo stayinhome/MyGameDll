@@ -9,8 +9,6 @@ using MyGameDll.MyEventManager;
 public class Controller : MonoBehaviour
 {
 
-    public GameObject SelectChess;
-
     private GameObject _SelectNode;
     public GameObject SelectNode
     {
@@ -18,16 +16,30 @@ public class Controller : MonoBehaviour
         set
         {
             _SelectNode = value;
-            MyEventManager.Instance.DispatchEvent(MyEventType.SelectNodeChange,value);
+            EvenData evenData = new EvenData();
+            evenData.gameObject = value;
+            MyEventManager.Instance.DispatchEvent(MyEventType.SelectNodeChange,gameObject, evenData);
         }
     }
 
+    private GameObject _SelectChess;
+    public GameObject SelectChess
+    {
+        get { return _SelectChess; }
+        set
+        {
+            _SelectChess = value;
+            EvenData evenData = new EvenData();
+            evenData.gameObject = value;
+            MyEventManager.Instance.DispatchEvent(MyEventType.SelectChessChange, gameObject, evenData);
+        }
+    }
 
     public bool HaveSelectChess
     {
         get
         {
-            return SelectChess != null;
+            return _SelectChess != null;
         }
     }
 
@@ -38,7 +50,6 @@ public class Controller : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //IniState();
             if(GlobalObject.CurPanel == PanelType.GamePanel)
             {
                 GameObject ob = BaseFunc.GetObjectByClick();
@@ -93,11 +104,6 @@ public class Controller : MonoBehaviour
 
     }
 
-    public void IniState()
-    {
-        BaseFunc.SetButtonStateByName("Development", false);
-
-    }
 
 
 
