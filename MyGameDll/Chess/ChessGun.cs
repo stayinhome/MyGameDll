@@ -12,10 +12,9 @@ namespace MyGameDll.Chess
         void Start()
         {
             TeamType = TeamEnum.ChessGun;
-            Attack = 2;
-            Defent = 2;
-            Operater = 2;
-            View = 2;
+            BaseNumber = 2;
+            BaseOperater = 2;
+            BaseView = 2;
 
         }
 

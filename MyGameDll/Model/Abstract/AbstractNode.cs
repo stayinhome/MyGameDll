@@ -14,7 +14,7 @@ namespace MyGameDll.Abstract
         /// <summary>
         /// 类型
         /// </summary>
-        public NodeEnum NodeType { get; set; } = NodeEnum.Normol;
+        public NodeEnum NodeType = NodeEnum.Normol;
 
         /// <summary>
         /// 临接节点
@@ -27,19 +27,18 @@ namespace MyGameDll.Abstract
         /// </summary>
         public TeamList CurTeam = new TeamList();
 
-
-        void Start()
+        public virtual void Start()
         {
             CurTeam.addTeam_Event += AddTeam_Event;
             CurTeam.removeTeam_Event += RemoveTeam_Event;
         }
 
-        private void AddTeam_Event()
+        public void AddTeam_Event()
         {
             GameObject.Find("GlobalObject").GetComponent<GlobalObject>().listNode.Add(gameObject);
         }
 
-        private void RemoveTeam_Event()
+        public void RemoveTeam_Event()
         {
             GameObject.Find("GlobalObject").GetComponent<GlobalObject>().listNode.Remove(gameObject);
         }

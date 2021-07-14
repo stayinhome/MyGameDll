@@ -9,9 +9,10 @@ namespace MyGameDll.Node
 {
     class CommanderNode : AbstractNode
     {
-        void Start()
-        {
-            NodeType = NodeEnum.Commander;
-        }
+        //public override void Start()
+        //{
+        //    base.Start();
+        //    NodeType = NodeEnum.Commander;
+        //}
     }
 }

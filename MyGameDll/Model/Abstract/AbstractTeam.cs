@@ -13,7 +13,7 @@ namespace MyGameDll
         /// <summary>
         /// 类型
         /// </summary>
-        public TeamEnum TeamType { get; set; } = TeamEnum.None;
+        public TeamEnum TeamType = TeamEnum.None;
 
         /// <summary>
         /// 基础数值
@@ -103,7 +103,7 @@ namespace MyGameDll
 
         public virtual void RefreshMe()
         {
-
+            Operater = BaseOperater;
         }
 
 
