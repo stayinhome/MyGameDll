@@ -9,17 +9,17 @@ namespace MyGameDll.MyEventManager
     public delegate void Event_Delegate(object render,EvenData evenData);
 
 
-    public class MyEventManager 
+    public class MEventManager 
     {
 
-        private static MyEventManager _instance;
-        public static MyEventManager Instance
+        private static MEventManager _instance;
+        public static MEventManager Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new MyEventManager();
+                    _instance = new MEventManager();
                 }
                 return _instance;
             }
@@ -76,6 +76,7 @@ namespace MyGameDll.MyEventManager
     {
         public GameObject gameObject;
 
+        public object Value;
 
     }
 
@@ -86,6 +87,8 @@ namespace MyGameDll.MyEventManager
         SelectNodeChange = 1,
 
         SelectChessChange = 2,
+
+        SelectChessOperaterValueChange = 3,
     }
 
 }

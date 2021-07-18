@@ -1,5 +1,6 @@
 ﻿using InformationManagement;
 using MyGameDll.Abstract;
+using MyGameDll.MyEventManager;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,10 +16,30 @@ namespace MyGameDll
         /// </summary>
         public TeamEnum TeamType = TeamEnum.None;
 
+
+        private int _BaseNumber = 0;
         /// <summary>
         /// 基础数值
         /// </summary>
-        public int BaseNumber = 0;
+        public int BaseNumber
+        {
+
+            get
+            {
+                return _BaseNumber;
+            }
+
+            set
+            {
+                _BaseNumber = value;
+                if(gameObject != null)
+                {
+                    gameObject.BroadcastMessage("RefreshAttack", Attack);
+                    gameObject.BroadcastMessage("RefreshDefent", Defent);
+                }
+
+            }
+        }
         /// <summary>
         /// 攻击力
         /// </summary>
@@ -26,7 +47,7 @@ namespace MyGameDll
         {
             get
             {
-                return BaseNumber;
+                return _BaseNumber;
             }
 
         }
@@ -38,10 +59,11 @@ namespace MyGameDll
         {
             get
             {
-                return BaseNumber;
+                return _BaseNumber;
             }
 
         }
+
 
         /// <summary>
         /// 基础行动点
@@ -66,6 +88,10 @@ namespace MyGameDll
                     BaseOperater = value;
                 }
                 _Operater = value;
+
+                EvenData evenData = new EvenData();
+                evenData.Value = value;
+                MEventManager.Instance.DispatchEvent(MyEventType.SelectChessOperaterValueChange,gameObject, evenData);
             }
         }
 

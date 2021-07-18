@@ -1,4 +1,5 @@
 ﻿using MyGameDll.Abstract;
+using MyGameDll.Model.Dto;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,6 +35,7 @@ namespace MyGameDll
             if (hit.collider != null)
             {
                 GameObject ob = hit.collider.gameObject;
+
                 return ob;
 
             }
@@ -104,22 +106,44 @@ namespace MyGameDll
             }
         }
 
-        public static void CreatTeam(GameObject Node , AbstractTeam TeamData = null)
+        public static void CreatTeam(GameObject Node , TeamData TeamData = null)
         {
-            GameObject layerPrefab = Resources.Load("Prefab/ChessGun") as GameObject;
-            GameObject go = Instantiate(layerPrefab, GameObject.Find("Chess").transform, true);
-            go.transform.localPosition = Node.transform.localPosition;
-            go.GetComponent<AbstractTeam>().CurNode = Node;
-            if (TeamData != null)
+            GameObject layerPrefab = null;
+            GameObject go = null;
+
+            switch (TeamData.Camp)
             {
-                go.GetComponent<AbstractTeam>().TeamType = TeamData.TeamType;
-                go.GetComponent<AbstractTeam>().BaseNumber = TeamData.BaseNumber;
-                go.GetComponent<AbstractTeam>().BaseOperater = TeamData.BaseOperater;
-                go.GetComponent<AbstractTeam>().BaseView = TeamData.BaseView;
-                go.GetComponent<AbstractTeam>().Camp = TeamData.Camp;
-                go.GetComponent<AbstractTeam>().Member = TeamData.Member;
+                case CampEnum.friend:
+                    {
+                        layerPrefab = Resources.Load("Prefab/ChessGun") as GameObject;
+                        go = Instantiate(layerPrefab, GameObject.Find("Chess").transform, true);
+                        break;
+                    }
+                case CampEnum.enemy:
+                    {
+                        layerPrefab = Resources.Load("Prefab/Enemey") as GameObject;
+                        go = Instantiate(layerPrefab, GameObject.Find("Enemeys").transform, true);
+                        break;
+                    }
             }
-            Node.GetComponent<AbstractNode>().CurTeam.Add(go);
+
+            if(go != null)
+            {
+                Vector3 newposition = new Vector3(Node.transform.position.x, Node.transform.position.y, -5);
+                go.transform.position = newposition;
+                go.GetComponent<AbstractTeam>().CurNode = Node;
+                if (TeamData != null)
+                {
+                    go.GetComponent<AbstractTeam>().TeamType = TeamData.TeamType;
+                    go.GetComponent<AbstractTeam>().BaseNumber = TeamData.BaseNumber;
+                    go.GetComponent<AbstractTeam>().BaseOperater = TeamData.BaseOperater;
+                    go.GetComponent<AbstractTeam>().BaseView = TeamData.BaseView;
+                    go.GetComponent<AbstractTeam>().Camp = TeamData.Camp;
+                    go.GetComponent<AbstractTeam>().Member = TeamData.Member;
+                }
+                Node.GetComponent<AbstractNode>().CurTeam.Add(go);
+            }
+
 
         }
 

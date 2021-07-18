@@ -58,8 +58,8 @@ namespace MyGameDll
 
         void Start()
         {
-            MyEventManager.MyEventManager.Instance.AddListener(MyEventType.SelectNodeChange, SelectNode_Change);
-            MyEventManager.MyEventManager.Instance.AddListener(MyEventType.SelectChessChange, SelectChess_Change);
+            MEventManager.Instance.AddListener(MyEventType.SelectNodeChange, SelectNode_Change);
+            MEventManager.Instance.AddListener(MyEventType.SelectChessChange, SelectChess_Change);
 
         }
 

@@ -44,7 +44,7 @@ namespace MyGameDll
             if (Count > 1)
             {
                 GameObject go1 = this[0];
-                for(int i = 1;i<Count - 1; i++)
+                for(int i = 1;i<Count; i++)
                 {
                     if(go1.GetComponent<AbstractTeam>().Camp != this[i].GetComponent<AbstractTeam>().Camp)
                     {

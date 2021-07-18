@@ -18,7 +18,7 @@ public class Controller : MonoBehaviour
             _SelectNode = value;
             EvenData evenData = new EvenData();
             evenData.gameObject = value;
-            MyEventManager.Instance.DispatchEvent(MyEventType.SelectNodeChange,gameObject, evenData);
+            MEventManager.Instance.DispatchEvent(MyEventType.SelectNodeChange,gameObject, evenData);
         }
     }
 
@@ -31,7 +31,7 @@ public class Controller : MonoBehaviour
             _SelectChess = value;
             EvenData evenData = new EvenData();
             evenData.gameObject = value;
-            MyEventManager.Instance.DispatchEvent(MyEventType.SelectChessChange, gameObject, evenData);
+            MEventManager.Instance.DispatchEvent(MyEventType.SelectChessChange, gameObject, evenData);
         }
     }
 
@@ -55,23 +55,46 @@ public class Controller : MonoBehaviour
                 GameObject ob = BaseFunc.GetObjectByClick();
                 if (ob != null)
                 {
-                    Layer type = (Layer)ob.layer;
-                    switch (type)
+                    switch (ob.tag)
                     {
-                        case Layer.Chess:
+                        case "Chess":
                             {
                                 SelectChess = ob;
                                 break;
                             }
-                        case Layer.Node:
+                        case "Enemy":
+                            {
+                                if (HaveSelectChess)
+                                {
+                                    GameObject EnemyCurNode = ob.GetComponent<AbstractTeam>().CurNode;
+                                    GameObject SelectChessCurNode = SelectChess.GetComponent<AbstractTeam>().CurNode;
+                                    if (EnemyCurNode.GetComponent<AbstractNode>().IsNextNode(SelectChessCurNode))
+                                    {
+                                        if (SelectChess.GetComponent<AbstractTeam>().Operater > 0)
+                                        {
+                                            SelectChessCurNode.GetComponent<AbstractNode>().CurTeam.Remove(SelectChess);
+                                            SelectChess.GetComponent<AbstractTeam>().Operater--;
+                                            SelectChess.transform.position = new Vector3(EnemyCurNode.transform.position.x, EnemyCurNode.transform.position.y, SelectChess.transform.position.z);
+                                            EnemyCurNode.GetComponent<AbstractNode>().CurTeam.Add(SelectChess);
+                                            SelectChess.GetComponent<AbstractTeam>().CurNode = EnemyCurNode;
+                                        }
+                                    }
+
+                                }
+
+                                break;
+                            }
+                        case "Commander":
+                        case "NullNode":
                             {
                                 SelectNode = ob;
                                 //DoMove
                                 if (HaveSelectChess && ob.GetComponent<AbstractNode>().IsNextNode(SelectChess.GetComponent<AbstractTeam>().CurNode))
                                 {
-                                    if (SelectChess.GetComponent<AbstractTeam>().Operater-- > 0)
+                                    if (SelectChess.GetComponent<AbstractTeam>().Operater > 0)
                                     {
                                         SelectChess.GetComponent<AbstractTeam>().CurNode.GetComponent<AbstractNode>().CurTeam.Remove(SelectChess);
+                                        SelectChess.GetComponent<AbstractTeam>().Operater--;
                                         SelectChess.transform.position = new Vector3(ob.transform.position.x, ob.transform.position.y, SelectChess.transform.position.z);
                                         SelectNode.GetComponent<AbstractNode>().CurTeam.Add(SelectChess);
                                         SelectChess.GetComponent<AbstractTeam>().CurNode = ob;
