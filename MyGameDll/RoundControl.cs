@@ -54,16 +54,15 @@ namespace MyGameDll
 
             List<GameObject> list =  GameObject.Find("GlobalObject").GetComponent<GlobalObject>().listNode;
 
-            Stack<GameObject> GoStack = new Stack<GameObject>();
+            List<GameObject> Golist = new List<GameObject>();
 
-            for(int i = 0 ; i < list.Count; i++)
+            for (int i = 0 ; i < list.Count; i++)
             {
                 GameObject Node = list[i];
                 int AttackCount = 0;
                 int DefentCount = 0;
                 TeamList CurTeam = Node.GetComponent<AbstractNode>().CurTeam;
 
-                List<GameObject> Golist = new List<GameObject>();
                 if (GlobalObject.RoundType == RoundTypeEnum.Player)
                 {
                     foreach(GameObject Team in CurTeam)
@@ -79,11 +78,11 @@ namespace MyGameDll
                     }
                     if(AttackCount > DefentCount)
                     {
-                        Golist = CurTeam.Remove(CampEnum.Enemy);
+                        Golist.AddRange(CurTeam.Remove(CampEnum.Enemy));
                     }
                     else
                     {
-                        Golist = CurTeam.Remove(CampEnum.Player);
+                        Golist.AddRange(CurTeam.Remove(CampEnum.Player));
                     }
 
                 }
@@ -102,26 +101,25 @@ namespace MyGameDll
                     }
                     if (AttackCount > DefentCount)
                     {
-                        Golist = CurTeam.Remove(CampEnum.Player);
+                        Golist.AddRange(CurTeam.Remove(CampEnum.Player));
                     }
                     else
                     {
-                        Golist = CurTeam.Remove(CampEnum.Enemy);
+                        Golist.AddRange(CurTeam.Remove(CampEnum.Enemy));
                     }
                 }
 
-                foreach(GameObject go in Golist)
-                {
-                    GoStack.Push(go);
-                }
-
             }
 
-            while(GoStack.Count > 0)
+            foreach(GameObject go in Golist)
             {
-                GameObject go = GoStack.Pop();
                 Destroy(go);
+
             }
+            //while (GoStack.Count > 0)
+            //{
+            //    GameObject go = GoStack.Pop();
+            //}
 
 
 
