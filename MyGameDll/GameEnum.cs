@@ -43,9 +43,9 @@ namespace MyGameDll
     {
         None = 0,
 
-        friend = 1,
+        Player = 1,
 
-        enemy =2,
+        Enemy =2,
 
 
     }
@@ -60,5 +60,12 @@ namespace MyGameDll
     public enum RoleTypeEnum
     {
         None = 0,
+    }
+
+    public enum RoundTypeEnum
+    {
+        Player = 0,
+
+        Enemy = 1,
     }
 }

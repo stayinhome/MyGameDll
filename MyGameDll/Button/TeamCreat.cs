@@ -13,7 +13,7 @@ namespace MyGameDll.Button
         public void Creat()
         {
             TeamData team = new TeamData();
-            team.Camp = CampEnum.friend;
+            team.Camp = CampEnum.Player;
             team.BaseNumber = 3;
             team.BaseOperater = 3;
             team.BaseView = 2;

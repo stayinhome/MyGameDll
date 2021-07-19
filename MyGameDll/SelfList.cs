@@ -38,6 +38,24 @@ namespace MyGameDll
             }
         }
 
+        public List<GameObject> Remove(CampEnum CampType)
+        {
+            List<GameObject> list = new List<GameObject>();
+            foreach(GameObject go in this)
+            {
+                if(go.GetComponent<AbstractTeam>().Camp == CampType)
+                {
+                    list.Add(go);
+                }
+            }
+
+            foreach(GameObject go in list)
+            {
+                Remove(go);
+            }
+            return list;
+        }
+
         public bool HaveDifferentCamp()
         {
 

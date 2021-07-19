@@ -10,7 +10,7 @@ namespace MyGameDll
 {
     public class GlobalObject : MonoBehaviour
     {
-
+        public static RoundTypeEnum RoundType = RoundTypeEnum.Player;
 
         public  GameObject _CurSelectChess;
 

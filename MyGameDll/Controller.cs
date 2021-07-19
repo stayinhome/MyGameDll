@@ -67,18 +67,8 @@ public class Controller : MonoBehaviour
                                 if (HaveSelectChess)
                                 {
                                     GameObject EnemyCurNode = ob.GetComponent<AbstractTeam>().CurNode;
-                                    GameObject SelectChessCurNode = SelectChess.GetComponent<AbstractTeam>().CurNode;
-                                    if (EnemyCurNode.GetComponent<AbstractNode>().IsNextNode(SelectChessCurNode))
-                                    {
-                                        if (SelectChess.GetComponent<AbstractTeam>().Operater > 0)
-                                        {
-                                            SelectChessCurNode.GetComponent<AbstractNode>().CurTeam.Remove(SelectChess);
-                                            SelectChess.GetComponent<AbstractTeam>().Operater--;
-                                            SelectChess.transform.position = new Vector3(EnemyCurNode.transform.position.x, EnemyCurNode.transform.position.y, SelectChess.transform.position.z);
-                                            EnemyCurNode.GetComponent<AbstractNode>().CurTeam.Add(SelectChess);
-                                            SelectChess.GetComponent<AbstractTeam>().CurNode = EnemyCurNode;
-                                        }
-                                    }
+
+                                    BaseFunc.TeamMoveToNode(SelectChess, EnemyCurNode);
 
                                 }
 
@@ -89,16 +79,10 @@ public class Controller : MonoBehaviour
                             {
                                 SelectNode = ob;
                                 //DoMove
-                                if (HaveSelectChess && ob.GetComponent<AbstractNode>().IsNextNode(SelectChess.GetComponent<AbstractTeam>().CurNode))
+                                if (HaveSelectChess)
                                 {
-                                    if (SelectChess.GetComponent<AbstractTeam>().Operater > 0)
-                                    {
-                                        SelectChess.GetComponent<AbstractTeam>().CurNode.GetComponent<AbstractNode>().CurTeam.Remove(SelectChess);
-                                        SelectChess.GetComponent<AbstractTeam>().Operater--;
-                                        SelectChess.transform.position = new Vector3(ob.transform.position.x, ob.transform.position.y, SelectChess.transform.position.z);
-                                        SelectNode.GetComponent<AbstractNode>().CurTeam.Add(SelectChess);
-                                        SelectChess.GetComponent<AbstractTeam>().CurNode = ob;
-                                    }
+                                    BaseFunc.TeamMoveToNode(SelectChess, SelectNode);
+
                                 }
                                 else if (!HaveSelectChess)
                                 {

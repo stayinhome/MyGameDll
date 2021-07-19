@@ -113,13 +113,13 @@ namespace MyGameDll
 
             switch (TeamData.Camp)
             {
-                case CampEnum.friend:
+                case CampEnum.Player:
                     {
                         layerPrefab = Resources.Load("Prefab/ChessGun") as GameObject;
                         go = Instantiate(layerPrefab, GameObject.Find("Chess").transform, true);
                         break;
                     }
-                case CampEnum.enemy:
+                case CampEnum.Enemy:
                     {
                         layerPrefab = Resources.Load("Prefab/Enemey") as GameObject;
                         go = Instantiate(layerPrefab, GameObject.Find("Enemeys").transform, true);
@@ -147,6 +147,47 @@ namespace MyGameDll
 
         }
 
+        public static bool SelectTeamCanMoveToNode(GameObject Team,GameObject Node)
+        {
+            if(Team.GetComponent<AbstractTeam>() == null)
+            {
+                return false;
+            }
 
+            if (Team.GetComponent<AbstractTeam>().Operater <= 0)
+            {
+                return false;
+            }
+
+            if (Team.GetComponent<AbstractTeam>().CurNode.GetComponent<AbstractNode>().CurTeam.HaveDifferentCamp())
+            {
+                return false;
+            }
+
+            if (! Node.GetComponent<AbstractNode>().IsNextNode(Team.GetComponent<AbstractTeam>().CurNode))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool TeamMoveToNode(GameObject Team, GameObject Node)
+        {
+            if (!SelectTeamCanMoveToNode(Team, Node))
+            {
+                return false;
+            }
+
+            Team.GetComponent<AbstractTeam>().CurNode.GetComponent<AbstractNode>().CurTeam.Remove(Team);
+            Team.GetComponent<AbstractTeam>().Operater--;
+            Team.transform.position = new Vector3(Node.transform.position.x, Node.transform.position.y, Team.transform.position.z);
+            Node.GetComponent<AbstractNode>().CurTeam.Add(Team);
+            Team.GetComponent<AbstractTeam>().CurNode = Node;
+
+            return true;
+
+
+        }
     }
 }

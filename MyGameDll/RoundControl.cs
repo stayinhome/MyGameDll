@@ -13,7 +13,7 @@ namespace MyGameDll
 
         public void DoRefresh()
         {
-            //Battle();
+            Battle();
 
             RefreshOperation();
 
@@ -40,7 +40,7 @@ namespace MyGameDll
             foreach(GameObject item in list)
             {
                 TeamData team = new TeamData();
-                team.Camp = CampEnum.enemy;
+                team.Camp = CampEnum.Enemy;
                 team.BaseNumber = 2;
                 team.BaseView = 2;
 
@@ -53,6 +53,76 @@ namespace MyGameDll
         {
 
             List<GameObject> list =  GameObject.Find("GlobalObject").GetComponent<GlobalObject>().listNode;
+
+            Stack<GameObject> GoStack = new Stack<GameObject>();
+
+            for(int i = 0 ; i < list.Count; i++)
+            {
+                GameObject Node = list[i];
+                int AttackCount = 0;
+                int DefentCount = 0;
+                TeamList CurTeam = Node.GetComponent<AbstractNode>().CurTeam;
+
+                List<GameObject> Golist = new List<GameObject>();
+                if (GlobalObject.RoundType == RoundTypeEnum.Player)
+                {
+                    foreach(GameObject Team in CurTeam)
+                    {
+                        if (Team.GetComponent<AbstractTeam>().Camp == CampEnum.Player)
+                        {
+                            AttackCount += Team.GetComponent<AbstractTeam>().Attack;
+                        }
+                        else if(Team.GetComponent<AbstractTeam>().Camp == CampEnum.Enemy)
+                        {
+                            DefentCount += Team.GetComponent<AbstractTeam>().Defent;
+                        }
+                    }
+                    if(AttackCount > DefentCount)
+                    {
+                        Golist = CurTeam.Remove(CampEnum.Enemy);
+                    }
+                    else
+                    {
+                        Golist = CurTeam.Remove(CampEnum.Player);
+                    }
+
+                }
+                else if (GlobalObject.RoundType == RoundTypeEnum.Enemy)
+                {
+                    foreach (GameObject Team in CurTeam)
+                    {
+                        if (Team.GetComponent<AbstractTeam>().Camp == CampEnum.Player)
+                        {
+                            DefentCount += Team.GetComponent<AbstractTeam>().Defent;
+                        }
+                        else if (Team.GetComponent<AbstractTeam>().Camp == CampEnum.Enemy)
+                        {
+                            AttackCount += Team.GetComponent<AbstractTeam>().Attack;
+                        }
+                    }
+                    if (AttackCount > DefentCount)
+                    {
+                        Golist = CurTeam.Remove(CampEnum.Player);
+                    }
+                    else
+                    {
+                        Golist = CurTeam.Remove(CampEnum.Enemy);
+                    }
+                }
+
+                foreach(GameObject go in Golist)
+                {
+                    GoStack.Push(go);
+                }
+
+            }
+
+            while(GoStack.Count > 0)
+            {
+                GameObject go = GoStack.Pop();
+                Destroy(go);
+            }
+
 
 
         }
@@ -72,5 +142,7 @@ namespace MyGameDll
                 }
             }
         }
+
+        
     }
 }
