@@ -56,9 +56,9 @@ namespace MyGameDll
 
             List<GameObject> Golist = new List<GameObject>();
 
-            for (int i = 0 ; i < list.Count; i++)
+            while(list.Count>0)
             {
-                GameObject Node = list[i];
+                GameObject Node = list[0];
                 int AttackCount = 0;
                 int DefentCount = 0;
                 TeamList CurTeam = Node.GetComponent<AbstractNode>().CurTeam;

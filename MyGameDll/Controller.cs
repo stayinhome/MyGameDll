@@ -67,8 +67,8 @@ public class Controller : MonoBehaviour
                                 if (HaveSelectChess)
                                 {
                                     GameObject EnemyCurNode = ob.GetComponent<AbstractTeam>().CurNode;
-
-                                    BaseFunc.TeamMoveToNode(SelectChess, EnemyCurNode);
+                                    SelectNode = EnemyCurNode;
+                                    BaseFunc.TeamMoveToNode(SelectChess, EnemyCurNode);                           
 
                                 }
 
