@@ -64,7 +64,7 @@
     <Compile Include="BaseFunc.cs" />
     <Compile Include="CameraControl.cs" />
     <Compile Include="Controller.cs" />
-    <Compile Include="Chess\ChessGun.cs" />
+    <Compile Include="Team\ChessGun.cs" />
     <Compile Include="DevelopmentButton.cs" />
     <Compile Include="GameEnum.cs" />
     <Compile Include="Model\Dto\TeamData.cs" />

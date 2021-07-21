@@ -1,5 +1,6 @@
 ﻿using MyGameDll.Abstract;
 using MyGameDll.Model.Dto;
+using MyGameDll.Team;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,6 +50,24 @@ namespace MyGameDll
         {
             GameObject Button = GameObject.FindGameObjectWithTag(TagName);
 
+
+        }
+
+        public static void SetButtonStateByEnum(ButtonEnum ButtonType, bool? Active = null, Vector3? Position = null)
+        {
+            string ButtonName = "";
+            switch (ButtonType)
+            {
+                case ButtonEnum.Development:
+                    {
+                        ButtonName = "Development";
+                        break;
+                    }
+            }
+            if(ButtonName != "")
+            {
+                SetButtonStateByName(ButtonName, Active, Position);
+            }
 
         }
 
@@ -131,15 +150,11 @@ namespace MyGameDll
             {
                 Vector3 newposition = new Vector3(Node.transform.position.x, Node.transform.position.y, -5);
                 go.transform.position = newposition;
+                go.AddComponent<ChessGun>();
                 go.GetComponent<AbstractTeam>().CurNode = Node;
                 if (TeamData != null)
                 {
-                    go.GetComponent<AbstractTeam>().TeamType = TeamData.TeamType;
-                    go.GetComponent<AbstractTeam>().BaseNumber = TeamData.BaseNumber;
-                    go.GetComponent<AbstractTeam>().BaseOperater = TeamData.BaseOperater;
-                    go.GetComponent<AbstractTeam>().BaseView = TeamData.BaseView;
-                    go.GetComponent<AbstractTeam>().Camp = TeamData.Camp;
-                    go.GetComponent<AbstractTeam>().Member = TeamData.Member;
+                    go.GetComponent<AbstractTeam>().DoInit(TeamData);
                 }
                 Node.GetComponent<AbstractNode>().CurTeam.Add(go);
             }

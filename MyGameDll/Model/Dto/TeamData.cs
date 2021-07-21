@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MyGameDll.Model.Dto
 {
-    class TeamData
+    public class TeamData
     {
         public int TeamID = 0;
 

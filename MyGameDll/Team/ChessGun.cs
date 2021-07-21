@@ -2,21 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MyGameDll.Model.Dto;
 
-namespace MyGameDll.Chess
+namespace MyGameDll.Team
 {
     class ChessGun : AbstractTeam
     {
-
-
-        void Start()
-        {
-            TeamType = TeamEnum.ChessGun;
-            BaseNumber = 2;
-            BaseOperater = 2;
-            BaseView = 2;
-
-        }
 
         public override void RefreshMe()
         {
@@ -24,6 +15,14 @@ namespace MyGameDll.Chess
             Operater = 2;
         }
 
+        public override void DoInit(TeamData teamData)
+        {
+            base.DoInit(teamData);
+            BaseOperater = 2;
+            TeamType = TeamEnum.ChessGun;
+
+
+        }
 
     }
 }

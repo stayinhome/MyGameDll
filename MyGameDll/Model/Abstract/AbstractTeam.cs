@@ -1,5 +1,6 @@
 ﻿using InformationManagement;
 using MyGameDll.Abstract;
+using MyGameDll.Model.Dto;
 using MyGameDll.MyEventManager;
 using System.Collections.Generic;
 using UnityEngine;
@@ -132,6 +133,10 @@ namespace MyGameDll
             Operater = BaseOperater;
         }
 
+        public virtual void DoInit(TeamData teamData)
+        {
+            Camp = teamData.Camp;
+        }
 
     }
 }

@@ -55,6 +55,7 @@ public class Controller : MonoBehaviour
                 GameObject ob = BaseFunc.GetObjectByClick();
                 if (ob != null)
                 {
+
                     switch (ob.tag)
                     {
                         case "Chess":
@@ -86,7 +87,7 @@ public class Controller : MonoBehaviour
                                 }
                                 else if (!HaveSelectChess)
                                 {
-                                    if (ob.tag == "Commander")
+                                    if (ob.tag == NodeType.Commander)
                                     {
                                         BaseFunc.ShowButton(ob, ButtonEnum.Development);
 
@@ -97,11 +98,15 @@ public class Controller : MonoBehaviour
                             }
                     }
 
+
+                    SetButtonState();
+
                 }
                 else
                 {
                     SelectNode = null;
                     SelectChess = null;
+                    SetButtonState();
                 }
             }
 
@@ -112,7 +117,23 @@ public class Controller : MonoBehaviour
     }
 
 
+    private void SetButtonState()
+    {
+        if(SelectNode == null)
+        {
+            BaseFunc.SetButtonStateByEnum(ButtonEnum.Development, false);
 
+        }
+        else
+        {
+            if (SelectNode.tag != NodeType.Commander)
+            {
+                BaseFunc.SetButtonStateByEnum(ButtonEnum.Development, false);
+            }
+        }
+
+
+    }
 
 
 

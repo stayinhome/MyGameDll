@@ -31,6 +31,22 @@ namespace MyGameDll
         Commander =1,
     }
 
+    public class NodeType
+    {
+        /// <summary>
+        /// 空节点
+        /// </summary>
+        public static string Normol = "Null";
+
+        /// <summary>
+        /// 指挥所
+        /// </summary>
+        public static string Commander = "Commander";
+
+
+
+    }
+
     public enum ButtonEnum
     {
         None = 0,
