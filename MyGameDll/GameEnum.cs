@@ -52,22 +52,60 @@ namespace MyGameDll
 
     }
 
+
+
+    public enum BuildEnum
+    {
+        /// <summary>
+        /// 路障
+        /// </summary>
+        Roadblocks = 0,
+
+        /// <summary>
+        /// 陷阱
+        /// </summary>
+        Trap = 1,
+
+        /// <summary>
+        /// 自动火炮
+        /// </summary>
+        Turret = 2,
+
+        /// <summary>
+        /// 据点/仓库
+        /// </summary>
+        Warehouse = 3,
+
+        /// <summary>
+        /// 指挥中继塔
+        /// </summary>
+        RelayTower = 4,
+
+        /// <summary>
+        /// 红外线定位点
+        /// </summary>
+        InfraredPositioning = 5,
+    }
+
     public enum NodeEnum
     {
         Normol = 0,
 
-        Commander =1,
-    }
+        Commander = 1,
 
-    public enum BuildEnum
-    {
-        Roadblocks = 0,
+        HeavyArtillery = 2,
 
-        Trap = 1,
+        HighPoints = 3,
 
-        Turret = 2,
+        UAVControlCenter = 4,
 
+        Airport = 5,
 
+        Radar = 6,
+
+        ArtilleryPosition = 7,
+
+        Metro = 8,
     }
 
     public class NodeType
@@ -82,6 +120,40 @@ namespace MyGameDll
         /// </summary>
         public static string Commander = "Commander";
 
+        /// <summary>
+        /// 重火炮
+        /// </summary>
+        public static string HeavyArtillery = "HeavyArtillery";
+
+        /// <summary>
+        /// 制高点
+        /// </summary>
+        public static string HighPoints = "HighPoints";
+
+        /// <summary>
+        /// 无人机集群控制中心
+        /// </summary>
+        public static string UAVControlCenter = "UAVControlCenter";
+
+        /// <summary>
+        /// 机场
+        /// </summary>
+        public static string Airport = "Airport";
+
+        /// <summary>
+        /// 雷达
+        /// </summary>
+        public static string Radar = "Radar";
+
+        /// <summary>
+        /// 火炮阵地
+        /// </summary>
+        public static string ArtilleryPosition = "ArtilleryPosition";
+
+        /// <summary>
+        /// 地铁
+        /// </summary>
+        public static string Metro = "Metro";
 
 
     }
@@ -94,8 +166,6 @@ namespace MyGameDll
 
         Building = 2,
 
-        Warehouse = 3,
-
     }
 
     public class ButtonType
@@ -105,8 +175,6 @@ namespace MyGameDll
         public static string Development = "Development";
 
         public static string Building = "Building";
-
-        public static string Warehouse = "Warehouse";
 
 
     }

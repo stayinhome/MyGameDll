@@ -22,7 +22,8 @@ namespace MyGameDll.Team
             TeamType = TeamEnum.Rifle;
             BaseOperater = 2;
             BaseView = 2;
-            foreach(AbstractRole item in teamData.Member)
+            BaseNumber = 2;
+            foreach (AbstractRole item in teamData.Member)
             {
                 if(item.RoleType == RoleTypeEnum.Artillery || item.RoleType == RoleTypeEnum.Air)
                 {

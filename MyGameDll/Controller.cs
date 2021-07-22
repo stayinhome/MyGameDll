@@ -75,7 +75,8 @@ public class Controller : MonoBehaviour
                                             {
                                                 GameObject EnemyCurNode = ob.GetComponent<AbstractTeam>().CurNode;
                                                 SelectNode = EnemyCurNode;
-                                                BaseFunc.TeamMoveToNode(SelectChess, EnemyCurNode);
+                                                SelectChess.GetComponent<AbstractTeam>().DoMoveTo(SelectNode);
+                                                //BaseFunc.TeamMoveToNode(SelectChess, EnemyCurNode);
 
                                             }
 
@@ -97,7 +98,8 @@ public class Controller : MonoBehaviour
                                             //DoMove
                                             if (HaveSelectChess)
                                             {
-                                                BaseFunc.TeamMoveToNode(SelectChess, SelectNode);
+                                                SelectChess.GetComponent<AbstractTeam>().DoMoveTo(SelectNode);
+                                                //BaseFunc.TeamMoveToNode(SelectChess, SelectNode);
 
                                             }
                                             else if (!HaveSelectChess)
