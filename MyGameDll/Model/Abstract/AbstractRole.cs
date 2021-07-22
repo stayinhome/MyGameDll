@@ -18,6 +18,16 @@ namespace MyGameDll.Abstract
         public string Name { get; }
 
         /// <summary>
+        /// 基础数值
+        /// </summary>
+        public int BaseValue { get; set; }
+
+        /// <summary>
+        /// 携带物资
+        /// </summary>
+        public int Material = 0;
+
+        /// <summary>
         /// 角色类型
         /// </summary>
         public RoleTypeEnum RoleType = RoleTypeEnum.None;

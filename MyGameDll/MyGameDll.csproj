@@ -48,7 +48,7 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.8f1c1\Editor\Data\Managed\UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.8f1c1\Editor\Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\RefrenDll\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -64,7 +64,8 @@
     <Compile Include="BaseFunc.cs" />
     <Compile Include="CameraControl.cs" />
     <Compile Include="Controller.cs" />
-    <Compile Include="Team\ChessGun.cs" />
+    <Compile Include="Team\ArtilleryTeam.cs" />
+    <Compile Include="Team\RifleTeam.cs" />
     <Compile Include="DevelopmentButton.cs" />
     <Compile Include="GameEnum.cs" />
     <Compile Include="Model\Dto\TeamData.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Node\NormolNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoundControl.cs" />
+    <Compile Include="Team\SupportTeam.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\" />

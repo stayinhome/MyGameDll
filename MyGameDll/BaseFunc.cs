@@ -14,15 +14,8 @@ namespace MyGameDll
     {
 
 
-        public static void ShowButton(GameObject go,ButtonEnum Type)
+        public static void ShowButton(GameObject go,string ButtonType)
         {
-            string ButtonType = "None";
-            switch (Type)
-            {
-                case ButtonEnum.Development:
-                    ButtonType = "Development";
-                    break;
-            }
 
             Vector3 NewPosition = new Vector3(go.transform.position.x + 1, go.transform.position.y + 1, go.transform.position.z);
             SetButtonStateByName(ButtonType, true, NewPosition);
@@ -53,14 +46,24 @@ namespace MyGameDll
 
         }
 
-        public static void SetButtonStateByEnum(ButtonEnum ButtonType, bool? Active = null, Vector3? Position = null)
+        public static void SetButtonStateByEnum(ButtonEnum ButtonEnum, bool? Active = null, Vector3? Position = null)
         {
             string ButtonName = "";
-            switch (ButtonType)
+            switch (ButtonEnum)
             {
                 case ButtonEnum.Development:
                     {
-                        ButtonName = "Development";
+                        ButtonName = ButtonType.Development;
+                        break;
+                    }
+                case ButtonEnum.Building:
+                    {
+                        ButtonName = ButtonType.Building;
+                        break;
+                    }
+                case ButtonEnum.Warehouse:
+                    {
+                        ButtonName = ButtonType.Warehouse;
                         break;
                     }
             }
@@ -150,7 +153,7 @@ namespace MyGameDll
             {
                 Vector3 newposition = new Vector3(Node.transform.position.x, Node.transform.position.y, -5);
                 go.transform.position = newposition;
-                go.AddComponent<ChessGun>();
+                go.AddComponent<RifleTeam>();
                 go.GetComponent<AbstractTeam>().CurNode = Node;
                 if (TeamData != null)
                 {

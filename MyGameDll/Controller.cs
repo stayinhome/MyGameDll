@@ -55,47 +55,66 @@ public class Controller : MonoBehaviour
                 GameObject ob = BaseFunc.GetObjectByClick();
                 if (ob != null)
                 {
-
-                    switch (ob.tag)
+                    Layer layer = (Layer)ob.layer;
+                    switch (layer)
                     {
-                        case "Chess":
+                        case Layer.Chess:
                             {
-                                SelectChess = ob;
-                                break;
-                            }
-                        case "Enemy":
-                            {
-                                if (HaveSelectChess)
+                                switch (ob.tag)
                                 {
-                                    GameObject EnemyCurNode = ob.GetComponent<AbstractTeam>().CurNode;
-                                    SelectNode = EnemyCurNode;
-                                    BaseFunc.TeamMoveToNode(SelectChess, EnemyCurNode);                           
+                                    case "Chess":
+                                        {
+                                            SelectChess = ob;
+                                            SelectNode = ob.GetComponent<AbstractTeam>().CurNode;
 
+                                            break;
+                                        }
+                                    case "Enemy":
+                                        {
+                                            if (HaveSelectChess)
+                                            {
+                                                GameObject EnemyCurNode = ob.GetComponent<AbstractTeam>().CurNode;
+                                                SelectNode = EnemyCurNode;
+                                                BaseFunc.TeamMoveToNode(SelectChess, EnemyCurNode);
+
+                                            }
+
+                                            break;
+                                        }
                                 }
 
                                 break;
+
                             }
-                        case "Commander":
-                        case "NullNode":
+                        case Layer.Node:
                             {
-                                SelectNode = ob;
-                                //DoMove
-                                if (HaveSelectChess)
+                                switch (ob.tag)
                                 {
-                                    BaseFunc.TeamMoveToNode(SelectChess, SelectNode);
+                                    case "Commander":
+                                    case "NullNode":
+                                        {
+                                            SelectNode = ob;
+                                            //DoMove
+                                            if (HaveSelectChess)
+                                            {
+                                                BaseFunc.TeamMoveToNode(SelectChess, SelectNode);
 
-                                }
-                                else if (!HaveSelectChess)
-                                {
-                                    if (ob.tag == NodeType.Commander)
-                                    {
-                                        BaseFunc.ShowButton(ob, ButtonEnum.Development);
+                                            }
+                                            else if (!HaveSelectChess)
+                                            {
+                                                if (ob.tag == NodeType.Commander)
+                                                {
+                                                    BaseFunc.ShowButton(ob, ButtonType.Development);
 
-                                    }
+                                                }
 
+                                            }
+                                            break;
+                                        }
                                 }
                                 break;
                             }
+
                     }
 
 

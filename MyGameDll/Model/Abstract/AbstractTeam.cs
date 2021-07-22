@@ -48,7 +48,7 @@ namespace MyGameDll
         {
             get
             {
-                return _BaseNumber;
+                return CalAttack();
             }
 
         }
@@ -60,10 +60,11 @@ namespace MyGameDll
         {
             get
             {
-                return _BaseNumber;
+                return CalDefent();
             }
 
         }
+
 
 
         /// <summary>
@@ -107,10 +108,20 @@ namespace MyGameDll
         {
             get
             {
-                return BaseView;
+                return CalView();
             }
 
         }
+
+        /// <summary>
+        /// 携带物资
+        /// </summary>
+        public int Material = 0;
+
+        /// <summary>
+        /// 最大携带物资
+        /// </summary>
+        public int MaxMaterial = 0;
 
         /// <summary>
         /// 当前所在节点
@@ -121,6 +132,8 @@ namespace MyGameDll
         /// 阵营
         /// </summary>
         public CampEnum Camp = CampEnum.None;
+
+
 
         /// <summary>
         /// 成员
@@ -136,7 +149,80 @@ namespace MyGameDll
         public virtual void DoInit(TeamData teamData)
         {
             Camp = teamData.Camp;
+            Member = teamData.Member;
         }
 
+        /// <summary>
+        /// 计算属性
+        /// </summary>
+        protected virtual void CalProperty()
+        {
+
+        }
+
+        /// <summary>
+        /// 攻击力计算
+        /// </summary>
+        /// <returns></returns>
+        protected virtual int CalAttack()
+        {
+            return _BaseNumber;
+        }
+
+        /// <summary>
+        /// 防御力计算
+        /// </summary>
+        /// <returns></returns>
+        protected virtual int CalDefent()
+        {
+            return _BaseNumber;
+        }
+
+        /// <summary>
+        /// 视野计算
+        /// </summary>
+        /// <returns></returns>
+        protected virtual int CalView()
+        {
+            return BaseView;
+
+        }
+
+        public virtual void DoMoveTo(GameObject Node)
+        {
+            if (!CanMoveTo(Node))
+            {
+                return ;
+            }
+
+            CurNode.GetComponent<AbstractNode>().CurTeam.Remove(gameObject);
+            Operater--;
+            gameObject.transform.position = new Vector3(Node.transform.position.x, Node.transform.position.y, gameObject.transform.position.z);
+            Node.GetComponent<AbstractNode>().CurTeam.Add(gameObject);
+            CurNode = Node;
+        }
+
+        public virtual bool CanMoveTo(GameObject Node)
+        {
+
+            if (Operater <= 0)
+            {
+                return false;
+            }
+
+            if (CurNode.GetComponent<AbstractNode>().CurTeam.HaveDifferentCamp())
+            {
+                return false;
+            }
+
+            if (!Node.GetComponent<AbstractNode>().IsNextNode(CurNode))
+            {
+                return false;
+            }
+
+
+
+            return true;
+        }
     }
 }

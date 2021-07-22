@@ -116,11 +116,6 @@ namespace MyGameDll
                 Destroy(go);
 
             }
-            //while (GoStack.Count > 0)
-            //{
-            //    GameObject go = GoStack.Pop();
-            //}
-
 
 
         }
