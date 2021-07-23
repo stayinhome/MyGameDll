@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace MyGameDll.Model.Dto
 {
@@ -57,7 +58,7 @@ namespace MyGameDll.Model.Dto
         /// <summary>
         /// 成员
         /// </summary>
-        public List<AbstractRole> Member = new List<AbstractRole>();
+        public List<GameObject> Member = new List<GameObject>();
 
     }
 }

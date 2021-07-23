@@ -80,7 +80,7 @@ namespace MyGameDll
         {
             get
             {
-                return _Operater;
+                return CalOperater();
             }
 
             set
@@ -138,7 +138,7 @@ namespace MyGameDll
         /// <summary>
         /// 成员
         /// </summary>
-        public List<AbstractRole> Member = new List<AbstractRole>();
+        public List<GameObject> Member = new List<GameObject>();
 
 
         public virtual void RefreshMe()
@@ -150,6 +150,11 @@ namespace MyGameDll
         {
             Camp = teamData.Camp;
             Member = teamData.Member;
+            foreach (GameObject item in teamData.Member)
+            {
+                AbstractRole role = item.GetComponent<AbstractRole>();
+                BaseNumber += role.BaseValue;
+            }
         }
 
         /// <summary>
@@ -184,8 +189,20 @@ namespace MyGameDll
         /// <returns></returns>
         protected virtual int CalView()
         {
-            return BaseView;
 
+            int view = BaseView;
+            if(CurNode.GetComponent<AbstractNode>().NodeType == NodeEnum.HighPoints)
+            {
+                view += PropertyValue.HighPointsAddView;
+            }
+
+            return view;
+
+        }
+
+        protected virtual int CalOperater()
+        {
+            return _Operater;
         }
 
         public virtual void DoMoveTo(GameObject Node)

@@ -1,6 +1,6 @@
 ﻿using MyGameDll.Abstract;
 using MyGameDll.Model.Dto;
-using MyGameDll.Team;
+using MyGameDll.Model.Team;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -61,11 +61,7 @@ namespace MyGameDll
                         ButtonName = ButtonType.Building;
                         break;
                     }
-                case ButtonEnum.Warehouse:
-                    {
-                        ButtonName = ButtonType.Warehouse;
-                        break;
-                    }
+
             }
             if(ButtonName != "")
             {
@@ -128,7 +124,7 @@ namespace MyGameDll
             }
         }
 
-        public static void CreatTeam(GameObject Node , TeamData TeamData = null)
+        public static void CreatTeam(GameObject Node , TeamData TeamData)
         {
             GameObject layerPrefab = null;
             GameObject go = null;
@@ -153,7 +149,27 @@ namespace MyGameDll
             {
                 Vector3 newposition = new Vector3(Node.transform.position.x, Node.transform.position.y, -5);
                 go.transform.position = newposition;
-                go.AddComponent<RifleTeam>();
+                switch (TeamData.TeamType)
+                {
+                    case TeamEnum.Rifle:
+                        {
+                            go.AddComponent<RifleTeam>();
+                            break;
+                        }
+                    case TeamEnum.Artillery:
+                        {
+                            go.AddComponent<ArtilleryTeam>();
+                            break;
+                        }
+                    case TeamEnum.None:
+                    default:
+                        {
+                            go.AddComponent<NormolTeam>();
+                            break;
+                        }
+
+                }
+                go.GetComponent<AbstractTeam>().TeamType = TeamData.TeamType;
                 go.GetComponent<AbstractTeam>().CurNode = Node;
                 if (TeamData != null)
                 {

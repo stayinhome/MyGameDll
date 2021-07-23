@@ -48,7 +48,7 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.8f1c1\Editor\Data\Managed\UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.8f1c1\Editor\Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\RefrenDll\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -64,18 +64,24 @@
     <Compile Include="BaseFunc.cs" />
     <Compile Include="CameraControl.cs" />
     <Compile Include="Controller.cs" />
-    <Compile Include="Team\ArtilleryTeam.cs" />
-    <Compile Include="Team\RifleTeam.cs" />
+    <Compile Include="Model\Team\AirTeam.cs" />
+    <Compile Include="Model\Team\ArmorTeam.cs" />
+    <Compile Include="Model\Team\ManeuverTeam.cs" />
+    <Compile Include="Model\Team\NormolTeam.cs" />
+    <Compile Include="Model\Team\SniperTeam.cs" />
+    <Compile Include="PropertyValue.cs" />
+    <Compile Include="Model\Team\ArtilleryTeam.cs" />
+    <Compile Include="Model\Team\RifleTeam.cs" />
     <Compile Include="DevelopmentButton.cs" />
     <Compile Include="GameEnum.cs" />
     <Compile Include="Model\Dto\TeamData.cs" />
     <Compile Include="MyEventManager\MyEventManager.cs" />
     <Compile Include="SelfList.cs" />
-    <Compile Include="Node\CommanderNode.cs" />
-    <Compile Include="Node\NormolNode.cs" />
+    <Compile Include="Model\Node\CommanderNode.cs" />
+    <Compile Include="Model\Node\NormolNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoundControl.cs" />
-    <Compile Include="Team\SupportTeam.cs" />
+    <Compile Include="Model\Team\SupportTeam.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\" />

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MyGameDll.Node
 {
-    class NormolNode : AbstractNode
+    public class NormolNode : AbstractNode
     {
 
     }
