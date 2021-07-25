@@ -14,13 +14,26 @@ namespace MyGameDll
     {
 
 
-        public static void ShowButton(GameObject go,string ButtonType)
+        public static void ShowButton(GameObject go,string ButtonName)
         {
 
-            Vector3 NewPosition = new Vector3(go.transform.position.x + 1, go.transform.position.y + 1, go.transform.position.z);
-            SetButtonStateByName(ButtonType, true, NewPosition);
+            Vector3 NewPosition = new Vector3(go.transform.position.x + 1, go.transform.position.y + 1, go.transform.position.z - 1);
+            SetButtonStateByName(ButtonName, true, NewPosition);
 
         }
+
+        public static void ShowButton(GameObject go, List<string> ButtonNames)
+        {
+
+            for(int i = 0;i< ButtonNames.Count;i++)
+            {
+                Vector3 NewPosition = new Vector3(go.transform.position.x + 1, go.transform.position.y + 1 - 2 * i, go.transform.position.z - 1);
+                SetButtonStateByName(ButtonNames[i], true, NewPosition);
+            }
+
+
+        }
+
 
         public static GameObject GetObjectByClick()
         {
@@ -51,9 +64,9 @@ namespace MyGameDll
             string ButtonName = "";
             switch (ButtonEnum)
             {
-                case ButtonEnum.Development:
+                case ButtonEnum.Deploy:
                     {
-                        ButtonName = ButtonType.Development;
+                        ButtonName = ButtonType.Deploy;
                         break;
                     }
                 case ButtonEnum.Building:
@@ -124,62 +137,6 @@ namespace MyGameDll
             }
         }
 
-        public static void CreatTeam(GameObject Node , TeamData TeamData)
-        {
-            GameObject layerPrefab = null;
-            GameObject go = null;
-
-            switch (TeamData.Camp)
-            {
-                case CampEnum.Player:
-                    {
-                        layerPrefab = Resources.Load("Prefab/ChessGun") as GameObject;
-                        go = Instantiate(layerPrefab, GameObject.Find("Chess").transform, true);
-                        break;
-                    }
-                case CampEnum.Enemy:
-                    {
-                        layerPrefab = Resources.Load("Prefab/Enemey") as GameObject;
-                        go = Instantiate(layerPrefab, GameObject.Find("Enemeys").transform, true);
-                        break;
-                    }
-            }
-
-            if(go != null)
-            {
-                Vector3 newposition = new Vector3(Node.transform.position.x, Node.transform.position.y, -5);
-                go.transform.position = newposition;
-                switch (TeamData.TeamType)
-                {
-                    case TeamEnum.Rifle:
-                        {
-                            go.AddComponent<RifleTeam>();
-                            break;
-                        }
-                    case TeamEnum.Artillery:
-                        {
-                            go.AddComponent<ArtilleryTeam>();
-                            break;
-                        }
-                    case TeamEnum.None:
-                    default:
-                        {
-                            go.AddComponent<NormolTeam>();
-                            break;
-                        }
-
-                }
-                go.GetComponent<AbstractTeam>().TeamType = TeamData.TeamType;
-                go.GetComponent<AbstractTeam>().CurNode = Node;
-                if (TeamData != null)
-                {
-                    go.GetComponent<AbstractTeam>().DoInit(TeamData);
-                }
-                Node.GetComponent<AbstractNode>().CurTeam.Add(go);
-            }
-
-
-        }
 
         public static bool SelectTeamCanMoveToNode(GameObject Team,GameObject Node)
         {
@@ -222,6 +179,28 @@ namespace MyGameDll
             return true;
 
 
+        }
+
+        public static void ChangeSpriteOnResourcesByImage(GameObject go ,string ImagePath)
+        {
+            Texture2D Tex = Resources.Load(ImagePath) as Texture2D;
+            if(Tex == null)
+            {
+                Debug.Log("无法从"+ ImagePath+"读取图片");
+            }
+            else
+            {
+                SpriteRenderer spr = go.GetComponent<SpriteRenderer>();
+                Sprite sprite = Sprite.Create(Tex, new Rect(0, 0, Tex.width, Tex.height), new Vector2(0.5f, 0.5f));
+                go.GetComponent<SpriteRenderer>().sprite = sprite;
+            }
+
+        }
+
+        public static void ChangeSpriteOnResourcesBySprite(GameObject go, string SpritePath)
+        {
+            Sprite sprite = Resources.Load<Sprite>(SpritePath);
+            go.GetComponent<SpriteRenderer>().sprite = sprite;
         }
     }
 }

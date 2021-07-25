@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace MyGameDll.Abstract
 {
-    public abstract class AbstractRole : MonoBehaviour, ISpeakInterface
+    public  class AbstractRole : MonoBehaviour, ISpeakInterface
     {
         public int RoleID = 0;
 
@@ -26,6 +26,11 @@ namespace MyGameDll.Abstract
         /// 携带物资
         /// </summary>
         public int Material = 0;
+
+        /// <summary>
+        /// 是否部署
+        /// </summary>
+        public bool isDeploy = false;
 
         /// <summary>
         /// 角色类型

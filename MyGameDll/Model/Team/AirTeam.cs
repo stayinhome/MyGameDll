@@ -12,7 +12,7 @@ namespace MyGameDll.Model.Team
         /// <summary>
         /// 是否部署
         /// </summary>
-        public bool IsDevelopment = false;
+        public bool IsDeploy = false;
 
 
         public override void DoInit(TeamData teamData)
@@ -27,7 +27,7 @@ namespace MyGameDll.Model.Team
         protected override int CalView()
         {
             int view = base.CalView();
-            if (IsDevelopment)
+            if (IsDeploy)
             {
                 view += 4;
             }

@@ -16,6 +16,8 @@ namespace MyGameDll
 
         public  GameObject _CurSelectNode;
 
+        public static OperationType CurOperation = OperationType.GamePanleControl;
+
         public  PanelType _CurPanel = PanelType.GamePanel;
 
         public  List<GameObject> listNode = new List<GameObject>();

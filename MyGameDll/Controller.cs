@@ -5,6 +5,7 @@ using MyGameDll;
 using System;
 using MyGameDll.Abstract;
 using MyGameDll.MyEventManager;
+using MyGameDll.Model.Team;
 
 public class Controller : MonoBehaviour
 {
@@ -50,7 +51,7 @@ public class Controller : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if(GlobalObject.CurPanel == PanelType.GamePanel)
+            if (GlobalObject.CurOperation == OperationType.GamePanleControl)
             {
                 GameObject ob = BaseFunc.GetObjectByClick();
                 if (ob != null)
@@ -66,7 +67,7 @@ public class Controller : MonoBehaviour
                                         {
                                             SelectChess = ob;
                                             SelectNode = ob.GetComponent<AbstractTeam>().CurNode;
-
+                                            ShowButtonBySelectTeam(ob);
                                             break;
                                         }
                                     case "Enemy":
@@ -76,7 +77,6 @@ public class Controller : MonoBehaviour
                                                 GameObject EnemyCurNode = ob.GetComponent<AbstractTeam>().CurNode;
                                                 SelectNode = EnemyCurNode;
                                                 SelectChess.GetComponent<AbstractTeam>().DoMoveTo(SelectNode);
-                                                //BaseFunc.TeamMoveToNode(SelectChess, EnemyCurNode);
 
                                             }
 
@@ -99,14 +99,13 @@ public class Controller : MonoBehaviour
                                             if (HaveSelectChess)
                                             {
                                                 SelectChess.GetComponent<AbstractTeam>().DoMoveTo(SelectNode);
-                                                //BaseFunc.TeamMoveToNode(SelectChess, SelectNode);
 
                                             }
                                             else if (!HaveSelectChess)
                                             {
                                                 if (ob.tag == NodeType.Commander)
                                                 {
-                                                    BaseFunc.ShowButton(ob, ButtonType.Development);
+                                                    BaseFunc.ShowButton(ob, ButtonType.Deploy);
 
                                                 }
 
@@ -129,6 +128,9 @@ public class Controller : MonoBehaviour
                     SelectChess = null;
                     SetButtonState();
                 }
+            }else if(GlobalObject.CurOperation == OperationType.FireSupport)
+            {
+
             }
 
 
@@ -142,20 +144,48 @@ public class Controller : MonoBehaviour
     {
         if(SelectNode == null)
         {
-            BaseFunc.SetButtonStateByEnum(ButtonEnum.Development, false);
+            BaseFunc.SetButtonStateByEnum(ButtonEnum.Deploy, false);
 
         }
         else
         {
             if (SelectNode.tag != NodeType.Commander)
             {
-                BaseFunc.SetButtonStateByEnum(ButtonEnum.Development, false);
+                BaseFunc.SetButtonStateByEnum(ButtonEnum.Deploy, false);
             }
         }
 
 
     }
 
+    private void ShowButtonBySelectTeam(GameObject Team)
+    {
+        AbstractTeam TeamProperty = Team.GetComponent<AbstractTeam>();
+        if(TeamProperty.Camp == CampEnum.Player)
+        {
+            List<string> ButtonList = new List<string>();
+            switch (TeamProperty.TeamType)
+            {
+                case TeamEnum.Artillery:
+                    {
+                        ArtilleryTeam ArtilleryProperty = TeamProperty as ArtilleryTeam;
+                        if (ArtilleryProperty.IsDeploy)
+                        {
+                            ButtonList.Add(ButtonType.DeployArtillery);
+                            ButtonList.Add(ButtonType.FireSupport);
+                        }
+                        else
+                        {
+                            ButtonList.Add(ButtonType.DeployArtillery);
+                        }
+                        break;
+                    }
+            }
 
+
+            BaseFunc.ShowButton(Team, ButtonList);
+        }
+
+    }
 
 }

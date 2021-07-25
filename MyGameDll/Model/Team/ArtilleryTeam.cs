@@ -13,7 +13,9 @@ namespace MyGameDll.Model.Team
         /// <summary>
         /// 是否部署
         /// </summary>
-        public bool IsDevelopment = false;
+        public bool IsDeploy = false;
+
+        public bool DoDeploy = false;
 
 
         public override void DoInit(TeamData teamData)
@@ -27,7 +29,7 @@ namespace MyGameDll.Model.Team
 
         public override bool CanMoveTo(GameObject Node)
         {
-            if (IsDevelopment)
+            if (IsDeploy)
             {
                 return false;
             }
@@ -62,6 +64,16 @@ namespace MyGameDll.Model.Team
         protected override int CalFireSupport()
         {
             return (int)(BaseNumber * PropertyValue.ArtillerySupportCorrection);
+        }
+
+        public override void RefreshMe()
+        {
+            base.RefreshMe();
+            if (DoDeploy)
+            {
+                IsDeploy = true;
+                DoDeploy = false;
+            }
         }
 
     }

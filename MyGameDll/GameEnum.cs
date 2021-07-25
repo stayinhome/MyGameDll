@@ -52,8 +52,6 @@ namespace MyGameDll
 
     }
 
-
-
     public enum BuildEnum
     {
         /// <summary>
@@ -113,47 +111,47 @@ namespace MyGameDll
         /// <summary>
         /// 空节点
         /// </summary>
-        public static string Normol = "Null";
+        public  const string Normol = "Null";
 
         /// <summary>
         /// 指挥所
         /// </summary>
-        public static string Commander = "Commander";
+        public const string Commander = "Commander";
 
         /// <summary>
         /// 重火炮
         /// </summary>
-        public static string HeavyArtillery = "HeavyArtillery";
+        public const string HeavyArtillery = "HeavyArtillery";
 
         /// <summary>
         /// 制高点
         /// </summary>
-        public static string HighPoints = "HighPoints";
+        public const string HighPoints = "HighPoints";
 
         /// <summary>
         /// 无人机集群控制中心
         /// </summary>
-        public static string UAVControlCenter = "UAVControlCenter";
+        public const string UAVControlCenter = "UAVControlCenter";
 
         /// <summary>
         /// 机场
         /// </summary>
-        public static string Airport = "Airport";
+        public const string Airport = "Airport";
 
         /// <summary>
         /// 雷达
         /// </summary>
-        public static string Radar = "Radar";
+        public const string Radar = "Radar";
 
         /// <summary>
         /// 火炮阵地
         /// </summary>
-        public static string ArtilleryPosition = "ArtilleryPosition";
+        public const string ArtilleryPosition = "ArtilleryPosition";
 
         /// <summary>
         /// 地铁
         /// </summary>
-        public static string Metro = "Metro";
+        public const string Metro = "Metro";
 
 
     }
@@ -162,7 +160,7 @@ namespace MyGameDll
     {
         None = 0,
 
-        Development = 1,
+        Deploy = 1,
 
         Building = 2,
 
@@ -170,11 +168,15 @@ namespace MyGameDll
 
     public class ButtonType
     {
-        public static string None = "None";
+        public const string None = "None";
 
-        public static string Development = "Development";
+        public const string Deploy = "Deploy";
 
-        public static string Building = "Building";
+        public const string Building = "Building";
+
+        public const string DeployArtillery = "DeployArtillery";
+
+        public const string FireSupport = "FireSupport";
 
 
     }
@@ -237,5 +239,38 @@ namespace MyGameDll
         Player = 0,
 
         Enemy = 1,
+    }
+
+    public class ResourcesPath
+    {
+        public static readonly string AirSpritePath = "icon/Air";
+
+        public static readonly string RifleSpritePath = "icon/Rifle";
+
+        public static readonly string ArmorSpritePath = "icon/Armor";
+
+        public static readonly string ArtillerySpritePath = "icon/Artillery";
+
+        public static readonly string ManeuverSpritePath = "icon/Maneuver";
+
+        public static readonly string SniperSpritePath = "icon/Sniper";
+
+        public static readonly string EnemySpritePath = "icon/Rifle";
+
+        public static readonly string NoneSpritePath = "icon/None";
+
+    }
+
+    public enum OperationType
+    {
+        Null = 0,
+        
+        GamePanleControl = 4,
+
+        TeamCreat = 1,
+
+        TeamDeploy = 2,
+
+        FireSupport = 3,
     }
 }

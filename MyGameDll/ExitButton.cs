@@ -12,7 +12,7 @@ namespace MyGameDll
 
         public void DoExit()
         {
-            GlobalObject.CurPanel = PanelType.GamePanel;
+            GlobalObject.CurOperation = OperationType.GamePanleControl;
 
             ob.SetActive(false);
         }

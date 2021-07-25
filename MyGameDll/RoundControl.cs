@@ -13,11 +13,15 @@ namespace MyGameDll
 
         public void DoRefresh()
         {
-            Battle();
+            if (GlobalObject.CurOperation == OperationType.GamePanleControl)
+            {
+                Battle();
 
-            RefreshOperation();
+                RefreshOperation();
 
-            CreatEnemy();
+                CreatEnemy();
+            }
+
         }
 
         public void CreatEnemy()
@@ -44,7 +48,7 @@ namespace MyGameDll
                 team.BaseNumber = 2;
                 team.BaseView = 2;
 
-                BaseFunc.CreatTeam(item, team);
+                TeamCreat.CreatTeam(item, team);
             }
             //List<GameObject> list = GameObject.Find("NullNodeLIst").transform.chi;
         }

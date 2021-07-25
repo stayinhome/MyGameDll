@@ -21,6 +21,10 @@ namespace MyGameDll.Abstract
         /// </summary>
         public List<GameObject> NextNode = new List<GameObject>();
 
+        /// <summary>
+        /// 火力支援
+        /// </summary>
+        public List<GameObject> FireSupport = new List<GameObject>();
 
         /// <summary>
         /// 当前存在队伍
