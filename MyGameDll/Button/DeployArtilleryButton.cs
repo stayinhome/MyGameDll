@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyGameDll.Model.Team;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,8 +17,10 @@ namespace MyGameDll.Button
                 if (ob == this.gameObject)
                 {
 
+                    GlobalObject.CurSelectChess.GetComponent<ArtilleryTeam>().DoDeploy = true;
 
-                    this.gameObject.SetActive(false);
+                    BaseFunc.IniButtonState();
+
                 }
 
             }

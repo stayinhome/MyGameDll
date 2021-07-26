@@ -59,30 +59,6 @@ namespace MyGameDll
 
         }
 
-        public static void SetButtonStateByEnum(ButtonEnum ButtonEnum, bool? Active = null, Vector3? Position = null)
-        {
-            string ButtonName = "";
-            switch (ButtonEnum)
-            {
-                case ButtonEnum.Deploy:
-                    {
-                        ButtonName = ButtonType.Deploy;
-                        break;
-                    }
-                case ButtonEnum.Building:
-                    {
-                        ButtonName = ButtonType.Building;
-                        break;
-                    }
-
-            }
-            if(ButtonName != "")
-            {
-                SetButtonStateByName(ButtonName, Active, Position);
-            }
-
-        }
-
         public static void SetButtonStateByName(string ButtonName, bool? Active = null, Vector3? Position = null)
         {
             GameObject ButtonList = GameObject.Find("ButtonList");
@@ -201,6 +177,13 @@ namespace MyGameDll
         {
             Sprite sprite = Resources.Load<Sprite>(SpritePath);
             go.GetComponent<SpriteRenderer>().sprite = sprite;
+        }
+
+        public static void IniButtonState()
+        {
+            BaseFunc.SetButtonStateByName(ButtonType.Deploy, false);
+            BaseFunc.SetButtonStateByName(ButtonType.DeployArtillery, false);
+            BaseFunc.SetButtonStateByName(ButtonType.FireSupport, false);
         }
     }
 }

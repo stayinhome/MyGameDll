@@ -20,6 +20,7 @@ public class Controller : MonoBehaviour
             EvenData evenData = new EvenData();
             evenData.gameObject = value;
             MEventManager.Instance.DispatchEvent(MyEventType.SelectNodeChange,gameObject, evenData);
+            BaseFunc.IniButtonState();
         }
     }
 
@@ -33,6 +34,7 @@ public class Controller : MonoBehaviour
             EvenData evenData = new EvenData();
             evenData.gameObject = value;
             MEventManager.Instance.DispatchEvent(MyEventType.SelectChessChange, gameObject, evenData);
+            BaseFunc.IniButtonState();
         }
     }
 
@@ -118,15 +120,11 @@ public class Controller : MonoBehaviour
 
                     }
 
-
-                    SetButtonState();
-
                 }
                 else
                 {
                     SelectNode = null;
                     SelectChess = null;
-                    SetButtonState();
                 }
             }else if(GlobalObject.CurOperation == OperationType.FireSupport)
             {
@@ -140,23 +138,24 @@ public class Controller : MonoBehaviour
     }
 
 
-    private void SetButtonState()
-    {
-        if(SelectNode == null)
-        {
-            BaseFunc.SetButtonStateByEnum(ButtonEnum.Deploy, false);
+    //private void SetButtonState()
+    //{
+    //    if(SelectNode == null)
+    //    {
+    //        BaseFunc.SetButtonStateByName(ButtonType.Deploy, false);
+    //        BaseFunc.SetButtonStateByName(ButtonType.DeployArtillery, false);
+    //        BaseFunc.SetButtonStateByName(ButtonType.FireSupport, false);
+    //    }
+    //    else
+    //    {
+    //        if (SelectNode.tag != NodeType.Commander)
+    //        {
+    //            BaseFunc.SetButtonStateByName(ButtonType.Deploy, false);
+    //        }
+    //    }
 
-        }
-        else
-        {
-            if (SelectNode.tag != NodeType.Commander)
-            {
-                BaseFunc.SetButtonStateByEnum(ButtonEnum.Deploy, false);
-            }
-        }
 
-
-    }
+    //}
 
     private void ShowButtonBySelectTeam(GameObject Team)
     {
@@ -168,7 +167,7 @@ public class Controller : MonoBehaviour
             {
                 case TeamEnum.Artillery:
                     {
-                        ArtilleryTeam ArtilleryProperty = TeamProperty as ArtilleryTeam;
+                        ArtilleryTeam ArtilleryProperty = Team.GetComponent<ArtilleryTeam>();
                         if (ArtilleryProperty.IsDeploy)
                         {
                             ButtonList.Add(ButtonType.DeployArtillery);

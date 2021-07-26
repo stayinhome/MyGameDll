@@ -15,7 +15,7 @@ public class DevelopmentButton : MonoBehaviour
                 BaseFunc.SetCanvasButtonStateByName("TeamCanvas", "TeamPanel", true);
                 GlobalObject.CurOperation = OperationType.TeamDeploy;
 
-                this.gameObject.SetActive(false);
+                BaseFunc.IniButtonState();
             }
 
         }
