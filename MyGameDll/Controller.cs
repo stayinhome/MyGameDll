@@ -126,8 +126,17 @@ public class Controller : MonoBehaviour
                     SelectNode = null;
                     SelectChess = null;
                 }
-            }else if(GlobalObject.CurOperation == OperationType.FireSupport)
+            }
+            else if(GlobalObject.CurOperation == OperationType.FireSupport)
             {
+                if (Input.GetMouseButtonDown(0))
+                {
+
+                }
+                else if (Input.GetMouseButtonDown(1))
+                {
+                    GlobalObject.CurOperation = OperationType.GamePanleControl;
+                }
 
             }
 

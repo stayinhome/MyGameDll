@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Button\DeployArtilleryButton.cs" />
+    <Compile Include="Button\FireSupportButton.cs" />
+    <Compile Include="TargetScript.cs" />
     <Compile Include="TeamCreat.cs" />
     <Compile Include="ExitButton.cs" />
     <Compile Include="GlobalObject.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyGameDll.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,12 +44,31 @@ namespace MyGameDll.Model.Team
                 _MaxSupportRang = value;
             }
         }
-        
 
+        private GameObject _SupportNode = null;
         /// <summary>
         /// 支援地点
         /// </summary>
-        public GameObject SupportNode = null;
+        public GameObject SupportNode
+        {
+
+            get
+            {
+                return _SupportNode;
+            }
+
+            set
+            {
+                _SupportNode?.GetComponent<AbstractNode>().FireSupport.Remove(this.gameObject);
+
+                _SupportNode = value;
+
+                _SupportNode?.GetComponent<AbstractNode>().FireSupport.Add(this.gameObject);
+
+
+            }
+
+        }
 
         /// <summary>
         /// 计算最大可支援范围

@@ -1,5 +1,6 @@
 ﻿using MyGameDll.Abstract;
 using MyGameDll.Model.Dto;
+using MyGameDll.Model.Team;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,7 +67,7 @@ namespace MyGameDll
                 int AttackCount = 0;
                 int DefentCount = 0;
                 TeamList CurTeam = Node.GetComponent<AbstractNode>().CurTeam;
-
+                List<GameObject> FireSupport = Node.GetComponent<AbstractNode>().FireSupport;
                 if (GlobalObject.RoundType == RoundTypeEnum.Player)
                 {
                     foreach(GameObject Team in CurTeam)
@@ -79,8 +80,21 @@ namespace MyGameDll
                         {
                             DefentCount += Team.GetComponent<AbstractTeam>().Defent;
                         }
+
                     }
-                    if(AttackCount > DefentCount)
+                    foreach (GameObject Team in FireSupport)
+                    {
+                        if (Team.GetComponent<AbstractTeam>().Camp == CampEnum.Player)
+                        {
+                            AttackCount += Team.GetComponent<SupportTeam>().FireSupport;
+                        }
+                        else if (Team.GetComponent<AbstractTeam>().Camp == CampEnum.Enemy)
+                        {
+                            DefentCount += Team.GetComponent<SupportTeam>().FireSupport;
+                        }
+                    }
+
+                    if (AttackCount > DefentCount)
                     {
                         Golist.AddRange(CurTeam.Remove(CampEnum.Enemy));
                     }
@@ -103,6 +117,19 @@ namespace MyGameDll
                             AttackCount += Team.GetComponent<AbstractTeam>().Attack;
                         }
                     }
+
+                    foreach (GameObject Team in FireSupport)
+                    {
+                        if (Team.GetComponent<AbstractTeam>().Camp == CampEnum.Player)
+                        {
+                            AttackCount += Team.GetComponent<SupportTeam>().FireSupport;
+                        }
+                        else if (Team.GetComponent<AbstractTeam>().Camp == CampEnum.Enemy)
+                        {
+                            DefentCount += Team.GetComponent<SupportTeam>().FireSupport;
+                        }
+                    }
+
                     if (AttackCount > DefentCount)
                     {
                         Golist.AddRange(CurTeam.Remove(CampEnum.Player));

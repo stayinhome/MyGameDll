@@ -14,7 +14,7 @@ namespace MyGameDll
 
         void Update()
         {
-            if (Input.GetMouseButton(0) && GlobalObject.CurOperation == OperationType.GamePanleControl)
+            if (Input.GetMouseButton(0) && (GlobalObject.CurOperation == OperationType.GamePanleControl || GlobalObject.CurOperation == OperationType.FireSupport))
             {
                 transform.Translate(Vector3.left * Input.GetAxis("Mouse X") * Speed);
                 transform.Translate(Vector3.up * Input.GetAxis("Mouse Y") * -Speed);
