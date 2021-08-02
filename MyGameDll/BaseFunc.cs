@@ -27,7 +27,7 @@ namespace MyGameDll
 
             for(int i = 0;i< ButtonNames.Count;i++)
             {
-                Vector3 NewPosition = new Vector3(go.transform.position.x + 1, go.transform.position.y + 1 - 2 * i, go.transform.position.z - 1);
+                Vector3 NewPosition = new Vector3(go.transform.position.x + 1, go.transform.position.y + 1 - i, go.transform.position.z - 1);
                 SetButtonStateByName(ButtonNames[i], true, NewPosition);
             }
 
@@ -38,7 +38,7 @@ namespace MyGameDll
         public static GameObject GetObjectByClick()
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, Vector2.up, 100);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, Vector2.up, 1);
             if (hit.collider != null)
             {
                 GameObject ob = hit.collider.gameObject;
@@ -184,6 +184,71 @@ namespace MyGameDll
             BaseFunc.SetButtonStateByName(ButtonType.Deploy, false);
             BaseFunc.SetButtonStateByName(ButtonType.DeployArtillery, false);
             BaseFunc.SetButtonStateByName(ButtonType.FireSupport, false);
+        }
+
+        public static List<GameObject> GetChilds(GameObject go)
+        {
+            return GetChilds(go.name);
+        }
+
+        public static List<GameObject> GetChilds(string GameObjectName)
+        {
+            List<GameObject> ans = new List<GameObject>();
+            GameObject go = GameObject.Find(GameObjectName);
+            if(go!= null)
+            {
+                foreach(Transform item in go.transform)
+                {
+                    ans.Add(item.gameObject);
+                }
+            }
+
+
+            return ans;
+        }
+
+        /// <summary>
+        /// 获取空结点
+        /// </summary>
+        /// <param name="Number">数量</param>
+        /// <param name="isAll">是否拿满</param>
+        /// <returns></returns>
+        public static HashSet<GameObject> GetNullNodeList(int Number,bool isGetAll)
+        {
+            HashSet<GameObject> ans = new HashSet<GameObject>();
+            int count = GameObject.Find("NullNodeLIst").transform.childCount;
+
+            if (isGetAll)
+            {
+                int i = 0;
+                while (i < Number)
+                {
+                    int index = UnityEngine.Random.Range(0, count);
+                    GameObject go = GameObject.Find("NullNodeLIst").transform.GetChild(index).gameObject;
+                    if (go.GetComponent<AbstractNode>().g_CurTeamCount == 0 && go.GetComponent<AbstractNode>().OtherObject == null)
+                    {
+                        ans.Add(go);
+                        i++;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < Number; i++)
+                {
+                    int index = UnityEngine.Random.Range(0, count);
+                    GameObject go = GameObject.Find("NullNodeLIst").transform.GetChild(index).gameObject;
+                    if (go.GetComponent<AbstractNode>().g_CurTeamCount == 0 && go.GetComponent<AbstractNode>().OtherObject == null)
+                    {
+                        ans.Add(go);
+                    }
+
+                }
+            }
+
+
+
+            return ans;
         }
     }
 }

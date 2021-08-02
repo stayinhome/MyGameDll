@@ -10,9 +10,12 @@ namespace MyGameDll
 
     public enum Layer
     {
-        Chess = 7,
 
         Node = 6,
+
+        Chess = 7,
+
+        Other = 8,
 
     }
 
@@ -263,14 +266,15 @@ namespace MyGameDll
 
     public enum OperationType
     {
-        Null = 0,
-        
-        GamePanleControl = 4,
+        Null = 0,        
 
         TeamCreat = 1,
 
         TeamDeploy = 2,
 
         FireSupport = 3,
+
+        GamePanleControl = 4,
+
     }
 }

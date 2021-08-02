@@ -16,7 +16,7 @@ namespace MyGameDll.Model.Team
             base.DoInit(teamData);
             BaseOperater = 2;
             BaseView = 2;
-            MaxSupportRang = 1;
+            MaxSupportRang = 5;
             foreach (GameObject item in teamData.Member)
             {
                 AbstractRole role = item.GetComponent<AbstractRole>();

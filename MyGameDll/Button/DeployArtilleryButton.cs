@@ -17,7 +17,7 @@ namespace MyGameDll.Button
                 if (ob == this.gameObject)
                 {
 
-                    GlobalObject.CurSelectChess.GetComponent<ArtilleryTeam>().DoDeploy = true;
+                    GlobalObject.CurSelectChess.GetComponent<ArtilleryTeam>().DoDeploy = !GlobalObject.CurSelectChess.GetComponent<ArtilleryTeam>().DoDeploy;
 
                     BaseFunc.IniButtonState();
 

@@ -89,6 +89,10 @@ namespace MyGameDll.MyEventManager
         SelectChessChange = 2,
 
         SelectChessOperaterValueChange = 3,
+
+        MaterialCountValueChange = 4,
+
+        OperationChange =5,
     }
 
 }

@@ -117,6 +117,21 @@ public class Controller : MonoBehaviour
                                 }
                                 break;
                             }
+                        case Layer.Other:
+                            {
+                                if (HaveSelectChess)
+                                {
+                                    GameObject CurNode = ob.GetComponent<MaterialScript>().CurNode;
+                                    SelectNode = CurNode;
+                                    if (SelectChess.GetComponent<AbstractTeam>().CanMoveTo(SelectNode))
+                                    {
+                                        SelectChess.GetComponent<AbstractTeam>().DoMoveTo(SelectNode);
+                                        ob.SendMessage("AddMaterial", SelectChess);
+                                    }
+
+                                }
+                                break;
+                            }
 
                     }
 
@@ -126,45 +141,12 @@ public class Controller : MonoBehaviour
                     SelectNode = null;
                     SelectChess = null;
                 }
-            }
-            else if(GlobalObject.CurOperation == OperationType.FireSupport)
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-
-                }
-                else if (Input.GetMouseButtonDown(1))
-                {
-                    GlobalObject.CurOperation = OperationType.GamePanleControl;
-                }
-
-            }
-
-
+            }          
 
         }
 
     }
 
-
-    //private void SetButtonState()
-    //{
-    //    if(SelectNode == null)
-    //    {
-    //        BaseFunc.SetButtonStateByName(ButtonType.Deploy, false);
-    //        BaseFunc.SetButtonStateByName(ButtonType.DeployArtillery, false);
-    //        BaseFunc.SetButtonStateByName(ButtonType.FireSupport, false);
-    //    }
-    //    else
-    //    {
-    //        if (SelectNode.tag != NodeType.Commander)
-    //        {
-    //            BaseFunc.SetButtonStateByName(ButtonType.Deploy, false);
-    //        }
-    //    }
-
-
-    //}
 
     private void ShowButtonBySelectTeam(GameObject Team)
     {
@@ -185,6 +167,15 @@ public class Controller : MonoBehaviour
                         else
                         {
                             ButtonList.Add(ButtonType.DeployArtillery);
+                        }
+                        break;
+                    }
+                case TeamEnum.Rifle:
+                case TeamEnum.Sniper:
+                    {
+                        if (!TeamProperty.CurNode.GetComponent<AbstractNode>().CurTeam.HaveDifferentCamp())
+                        {
+                            ButtonList.Add(ButtonType.FireSupport);
                         }
                         break;
                     }

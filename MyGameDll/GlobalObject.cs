@@ -16,23 +16,44 @@ namespace MyGameDll
 
         public  GameObject _CurSelectNode;
 
-        public static OperationType CurOperation = OperationType.GamePanleControl;
+        public static OperationType g_CurOperation = OperationType.GamePanleControl;
 
-        public  PanelType _CurPanel = PanelType.GamePanel;
+        public static OperationType CurOperation
+        {
+            get { return g_CurOperation; }
 
-        public  List<GameObject> listNode = new List<GameObject>();
+            set
+            {
+                g_CurOperation = value;
+                EvenData evenData = new EvenData();
+                evenData.Value = value;
+                MEventManager.Instance.DispatchEvent(MyEventType.OperationChange, null, evenData);
 
-        public static PanelType CurPanel
+            }
+        }
+        
+
+        public static int _MaterialCount = 20;
+
+        public static int MaterialCount
         {
             get
             {
-                return GameObject.Find("GlobalObject").GetComponent<GlobalObject>()._CurPanel;
+                return _MaterialCount;
             }
+
             set
             {
-                GameObject.Find("GlobalObject").GetComponent<GlobalObject>()._CurPanel = value;
+                _MaterialCount = value;
+                EvenData evenData = new EvenData();
+                evenData.Value = value;
+                MEventManager.Instance.DispatchEvent(MyEventType.MaterialCountValueChange, null, evenData);
             }
         }
+
+
+        public  List<GameObject> listNode = new List<GameObject>();
+
 
         public static GameObject CurSelectChess
         {

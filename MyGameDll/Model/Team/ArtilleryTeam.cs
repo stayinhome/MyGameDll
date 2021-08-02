@@ -23,13 +23,13 @@ namespace MyGameDll.Model.Team
             base.DoInit(teamData);
             BaseOperater = 1;
             BaseView = 2;
-            MinSupportRang = 3;
-            MaxSupportRang = 8;
+            MinSupportRang = 15;
+            MaxSupportRang = 30;
         }
 
         public override bool CanMoveTo(GameObject Node)
         {
-            if (IsDeploy)
+            if (IsDeploy || DoDeploy)
             {
                 return false;
             }
@@ -71,7 +71,7 @@ namespace MyGameDll.Model.Team
             base.RefreshMe();
             if (DoDeploy)
             {
-                IsDeploy = true;
+                IsDeploy = !IsDeploy;
                 DoDeploy = false;
             }
         }

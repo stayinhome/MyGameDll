@@ -191,7 +191,7 @@ namespace MyGameDll
         {
 
             int view = BaseView;
-            if(CurNode.GetComponent<AbstractNode>().NodeType == NodeEnum.HighPoints)
+            if(CurNode != null && CurNode.GetComponent<AbstractNode>().NodeType == NodeEnum.HighPoints)
             {
                 view += PropertyValue.HighPointsAddView;
             }

@@ -9,6 +9,15 @@ namespace MyGameDll.Model.Team
 {
     public class SupportTeam : AbstractTeam
     {
+        /// <summary>
+        /// 火力支援标记对象
+        /// </summary>
+        public GameObject Target = null;
+
+        /// <summary>
+        /// 已行动支援过
+        /// </summary>
+        public bool IsWasSupport = false;
 
         /// <summary>
         /// 支援火力
@@ -82,6 +91,26 @@ namespace MyGameDll.Model.Team
         protected virtual int CalFireSupport()
         {
             return CalAttack();
+        }
+
+        void Start()
+        {
+            Target = gameObject.transform.Find("Target").gameObject;
+        }
+
+        public override void DoMoveTo(GameObject Node)
+        {
+            base.DoMoveTo(Node);
+            if (Target != null && Target.activeSelf)
+            {
+                Target.SetActive(false);
+            }
+        }
+
+        public override void RefreshMe()
+        {
+            base.RefreshMe();
+            IsWasSupport = false;
         }
     }
 }

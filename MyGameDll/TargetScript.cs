@@ -31,6 +31,7 @@ public class TargetScript : MonoBehaviour
                 }
 
             }
+            GlobalObject.CurOperation = OperationType.GamePanleControl;
 
         }
     }

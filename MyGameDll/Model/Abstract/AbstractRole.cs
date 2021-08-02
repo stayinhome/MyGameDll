@@ -37,6 +37,11 @@ namespace MyGameDll.Abstract
         /// </summary>
         public RoleTypeEnum RoleType = RoleTypeEnum.None;
 
+        /// <summary>
+        /// 需要资源
+        /// </summary>
+        public int NeedMat = 0;
+
 
         public virtual SpeakResult Speak(SpeakEnvironment environment)
         {

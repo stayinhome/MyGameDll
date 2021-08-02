@@ -17,16 +17,16 @@ namespace MyGameDll.Model.Team
             base.DoInit(teamData);
             BaseOperater = 2;
             BaseView = 4;
-            MaxSupportRang = 4;
+            MaxSupportRang = 20;
 
 
         }
         protected override int CalView()
         {
             int view = base.CalView();
-            if (CurNode.GetComponent<AbstractNode>().NodeType == NodeEnum.HighPoints)
+            if (CurNode != null && CurNode.GetComponent<AbstractNode>().NodeType == NodeEnum.HighPoints)
             {
-                view += PropertyValue.HighPointsAddView / 2;
+                view += PropertyValue.HighPointsAddView * 2;
             }
 
             return view;

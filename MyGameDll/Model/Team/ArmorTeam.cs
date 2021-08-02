@@ -19,7 +19,7 @@ namespace MyGameDll.Model.Team
 
         protected override int CalDefent()
         {
-            return (int)(base.CalDefent() * PropertyValue.AirDefentCorrection);
+            return (int)(base.CalDefent() * PropertyValue.ArmorDefentCorrection);
         }
 
     }
