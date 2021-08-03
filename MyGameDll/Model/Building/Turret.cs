@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MyGameDll.Model.Building
 {
-    public class Turret : MonoBehaviour, ISupport
+    public class Turret : AbstractBuilding, ISupport
     {
         public GameObject Target { get ; set; }
 

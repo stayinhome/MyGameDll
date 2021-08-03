@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MyGameDll.Model.Building
 {
-    public class Roadblocks : MonoBehaviour
+    public class Roadblocks : AbstractBuilding
     {
         public CampEnum BelongCamp = CampEnum.None;
 

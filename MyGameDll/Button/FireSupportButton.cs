@@ -18,11 +18,11 @@ namespace MyGameDll.Button
                 GameObject ob = BaseFunc.GetObjectByClick();
                 if (ob == this.gameObject)
                 {
-                    ITarget Target = GlobalObject.CurSelectChess?.GetComponent<ITarget>();
-                    if(Target != null)
+                    ISupport Support = GlobalObject.CurSelectChess?.GetComponent<ISupport>();
+                    if(Support != null)
                     {
                         GlobalObject.CurOperation = OperationType.FireSupport;
-                        Target.Target.SetActive(true);
+                        Support.Target.SetActive(true);
                         BaseFunc.IniButtonState();
                     }
 

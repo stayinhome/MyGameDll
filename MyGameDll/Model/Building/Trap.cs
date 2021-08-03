@@ -3,7 +3,7 @@
 
 namespace MyGameDll.Model.Building
 {
-    public class Trap : MonoBehaviour
+    public class Trap : AbstractBuilding
     {
         public CampEnum BelongCamp = CampEnum.None;
 

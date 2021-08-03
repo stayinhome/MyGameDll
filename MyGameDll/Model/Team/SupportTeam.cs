@@ -105,13 +105,18 @@ namespace MyGameDll.Model.Team
             Target = gameObject.transform.Find("Target").gameObject;
         }
 
-        public override void DoMoveTo(GameObject Node)
+
+        public override bool CanMoveTo(GameObject Node)
         {
-            base.DoMoveTo(Node);
-            if (Target != null && Target.activeSelf)
+            bool b = base.CanMoveTo(Node);
+            if (b)
             {
-                Target.SetActive(false);
+                if (Target != null && Target.activeSelf)
+                {
+                    Target.SetActive(false);
+                }
             }
+            return b;
         }
 
         public override void RefreshMe()
