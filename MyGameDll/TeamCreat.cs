@@ -134,7 +134,7 @@ namespace MyGameDll
             RoleTypeEnum roleType = (RoleTypeEnum)RoleType;
 
             GameObject go = new GameObject();
-            go.name = GetRoleName(roleType);
+            go.name = roleType.ToString();
             go.transform.parent = GameObject.Find("Roles").transform;
             go.AddComponent<AbstractRole>();
             AbstractRole role = go.GetComponent<AbstractRole>();
@@ -212,46 +212,6 @@ namespace MyGameDll
 
         }
 
-        private string GetRoleName(RoleTypeEnum roleType)
-        {
-            string name = "Normal";
-            switch (roleType)
-            {
-                case RoleTypeEnum.Air:
-                    {
-                        name = "Air";
-                        break;
-                    }
-                case RoleTypeEnum.Armor:
-                    {
-                        name = "Armor";
-                        break;
-                    }
-                case RoleTypeEnum.Rifle:
-                    {
-                        name = "Rifle";
-                        break;
-                    }
-                case RoleTypeEnum.Artillery:
-                    {
-                        name = "Artillery";
-                        break;
-                    }
-                case RoleTypeEnum.Sniper:
-                    {
-                        name = "Sniper";
-                        break;
-                    }
-                case RoleTypeEnum.Maneuver:
-                    {
-                        name = "Maneuver";
-                        break;
-                    }
-            }
-            return name;
-        }
-
-
         public void SetButton(GameObject go)
         {
             switch (go.name)
@@ -325,63 +285,49 @@ namespace MyGameDll
                 Debug.Log(ex.ToString());
             }
 
-            string TeamType = "";
             switch (team.TeamType)
             {
                 case TeamEnum.Rifle:
                     {
                         TeamProperty = TempTeam.AddComponent<RifleTeam>();
-                        TeamType = "Rifle";
                         break;
                     }
                 case TeamEnum.Artillery:
                     {
                         TeamProperty = TempTeam.AddComponent<ArtilleryTeam>();
-                        TeamType = "Artillery";
-
                         break;
                     }
                 case TeamEnum.Maneuver:
                     {
                         TeamProperty = TempTeam.AddComponent<ManeuverTeam>();
-                        TeamType = "Maneuver";
-
-                        break;
+                     break;
                     }
                 case TeamEnum.Sniper:
                     {
                         TeamProperty = TempTeam.AddComponent<SniperTeam>();
-                        TeamType = "Sniper";
-
                         break;
                     }
                 case TeamEnum.Armor:
                     {
                         TeamProperty = TempTeam.AddComponent<ArmorTeam>();
-                        TeamType = "Armor";
-
                         break;
                     }
                 case TeamEnum.Air:
                     {
                         TeamProperty = TempTeam.AddComponent<AirTeam>();
-                        TeamType = "Air";
-
                         break;
                     }
                 case TeamEnum.None:
                 default:
                     {
                         TeamProperty = TempTeam.AddComponent<NormolTeam>();
-                        TeamType = "None";
-
                         break;
                     }
 
             }
             TeamProperty.DoInit(team);
 
-            txtTeamType.SendMessage("SetUIText", string.Format("TeamType : {0}", TeamType));
+            txtTeamType.SendMessage("SetUIText", string.Format("TeamType : {0}", team.TeamType.ToString()));
             txtAttack.SendMessage("SetUIText", string.Format("Attack : {0}", TeamProperty.Attack));
             txtDefent.SendMessage("SetUIText", string.Format("Defent : {0}", TeamProperty.Defent));
             txtView.SendMessage("SetUIText", string.Format("View : {0}", TeamProperty.View));
@@ -409,7 +355,6 @@ namespace MyGameDll
                         break;
                     }
             }
-            //go.GetComponent<SpriteRenderer>().sprite
 
             switch (TeamData.TeamType)
             {

@@ -60,33 +60,34 @@ namespace MyGameDll
         /// <summary>
         /// 路障
         /// </summary>
-        Roadblocks = 0,
+        Roadblocks ,
 
         /// <summary>
         /// 陷阱
         /// </summary>
-        Trap = 1,
+        Trap ,
 
         /// <summary>
         /// 自动火炮
         /// </summary>
-        Turret = 2,
+        Turret ,
 
         /// <summary>
         /// 据点/仓库
         /// </summary>
-        Warehouse = 3,
+        Warehouse,
 
         /// <summary>
         /// 指挥中继塔
         /// </summary>
-        RelayTower = 4,
+        RelayTower ,
 
         /// <summary>
         /// 红外线定位点
         /// </summary>
-        InfraredPositioning = 5,
+        InfraredPositioning,
     }
+
 
     public enum NodeEnum
     {
@@ -107,56 +108,6 @@ namespace MyGameDll
         ArtilleryPosition = 7,
 
         Metro = 8,
-    }
-
-    public class NodeType
-    {
-        /// <summary>
-        /// 空节点
-        /// </summary>
-        public  const string Normol = "Null";
-
-        /// <summary>
-        /// 指挥所
-        /// </summary>
-        public const string Commander = "Commander";
-
-        /// <summary>
-        /// 重火炮
-        /// </summary>
-        public const string HeavyArtillery = "HeavyArtillery";
-
-        /// <summary>
-        /// 制高点
-        /// </summary>
-        public const string HighPoints = "HighPoints";
-
-        /// <summary>
-        /// 无人机集群控制中心
-        /// </summary>
-        public const string UAVControlCenter = "UAVControlCenter";
-
-        /// <summary>
-        /// 机场
-        /// </summary>
-        public const string Airport = "Airport";
-
-        /// <summary>
-        /// 雷达
-        /// </summary>
-        public const string Radar = "Radar";
-
-        /// <summary>
-        /// 火炮阵地
-        /// </summary>
-        public const string ArtilleryPosition = "ArtilleryPosition";
-
-        /// <summary>
-        /// 地铁
-        /// </summary>
-        public const string Metro = "Metro";
-
-
     }
 
     public enum ButtonEnum

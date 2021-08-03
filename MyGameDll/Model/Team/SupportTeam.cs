@@ -1,4 +1,5 @@
 ﻿using MyGameDll.Abstract;
+using MyGameDll.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,17 +8,17 @@ using UnityEngine;
 
 namespace MyGameDll.Model.Team
 {
-    public class SupportTeam : AbstractTeam
+    public class SupportTeam : AbstractTeam , ISupport
     {
         /// <summary>
-        /// 火力支援标记对象
+        /// 火力支援标记
         /// </summary>
-        public GameObject Target = null;
+        public GameObject Target { get; set; }
 
         /// <summary>
         /// 已行动支援过
         /// </summary>
-        public bool IsWasSupport = false;
+        public bool IsWasSupport { get; set; } = false;
 
         /// <summary>
         /// 支援火力
@@ -34,10 +35,11 @@ namespace MyGameDll.Model.Team
         /// <summary>
         /// 最小可支援范围
         /// </summary>
-        public int MinSupportRang = 0;
+        public int MinSupportRang { get; set; }
 
 
         protected int _MaxSupportRang = 0;
+
         /// <summary>
         /// 最大可支援范围
         /// </summary>
@@ -78,6 +80,11 @@ namespace MyGameDll.Model.Team
             }
 
         }
+
+        /// <summary>
+        /// 所属阵营
+        /// </summary>
+        public CampEnum BelongCamp { get { return Camp; } set { Camp = value; } }
 
         /// <summary>
         /// 计算最大可支援范围

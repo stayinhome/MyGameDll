@@ -12,6 +12,8 @@ namespace MyGameDll
     {
         public static RoundTypeEnum RoundType = RoundTypeEnum.Player;
 
+        public static GameObject CurSelectObject;
+
         public  GameObject _CurSelectChess;
 
         public  GameObject _CurSelectNode;

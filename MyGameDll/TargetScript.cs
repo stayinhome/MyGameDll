@@ -1,4 +1,5 @@
 ﻿using MyGameDll;
+using MyGameDll.Interface;
 using MyGameDll.Model.Team;
 using MyGameDll.MyEventManager;
 using System.Collections;
@@ -22,11 +23,11 @@ public class TargetScript : MonoBehaviour
                 {
                     Node = Node.GetComponent<AbstractTeam>().CurNode;
                 }
-                SupportTeam TeamScr = Team.GetComponent<SupportTeam>();
+                ISupport SupportObject = Team.GetComponent<ISupport>();
                 int Rang = (int)Vector3.Distance(Team.transform.position, Node.transform.position);
-                if(Rang >= TeamScr.MinSupportRang && Rang <= TeamScr.MaxSupportRang)
+                if(Rang >= SupportObject.MinSupportRang && Rang <= SupportObject.MaxSupportRang)
                 {
-                    TeamScr.SupportNode = Node;
+                    SupportObject.SupportNode = Node;
                     this.gameObject.transform.position = Node.transform.position;
                 }
 

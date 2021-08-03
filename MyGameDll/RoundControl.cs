@@ -1,4 +1,5 @@
 ﻿using MyGameDll.Abstract;
+using MyGameDll.Interface;
 using MyGameDll.Model.Dto;
 using MyGameDll.Model.Team;
 using System;
@@ -67,19 +68,19 @@ namespace MyGameDll
 
             List<GameObject> Golist = new List<GameObject>();
 
-            CampEnum CureCamp = CampEnum.None;
-            CampEnum OtherCamp = CampEnum.None;
+            CampEnum PlayerCamp = CampEnum.None;
+            CampEnum EnemyCamp = CampEnum.None;
 
 
             if (RoundType == RoundTypeEnum.Player)
             {
-                CureCamp = CampEnum.Player;
-                OtherCamp = CampEnum.Enemy;
+                PlayerCamp = CampEnum.Player;
+                EnemyCamp = CampEnum.Enemy;
             }
             else if (RoundType == RoundTypeEnum.Enemy)
             {
-                CureCamp = CampEnum.Enemy;
-                OtherCamp = CampEnum.Player;
+                PlayerCamp = CampEnum.Enemy;
+                EnemyCamp = CampEnum.Player;
 
             }
 
@@ -95,11 +96,11 @@ namespace MyGameDll
 
                 foreach (GameObject Team in CurTeam)
                 {
-                    if (Team.GetComponent<AbstractTeam>().Camp == CureCamp)
+                    if (Team.GetComponent<AbstractTeam>().Camp == PlayerCamp)
                     {
                         AttackCount += Team.GetComponent<AbstractTeam>().Attack;
                     }
-                    else if (Team.GetComponent<AbstractTeam>().Camp == OtherCamp)
+                    else if (Team.GetComponent<AbstractTeam>().Camp == EnemyCamp)
                     {
                         DefentCount += Team.GetComponent<AbstractTeam>().Defent;
                     }
@@ -107,14 +108,14 @@ namespace MyGameDll
                 }
                 foreach (GameObject Team in FireSupport)
                 {
-                    SupportTeam supportTeam = Team.GetComponent<SupportTeam>();
+                    ISupport supportTeam = Team.GetComponent<ISupport>();
                     if (supportTeam != null)
                     {
-                        if (supportTeam.Camp == CureCamp)
+                        if (supportTeam.BelongCamp == PlayerCamp)
                         {
                             AttackCount += supportTeam.FireSupport;
                         }
-                        else if (supportTeam.Camp == OtherCamp)
+                        else if (supportTeam.BelongCamp == EnemyCamp)
                         {
                             DefentCount += supportTeam.FireSupport;
                         }
@@ -126,11 +127,11 @@ namespace MyGameDll
 
                 if (AttackCount > DefentCount)
                 {
-                    Golist.AddRange(CurTeam.Remove(OtherCamp));
+                    Golist.AddRange(CurTeam.Remove(EnemyCamp));
                 }
                 else
                 {
-                    Golist.AddRange(CurTeam.Remove(CureCamp));
+                    Golist.AddRange(CurTeam.Remove(PlayerCamp));
                 }
 
 
@@ -142,45 +143,46 @@ namespace MyGameDll
             #endregion
 
             #region 支援战斗
-            DoSupport("SniperTeams", OtherCamp);
-            DoSupport("AirTeams", OtherCamp);
-            DoSupport("ArtilleryTeams", OtherCamp);
+            DoSupport("SniperTeams", EnemyCamp);
+            DoSupport("AirTeams", EnemyCamp);
+            DoSupport("ArtilleryTeams", EnemyCamp);
+            DoSupport("Turrets", EnemyCamp);
             #endregion
 
 
 
         }
 
-        private void DoSupport(string ObjectName, CampEnum OtherCamp)
+        private void DoSupport(string ObjectName, CampEnum EnemyCamp)
         {
             List<GameObject> Golist = new List<GameObject>();
             List<GameObject> SupportTeams = BaseFunc.GetChilds(ObjectName);
-            foreach (GameObject Sniper in SupportTeams)
+            foreach (GameObject SupportObject in SupportTeams)
             {
-                SupportTeam SupportTeam = Sniper.GetComponent<SupportTeam>();
-                if (!SupportTeam.IsWasSupport && SupportTeam.SupportNode != null)
+                ISupport SupportObjectProperty = SupportObject.GetComponent<ISupport>();
+                if (!SupportObjectProperty.IsWasSupport && SupportObjectProperty.SupportNode != null)
                 {
-                    AbstractNode NodeProperty = SupportTeam.SupportNode.GetComponent<AbstractNode>();
+                    AbstractNode NodeProperty = SupportObjectProperty.SupportNode.GetComponent<AbstractNode>();
                     int DefentCount = 0;
                     TeamList CurTeam = NodeProperty.CurTeam;
                     foreach (GameObject Team in CurTeam)
                     {
-                        if (Team.GetComponent<AbstractTeam>().Camp == OtherCamp)
+                        if (Team.GetComponent<AbstractTeam>().Camp == EnemyCamp)
                         {
                             DefentCount += Team.GetComponent<AbstractTeam>().Defent;
                         }
                     }
 
-                    if (SupportTeam.FireSupport > DefentCount)
+                    if (SupportObjectProperty.FireSupport > DefentCount)
                     {
-                        Golist.AddRange(CurTeam.Remove(OtherCamp));
+                        Golist.AddRange(CurTeam.Remove(EnemyCamp));
                     }
                     else
                     {
                         //Golist.AddRange(CurTeam.Remove(CureCamp));
                     }
                 }
-                SupportTeam.IsWasSupport = true;
+                SupportObjectProperty.IsWasSupport = true;
 
             }
             foreach (GameObject go in Golist)

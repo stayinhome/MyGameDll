@@ -9,6 +9,16 @@ using MyGameDll.Model.Team;
 
 public class Controller : MonoBehaviour
 {
+    private GameObject _SelectOeject;
+    public GameObject SelectOeject
+    {
+        get { return _SelectOeject; }
+        set
+        {
+            _SelectOeject = value;
+            GlobalObject.CurSelectObject = value;
+        }
+    }
 
     private GameObject _SelectNode;
     public GameObject SelectNode
@@ -56,6 +66,7 @@ public class Controller : MonoBehaviour
             if (GlobalObject.CurOperation == OperationType.GamePanleControl)
             {
                 GameObject ob = BaseFunc.GetObjectByClick();
+                this.SelectOeject = ob;
                 if (ob != null)
                 {
                     Layer layer = (Layer)ob.layer;
@@ -105,7 +116,7 @@ public class Controller : MonoBehaviour
                                             }
                                             else if (!HaveSelectChess)
                                             {
-                                                if (ob.tag == NodeType.Commander)
+                                                if (ob.tag == NodeEnum.Commander.ToString())
                                                 {
                                                     BaseFunc.ShowButton(ob, ButtonType.Deploy);
 

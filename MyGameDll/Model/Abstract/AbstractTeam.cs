@@ -1,5 +1,6 @@
 ﻿using InformationManagement;
 using MyGameDll.Abstract;
+using MyGameDll.Model.Building;
 using MyGameDll.Model.Dto;
 using MyGameDll.MyEventManager;
 using System.Collections.Generic;
@@ -85,10 +86,7 @@ namespace MyGameDll
 
             set
             {
-                if(BaseOperater == 0)
-                {
-                    BaseOperater = value;
-                }
+
                 _Operater = value;
 
                 EvenData evenData = new EvenData();
@@ -217,6 +215,9 @@ namespace MyGameDll
             gameObject.transform.position = new Vector3(Node.transform.position.x, Node.transform.position.y, gameObject.transform.position.z);
             Node.GetComponent<AbstractNode>().CurTeam.Add(gameObject);
             CurNode = Node;
+
+            AfterMove();
+
         }
 
         public virtual bool CanMoveTo(GameObject Node)
@@ -240,6 +241,32 @@ namespace MyGameDll
 
 
             return true;
+        }
+
+        public virtual void AfterMove()
+        {
+            if(CurNode!= null)
+            {
+                AbstractNode NodeProperty = CurNode.GetComponent<AbstractNode>();
+                if(NodeProperty.OtherObject != null)
+                {
+                    BuildEnum buildEnum = (BuildEnum)System.Enum.Parse(typeof(BuildEnum), NodeProperty.OtherObject.tag);
+                    switch (buildEnum)
+                    {
+                        case BuildEnum.Roadblocks:
+                            {
+                                Roadblocks roadblocks = NodeProperty.OtherObject.GetComponent<Roadblocks>();
+                                if (roadblocks.BelongCamp != Camp)
+                                {
+                                    Operater = 0;
+                                }
+                                break;
+                            }
+                    }
+
+                }
+            }
+
         }
     }
 }

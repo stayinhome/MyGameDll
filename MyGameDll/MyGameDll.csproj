@@ -48,14 +48,18 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.8f1c1\Editor\Data\Managed\UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.8f1c1\Editor\Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\RefrenDll\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Button\DeployArtilleryButton.cs" />
     <Compile Include="Button\FireSupportButton.cs" />
+    <Compile Include="Interface\ISupport.cs" />
     <Compile Include="MaterialScript.cs" />
+    <Compile Include="Model\Building\Roadblocks.cs" />
+    <Compile Include="Model\Building\Trap.cs" />
+    <Compile Include="Model\Building\Turret.cs" />
     <Compile Include="TargetScript.cs" />
     <Compile Include="TeamCreat.cs" />
     <Compile Include="ExitButton.cs" />

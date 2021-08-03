@@ -1,4 +1,5 @@
-﻿using MyGameDll.Model.Team;
+﻿using MyGameDll.Interface;
+using MyGameDll.Model.Team;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,11 @@ namespace MyGameDll.Button
                 GameObject ob = BaseFunc.GetObjectByClick();
                 if (ob == this.gameObject)
                 {
-                    SupportTeam team = GlobalObject.CurSelectChess?.GetComponent<SupportTeam>();
-                    if(team != null&&(team.TeamType != TeamEnum.Maneuver || team.TeamType != TeamEnum.Armor))
+                    ITarget Target = GlobalObject.CurSelectChess?.GetComponent<ITarget>();
+                    if(Target != null)
                     {
                         GlobalObject.CurOperation = OperationType.FireSupport;
-                        team.Target.SetActive(true);
+                        Target.Target.SetActive(true);
                         BaseFunc.IniButtonState();
                     }
 
