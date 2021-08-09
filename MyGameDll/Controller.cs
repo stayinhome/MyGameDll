@@ -130,17 +130,26 @@ public class Controller : MonoBehaviour
                             }
                         case Layer.Other:
                             {
-                                if (HaveSelectChess)
+                                switch (ob.tag)
                                 {
-                                    GameObject CurNode = ob.GetComponent<MaterialScript>().CurNode;
-                                    SelectNode = CurNode;
-                                    if (SelectChess.GetComponent<AbstractTeam>().CanMoveTo(SelectNode))
-                                    {
-                                        SelectChess.GetComponent<AbstractTeam>().DoMoveTo(SelectNode);
-                                        ob.SendMessage("AddMaterial", SelectChess);
-                                    }
-
+                                    case "Turret":
+                                        {
+                                            GlobalObject.CurDoFireSupportObject = ob;
+                                            BaseFunc.ShowButton(ob, ButtonType.FireSupport);
+                                            break;
+                                        }
+                                    case "Material":
+                                        {
+                                            if (HaveSelectChess)
+                                            {
+                                                GameObject CurNode = ob.GetComponent<MaterialScript>().CurNode;
+                                                SelectNode = CurNode;
+                                                SelectChess.GetComponent<AbstractTeam>().DoMoveTo(SelectNode);
+                                            }
+                                            break;
+                                        }
                                 }
+
                                 break;
                             }
 
@@ -172,13 +181,11 @@ public class Controller : MonoBehaviour
                         ArtilleryTeam ArtilleryProperty = Team.GetComponent<ArtilleryTeam>();
                         if (ArtilleryProperty.IsDeploy)
                         {
-                            ButtonList.Add(ButtonType.DeployArtillery);
                             ButtonList.Add(ButtonType.FireSupport);
+                            GlobalObject.CurDoFireSupportObject = Team;
                         }
-                        else
-                        {
-                            ButtonList.Add(ButtonType.DeployArtillery);
-                        }
+                        ButtonList.Add(ButtonType.DeployArtillery);
+
                         break;
                     }
                 case TeamEnum.Rifle:
@@ -187,7 +194,14 @@ public class Controller : MonoBehaviour
                         if (!TeamProperty.CurNode.GetComponent<AbstractNode>().CurTeam.HaveDifferentCamp())
                         {
                             ButtonList.Add(ButtonType.FireSupport);
+                            GlobalObject.CurDoFireSupportObject = Team;
                         }
+                        ButtonList.Add(ButtonType.Building);
+                        break;
+                    }
+                case TeamEnum.Armor:
+                    {
+                        ButtonList.Add(ButtonType.Building);
                         break;
                     }
             }

@@ -14,6 +14,8 @@ namespace MyGameDll
 
         public static GameObject CurSelectObject;
 
+        public static GameObject CurDoFireSupportObject;
+
         public  GameObject _CurSelectChess;
 
         public  GameObject _CurSelectNode;

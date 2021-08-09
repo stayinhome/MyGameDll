@@ -57,35 +57,40 @@ namespace MyGameDll
 
     public enum BuildEnum
     {
-        /// <summary>
-        /// 路障
-        /// </summary>
-        Roadblocks ,
+
+        None = 0,
+
 
         /// <summary>
         /// 陷阱
         /// </summary>
-        Trap ,
+        Trap = 1,
 
         /// <summary>
         /// 自动火炮
         /// </summary>
-        Turret ,
+        Turret = 2,
 
         /// <summary>
         /// 据点/仓库
         /// </summary>
-        Warehouse,
+        Warehouse = 3,
 
         /// <summary>
         /// 指挥中继塔
         /// </summary>
-        RelayTower ,
+        RelayTower = 4,
 
         /// <summary>
         /// 红外线定位点
         /// </summary>
-        InfraredPositioning,
+        InfraredPositioning = 5,
+
+        /// <summary>
+        /// 路障
+        /// </summary>
+        Roadblock = 6,
+
     }
 
 
@@ -226,6 +231,8 @@ namespace MyGameDll
         FireSupport = 3,
 
         GamePanleControl = 4,
+
+        Building = 5,
 
     }
 }

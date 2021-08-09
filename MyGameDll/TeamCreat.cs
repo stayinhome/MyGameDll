@@ -49,6 +49,8 @@ namespace MyGameDll
 
             GlobalObject.MaterialCount -= NeedMat;
             this.team.Camp = CampEnum.Player;
+            this.team.Material = NeedMat;
+
             TeamCreat.CreatTeam(GlobalObject.CurSelectNode, team);
 
         }
@@ -431,10 +433,9 @@ namespace MyGameDll
             go.transform.position = newposition;
             go.GetComponent<AbstractTeam>().CurNode = Node;
             go.GetComponent<AbstractTeam>().TeamType = TeamData.TeamType;
+            go.GetComponent<AbstractTeam>().Material = TeamData.Material;
             go.GetComponent<AbstractTeam>().DoInit(TeamData);
             Node.GetComponent<AbstractNode>().CurTeam.Add(go);
-            Node.GetComponent<AbstractNode>().g_CurTeamCount = Node.GetComponent<AbstractNode>().CurTeam.Count;
-
 
         }
 

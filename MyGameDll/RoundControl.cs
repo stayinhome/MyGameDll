@@ -205,6 +205,18 @@ namespace MyGameDll
                     Debug.Log(e.ToString());
                 }
             }
+            go = GameObject.FindGameObjectWithTag("Turrets");
+            if (go != null)
+            {
+                try
+                {
+                    go.BroadcastMessage("RefreshMe");
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e.ToString());
+                }
+            }
         }
 
         

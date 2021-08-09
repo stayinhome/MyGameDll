@@ -53,6 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildingCreat.cs" />
+    <Compile Include="Button\BuildingButton.cs" />
     <Compile Include="Button\DeployArtilleryButton.cs" />
     <Compile Include="Button\FireSupportButton.cs" />
     <Compile Include="Interface\ISupport.cs" />
@@ -81,7 +83,7 @@
     <Compile Include="PropertyValue.cs" />
     <Compile Include="Model\Team\ArtilleryTeam.cs" />
     <Compile Include="Model\Team\RifleTeam.cs" />
-    <Compile Include="DevelopmentButton.cs" />
+    <Compile Include="Button\DevelopmentButton.cs" />
     <Compile Include="GameEnum.cs" />
     <Compile Include="Model\Dto\TeamData.cs" />
     <Compile Include="MyEventManager\MyEventManager.cs" />

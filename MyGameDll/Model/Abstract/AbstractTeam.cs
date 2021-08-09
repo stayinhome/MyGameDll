@@ -245,27 +245,29 @@ namespace MyGameDll
 
         public virtual void AfterMove()
         {
-            if(CurNode!= null)
-            {
-                AbstractNode NodeProperty = CurNode.GetComponent<AbstractNode>();
-                if(NodeProperty.OtherObject != null)
-                {
-                    BuildEnum buildEnum = (BuildEnum)System.Enum.Parse(typeof(BuildEnum), NodeProperty.OtherObject.tag);
-                    switch (buildEnum)
-                    {
-                        case BuildEnum.Roadblocks:
-                            {
-                                Roadblocks roadblocks = NodeProperty.OtherObject.GetComponent<Roadblocks>();
-                                if (roadblocks.BelongCamp != Camp)
-                                {
-                                    Operater = 0;
-                                }
-                                break;
-                            }
-                    }
+            //if(CurNode!= null)
+            //{
+            //    AbstractNode NodeProperty = CurNode.GetComponent<AbstractNode>();
+            //    if(NodeProperty.OtherObject != null)
+            //    {
+            //        BuildEnum buildEnum = (BuildEnum)System.Enum.Parse(typeof(BuildEnum), NodeProperty.OtherObject.tag);
+            //        switch (buildEnum)
+            //        {
+            //            case BuildEnum.Roadblock:
+            //                {
+            //                    Roadblocks roadblocks = NodeProperty.OtherObject.GetComponent<Roadblocks>();
+            //                    if (roadblocks.Camp != Camp)
+            //                    {
+            //                        Operater = 0;
+            //                        Destroy(NodeProperty.OtherObject);
+            //                        NodeProperty.OtherObject = null;
+            //                    }
+            //                    break;
+            //                }
+            //        }
 
-                }
-            }
+            //    }
+            //}
 
         }
     }

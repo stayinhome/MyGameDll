@@ -18,7 +18,7 @@ namespace MyGameDll.Button
                 GameObject ob = BaseFunc.GetObjectByClick();
                 if (ob == this.gameObject)
                 {
-                    ISupport Support = GlobalObject.CurSelectChess?.GetComponent<ISupport>();
+                    ISupport Support = GlobalObject.CurDoFireSupportObject?.GetComponent<ISupport>();
                     if(Support != null)
                     {
                         GlobalObject.CurOperation = OperationType.FireSupport;

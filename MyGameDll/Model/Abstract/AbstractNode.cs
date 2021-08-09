@@ -36,7 +36,13 @@ namespace MyGameDll.Abstract
         /// </summary>
         public List<GameObject> FireSupport = new List<GameObject>();
 
-        public int g_CurTeamCount = 0;
+        public int CurTeamCount
+        {
+            get
+            {
+                return CurTeam.Count;
+            }
+        }
         /// <summary>
         /// 当前存在队伍
         /// </summary>

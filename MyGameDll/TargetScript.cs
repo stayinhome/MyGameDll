@@ -13,16 +13,12 @@ public class TargetScript : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButtonDown(0) 
-            && GlobalObject.CurSelectChess == Team 
+            && GlobalObject.CurDoFireSupportObject == Team 
             && GlobalObject.CurOperation == OperationType.FireSupport)
         {
-            GameObject Node = BaseFunc.GetObjectByClick();
-            if(Node!=null)
+            GameObject Node = BaseFunc.GetNodeByClick();
+            if (Node!=null)
             {
-                if((Layer)Node.layer == Layer.Chess)
-                {
-                    Node = Node.GetComponent<AbstractTeam>().CurNode;
-                }
                 ISupport SupportObject = Team.GetComponent<ISupport>();
                 int Rang = (int)Vector3.Distance(Team.transform.position, Node.transform.position);
                 if(Rang >= SupportObject.MinSupportRang && Rang <= SupportObject.MaxSupportRang)

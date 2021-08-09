@@ -6,5 +6,8 @@ namespace MyGameDll.Model.Abstract
     {
         public GameObject CurNode = null;
 
+        public CampEnum Camp = CampEnum.None;
+
+
     }
 }

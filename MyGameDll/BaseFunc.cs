@@ -1,4 +1,5 @@
 ﻿using MyGameDll.Abstract;
+using MyGameDll.Model.Abstract;
 using MyGameDll.Model.Dto;
 using MyGameDll.Model.Team;
 using System;
@@ -50,6 +51,41 @@ namespace MyGameDll
             {
                 return null;
             }
+        }
+
+        public static GameObject GetNodeByClick()
+        {
+            GameObject go = GetObjectByClick();
+            if(go != null)
+            {
+                Layer layer = (Layer)go.layer;
+                switch (layer)
+                {
+                    case Layer.Chess:
+                        {
+                            go = go.GetComponent<AbstractTeam>().CurNode;
+                            break;
+                        }
+                    case Layer.Other:
+                        {
+                            if(go.tag == "Material")
+                            {
+                                go = go.GetComponent<MaterialScript>().CurNode;
+
+                            }
+                            else
+                            {
+                                go = go.GetComponent<AbstractBuilding>().CurNode;
+                            }
+                            break;
+                        }
+                }
+
+
+
+            }
+
+            return go;
         }
 
         public static void SetButtonStateByTag(string TagName,bool? Active = null,Vector3? Position = null)
@@ -181,9 +217,16 @@ namespace MyGameDll
 
         public static void IniButtonState()
         {
-            BaseFunc.SetButtonStateByName(ButtonType.Deploy, false);
-            BaseFunc.SetButtonStateByName(ButtonType.DeployArtillery, false);
-            BaseFunc.SetButtonStateByName(ButtonType.FireSupport, false);
+            GameObject ButtonList = GameObject.Find("ButtonList");
+            foreach(Transform item in ButtonList.transform)
+            {
+                item.gameObject.SetActive(false);
+            }
+
+
+            //BaseFunc.SetButtonStateByName(ButtonType.Deploy, false);
+            //BaseFunc.SetButtonStateByName(ButtonType.DeployArtillery, false);
+            //BaseFunc.SetButtonStateByName(ButtonType.FireSupport, false);
         }
 
         public static List<GameObject> GetChilds(GameObject go)
@@ -225,7 +268,7 @@ namespace MyGameDll
                 {
                     int index = UnityEngine.Random.Range(0, count);
                     GameObject go = GameObject.Find("NullNodeLIst").transform.GetChild(index).gameObject;
-                    if (go.GetComponent<AbstractNode>().g_CurTeamCount == 0 && go.GetComponent<AbstractNode>().OtherObject == null)
+                    if (go.GetComponent<AbstractNode>().CurTeamCount == 0 && go.GetComponent<AbstractNode>().OtherObject == null)
                     {
                         ans.Add(go);
                         i++;
@@ -238,7 +281,7 @@ namespace MyGameDll
                 {
                     int index = UnityEngine.Random.Range(0, count);
                     GameObject go = GameObject.Find("NullNodeLIst").transform.GetChild(index).gameObject;
-                    if (go.GetComponent<AbstractNode>().g_CurTeamCount == 0 && go.GetComponent<AbstractNode>().OtherObject == null)
+                    if (go.GetComponent<AbstractNode>().CurTeamCount == 0 && go.GetComponent<AbstractNode>().OtherObject == null)
                     {
                         ans.Add(go);
                     }

@@ -48,7 +48,10 @@ namespace MyGameDll.Model.Dto
         /// </summary>
         public int BaseView = 0;
 
-
+        /// <summary>
+        /// 携带物资
+        /// </summary>
+        public int Material = 0;
 
         /// <summary>
         /// 阵营

@@ -1,5 +1,6 @@
 ﻿using MyGameDll.Abstract;
 using MyGameDll.Interface;
+using MyGameDll.Model.Abstract;
 using UnityEngine;
 
 namespace MyGameDll.Model.Building
@@ -23,7 +24,7 @@ namespace MyGameDll.Model.Building
             }
         }
 
-        private int _MaxSupportRang = 0;
+        private int _MaxSupportRang = 5;
 
         public int MaxSupportRang
         {
@@ -66,7 +67,11 @@ namespace MyGameDll.Model.Building
             }
         }
 
-        public CampEnum BelongCamp { get; set; } = CampEnum.None;
+        public CampEnum BelongCamp
+        {
+            get { return Camp; }
+            set { Camp = value; }
+        }
 
         /// <summary>
         /// 部署需要的资源
@@ -78,6 +83,10 @@ namespace MyGameDll.Model.Building
             Target = gameObject.transform.Find("Target").gameObject;
         }
 
+        public void RefreshMe()
+        {
+            IsWasSupport = false;
+        }
 
     }
 }

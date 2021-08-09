@@ -12,24 +12,12 @@ namespace MyGameDll
 
         public int Material = 0;
 
-        //private void OnCollisionEnter2D(Collision2D collision)
-        //{
-        //    if (collision.gameObject.layer == (int)Layer.Chess)
-        //    {
-        //        if(collision.gameObject.GetComponent<AbstractTeam>().Camp == CampEnum.Player)
-        //        {
-        //            GlobalObject.MaterialCount += Material;
-        //        }
 
-        //        Destroy(gameObject);
-                
-        //    }
-        //}
-        public void AddMaterial(GameObject Go)
+        void OnTriggerStay2D(Collider2D other)
         {
-            if (Go.layer == (int)Layer.Chess)
+            if (other.gameObject.layer == (int)Layer.Chess)
             {
-                if (Go.GetComponent<AbstractTeam>().Camp == CampEnum.Player)
+                if (other.gameObject.GetComponent<AbstractTeam>().Camp == CampEnum.Player)
                 {
                     GlobalObject.MaterialCount += Material;
                 }
@@ -38,6 +26,7 @@ namespace MyGameDll
 
             }
         }
+
 
     }
 }
