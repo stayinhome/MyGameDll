@@ -195,13 +195,16 @@ public class Controller : MonoBehaviour
                         {
                             ButtonList.Add(ButtonType.FireSupport);
                             GlobalObject.CurDoFireSupportObject = Team;
+                            ButtonList.Add(ButtonType.Building);
                         }
-                        ButtonList.Add(ButtonType.Building);
                         break;
                     }
                 case TeamEnum.Armor:
                     {
-                        ButtonList.Add(ButtonType.Building);
+                        if (!TeamProperty.CurNode.GetComponent<AbstractNode>().CurTeam.HaveDifferentCamp())
+                        {
+                            ButtonList.Add(ButtonType.Building);
+                        }
                         break;
                     }
             }

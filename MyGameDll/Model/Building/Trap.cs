@@ -10,10 +10,6 @@ namespace MyGameDll.Model.Building
 
         public int Damage = 4;
 
-        /// <summary>
-        /// 部署需要的资源
-        /// </summary>
-        public int NeedMaterial = 0;
 
         void OnTriggerStay2D(Collider2D other)
         {

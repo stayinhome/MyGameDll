@@ -37,6 +37,13 @@ namespace MyGameDll
 
         }
 
+        void OnDisable()
+        {
+            SelectType = BuildEnum.None;
+            SelectTeam = null;
+            SetSelectType(0);
+        }
+
         public static void CreatBuilding(GameObject Node, BuildEnum buildType,CampEnum Camp)
         {
             if(Node == null || buildType == BuildEnum.None)
@@ -78,5 +85,7 @@ namespace MyGameDll
             Node.GetComponent<AbstractNode>().OtherObject = go;
 
         }
+
+
     }
 }

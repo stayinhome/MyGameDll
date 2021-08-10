@@ -125,15 +125,21 @@ namespace MyGameDll
 
                 }
 
+                double dif = 0;
                 if (AttackCount > DefentCount)
                 {
                     Golist.AddRange(CurTeam.Remove(EnemyCamp));
+                    dif = DefentCount / AttackCount;
                 }
                 else
                 {
                     Golist.AddRange(CurTeam.Remove(PlayerCamp));
+                    dif = AttackCount / DefentCount;
                 }
-
+                foreach(GameObject Team in CurTeam)
+                {
+                    Team.GetComponent<AbstractTeam>().BaseNumber = (int)(Team.GetComponent<AbstractTeam>().BaseNumber * dif);
+                }
 
             }
             foreach(GameObject go in Golist)

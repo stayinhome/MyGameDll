@@ -73,10 +73,6 @@ namespace MyGameDll.Model.Building
             set { Camp = value; }
         }
 
-        /// <summary>
-        /// 部署需要的资源
-        /// </summary>
-        public int NeedMaterial = 0;
 
         void Start()
         {
