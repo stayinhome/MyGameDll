@@ -200,7 +200,7 @@ namespace MyGameDll
         public void RefreshOperation()
         {
             GameObject go = GameObject.FindGameObjectWithTag("Chess");
-            if (go != null)
+            if (go != null && go.transform.childCount != 0)
             {
                 try
                 {
@@ -211,8 +211,8 @@ namespace MyGameDll
                     Debug.Log(e.ToString());
                 }
             }
-            go = GameObject.FindGameObjectWithTag("Turrets");
-            if (go != null)
+            go = GameObject.Find("Turrets");
+            if (go != null && go.transform.childCount != 0)
             {
                 try
                 {

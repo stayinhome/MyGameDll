@@ -90,7 +90,7 @@ namespace MyGameDll.Abstract
 
             Vector3 NodePosition = this.gameObject.transform.position;
             bool haveTurret = false;
-            if (_OtherObject.tag == "Turret")
+            if (_OtherObject!= null && _OtherObject.tag == "Turret")
             {
                 _OtherObject.transform.position = new Vector3(NodePosition.x, NodePosition.y, _OtherObject.transform.position.z);
                 haveTurret = true;
@@ -168,7 +168,10 @@ namespace MyGameDll.Abstract
                 }
                 else
                 {
-                    anglc = 360 / (CurTeam.Count - 1);
+                    if(CurTeam.Count > 1)
+                    {
+                        anglc = 360 / (CurTeam.Count - 1);
+                    }
                     int i = 0;
                     bool isFirst = true;
                     foreach (GameObject item in TempTeam)

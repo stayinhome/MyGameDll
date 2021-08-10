@@ -41,7 +41,7 @@ namespace MyGameDll
         {
             SelectType = BuildEnum.None;
             SelectTeam = null;
-            SetSelectType(0);
+            //SetSelectType(0);
         }
 
         public static void CreatBuilding(GameObject Node, BuildEnum buildType,CampEnum Camp)

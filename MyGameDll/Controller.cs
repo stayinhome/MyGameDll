@@ -78,10 +78,21 @@ public class Controller : MonoBehaviour
                                 {
                                     case "Chess":
                                         {
-                                            SelectChess = ob;
-                                            SelectNode = ob.GetComponent<AbstractTeam>().CurNode;
-                                            ShowButtonBySelectTeam(ob);
+                                            if (HaveSelectChess)
+                                            {
+                                                GameObject Node = ob.GetComponent<AbstractTeam>().CurNode;
+                                                SelectNode = Node;
+                                                SelectChess.GetComponent<AbstractTeam>().DoMoveTo(SelectNode);
+
+                                            }
+                                            else
+                                            {
+                                                SelectChess = ob;
+                                                SelectNode = ob.GetComponent<AbstractTeam>().CurNode;
+                                                ShowButtonBySelectTeam(ob);
+                                            }
                                             break;
+
                                         }
                                     case "Enemy":
                                         {
