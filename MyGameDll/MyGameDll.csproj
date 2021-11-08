@@ -63,6 +63,7 @@
     <Compile Include="Model\Building\Roadblocks.cs" />
     <Compile Include="Model\Building\Trap.cs" />
     <Compile Include="Model\Building\Turret.cs" />
+    <Compile Include="MoveScript.cs" />
     <Compile Include="TargetScript.cs" />
     <Compile Include="TeamCreat.cs" />
     <Compile Include="ExitButton.cs" />

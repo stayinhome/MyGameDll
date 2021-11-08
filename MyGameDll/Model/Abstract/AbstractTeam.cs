@@ -13,6 +13,7 @@ namespace MyGameDll
 
         public int TeamID = 0;
 
+
         /// <summary>
         /// 类型
         /// </summary>
@@ -212,7 +213,10 @@ namespace MyGameDll
 
             CurNode.GetComponent<AbstractNode>().CurTeam.Remove(gameObject);
             Operater--;
-            gameObject.transform.position = new Vector3(Node.transform.position.x, Node.transform.position.y, gameObject.transform.position.z);
+
+            Vector3 newPosition = new Vector3(Node.transform.position.x, Node.transform.position.y, gameObject.transform.position.z);
+            gameObject.GetComponent<MoveScript>().MoveToTarget(newPosition);
+
             Node.GetComponent<AbstractNode>().CurTeam.Add(gameObject);
             CurNode = Node;
 
@@ -234,6 +238,11 @@ namespace MyGameDll
             }
 
             if (!Node.GetComponent<AbstractNode>().IsNextNode(CurNode))
+            {
+                return false;
+            }
+
+            if (gameObject.GetComponent<MoveScript>().Moveing)
             {
                 return false;
             }

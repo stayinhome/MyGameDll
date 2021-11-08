@@ -74,6 +74,7 @@ namespace MyGameDll.Abstract
         public void AddTeam_Event()
         {
             GameObject.Find("GlobalObject").GetComponent<GlobalObject>().listNode.Add(gameObject);
+
         }
 
         public void RemoveTeam_Event()
@@ -116,7 +117,8 @@ namespace MyGameDll.Abstract
                 int difY = 1;
                 foreach(GameObject item in PlayTeam)
                 {
-                    item.transform.position = new Vector3(NodePosition.x - 1, NodePosition.y + difY, item.transform.position.z);
+                    Vector3 NewPosition = new Vector3(NodePosition.x - 1, NodePosition.y + difY, item.transform.position.z);
+                    item.GetComponent<MoveScript>().MoveToTarget(NewPosition);
                     if (mark)
                     {
                         difY = difY + difY/Math.Abs(difY);
@@ -130,7 +132,8 @@ namespace MyGameDll.Abstract
                 }
                 foreach (GameObject item in EnemyTeam)
                 {
-                    item.transform.position = new Vector3(NodePosition.x + 1, NodePosition.y + difY, item.transform.position.z);
+                    Vector3 NewPosition = new Vector3(NodePosition.x + 1, NodePosition.y + difY, item.transform.position.z);
+                    item.GetComponent<MoveScript>().MoveToTarget(NewPosition);
                     if (mark)
                     {
                         difY = difY + difY / Math.Abs(difY);
@@ -162,7 +165,8 @@ namespace MyGameDll.Abstract
                     {
                         float difx = (float)Math.Cos(anglc * i);
                         float dify = (float)Math.Sin(anglc * i);
-                        item.transform.position = new Vector3(NodePosition.x + difx, NodePosition.y + dify, item.transform.position.z);
+                        Vector3 NewPosition = new Vector3(NodePosition.x + difx, NodePosition.y + dify, item.transform.position.z);
+                        item.GetComponent<MoveScript>().MoveToTarget(NewPosition);
                         i++;
                     }
                 }
@@ -180,12 +184,14 @@ namespace MyGameDll.Abstract
                         float dify = (float)Math.Sin(anglc * i);
                         if (isFirst)
                         {
-                            item.transform.position = new Vector3(NodePosition.x , NodePosition.y , item.transform.position.z);
+                            Vector3 NewPosition = new Vector3(NodePosition.x , NodePosition.y , item.transform.position.z);
+                            item.GetComponent<MoveScript>().MoveToTarget(NewPosition);
                             isFirst = false;
                         }
                         else
                         {
-                            item.transform.position = new Vector3(NodePosition.x + difx, NodePosition.y + dify, item.transform.position.z);
+                            Vector3 NewPosition = new Vector3(NodePosition.x + difx, NodePosition.y + dify, item.transform.position.z);
+                            item.GetComponent<MoveScript>().MoveToTarget(NewPosition);
                             i++;
                         }
 

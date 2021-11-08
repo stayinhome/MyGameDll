@@ -6,6 +6,7 @@ using System;
 using MyGameDll.Abstract;
 using MyGameDll.MyEventManager;
 using MyGameDll.Model.Team;
+using MyGameDll.Model.Abstract;
 
 public class Controller : MonoBehaviour
 {
@@ -147,6 +148,16 @@ public class Controller : MonoBehaviour
                                         {
                                             GlobalObject.CurDoFireSupportObject = ob;
                                             BaseFunc.ShowButton(ob, ButtonType.FireSupport);
+                                            break;
+                                        }
+                                    case "Trap":
+                                        {
+                                            if (HaveSelectChess)
+                                            {
+                                                GameObject CurNode = ob.GetComponent<AbstractBuilding>().CurNode;
+                                                SelectNode = CurNode;
+                                                SelectChess.GetComponent<AbstractTeam>().DoMoveTo(SelectNode);
+                                            }
                                             break;
                                         }
                                     case "Material":

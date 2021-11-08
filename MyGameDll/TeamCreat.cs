@@ -412,7 +412,7 @@ namespace MyGameDll
                     {
                         if (TeamData.Camp != CampEnum.Enemy)
                         {
-                            go = Instantiate(layerPrefab, GameObject.Find("Chess").transform, true);
+                            go = Instantiate(layerPrefab, GameObject.Find("NormalTeams").transform, true);
 
                         }
                         else

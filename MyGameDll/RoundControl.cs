@@ -16,15 +16,64 @@ namespace MyGameDll
         {
             if (GlobalObject.CurOperation == OperationType.GamePanleControl)
             {
+
                 Battle(RoundTypeEnum.Player);
 
                 CreatEnemy();
+
+                EnemyMove();
 
                 Battle(RoundTypeEnum.Enemy);
 
                 CreatMaterials();
 
+                RefreshNodeCamp();
+
                 RefreshOperation();
+
+            }
+
+        }
+
+        private void EnemyMove()
+        {
+            foreach (Transform team in GameObject.Find("Enemys").transform)
+            {
+                AbstractTeam Team = team.GetComponent<AbstractTeam>();
+                AbstractNode CurNode = Team.CurNode.GetComponent<AbstractNode>();
+
+                int i = 0;
+                while (Team.Operater > 0 && i <5)
+                {
+                    foreach (GameObject go in CurNode.NextNode)
+                    {
+                        if (Team.CanMoveTo(go))
+                        {
+                            Team.DoMoveTo(go);
+                            break;
+                        }
+                    }
+                    i++;
+                }
+
+
+
+            }
+        }
+
+        public void RefreshNodeCamp()
+        {
+            foreach(Transform TeamType in GameObject.Find("Chess").transform)
+            {
+                foreach(Transform team in TeamType)
+                {
+                    team.GetComponent<AbstractTeam>().CurNode.GetComponent<AbstractNode>().Camp = team.GetComponent<AbstractTeam>().Camp;
+                }
+            }
+
+            foreach (Transform team in GameObject.Find("Enemys").transform)
+            {
+                team.GetComponent<AbstractTeam>().CurNode.GetComponent<AbstractNode>().Camp = team.GetComponent<AbstractTeam>().Camp;
 
             }
 
@@ -64,7 +113,7 @@ namespace MyGameDll
         public void Battle(RoundTypeEnum RoundType)
         {
 
-            List<GameObject> list =  GameObject.Find("GlobalObject").GetComponent<GlobalObject>().listNode;
+            HashSet<GameObject> list =  GameObject.Find("GlobalObject").GetComponent<GlobalObject>().listNode;
 
             List<GameObject> Golist = new List<GameObject>();
 
@@ -87,7 +136,7 @@ namespace MyGameDll
             #region 普通战斗
             while (list.Count>0)
             {
-                GameObject Node = list[0];
+                GameObject Node = list.First();
                 int AttackCount = 0;
                 int DefentCount = 0;
                 TeamList CurTeam = Node.GetComponent<AbstractNode>().CurTeam;
@@ -129,16 +178,16 @@ namespace MyGameDll
                 if (AttackCount > DefentCount)
                 {
                     Golist.AddRange(CurTeam.Remove(EnemyCamp));
-                    dif = DefentCount / AttackCount;
+                    dif = DefentCount / (double)AttackCount;
                 }
                 else
                 {
                     Golist.AddRange(CurTeam.Remove(PlayerCamp));
-                    dif = AttackCount / DefentCount;
+                    dif = AttackCount / (double)DefentCount;
                 }
                 foreach(GameObject Team in CurTeam)
                 {
-                    Team.GetComponent<AbstractTeam>().BaseNumber = (int)(Team.GetComponent<AbstractTeam>().BaseNumber * dif);
+                    Team.GetComponent<AbstractTeam>().BaseNumber = (int)(Team.GetComponent<AbstractTeam>().BaseNumber * (1- dif));
                 }
 
             }
@@ -153,6 +202,7 @@ namespace MyGameDll
             DoSupport("AirTeams", EnemyCamp);
             DoSupport("ArtilleryTeams", EnemyCamp);
             DoSupport("Turrets", EnemyCamp);
+
             #endregion
 
 
@@ -208,7 +258,7 @@ namespace MyGameDll
                 }
                 catch (Exception e)
                 {
-                    Debug.Log(e.ToString());
+                    //Debug.Log(e.ToString());
                 }
             }
             go = GameObject.Find("Turrets");
@@ -220,7 +270,20 @@ namespace MyGameDll
                 }
                 catch (Exception e)
                 {
-                    Debug.Log(e.ToString());
+                    //Debug.Log(e.ToString());
+                }
+            }
+
+            go = GameObject.Find("Enemys");
+            if (go != null && go.transform.childCount != 0)
+            {
+                try
+                {
+                    go.BroadcastMessage("RefreshMe");
+                }
+                catch (Exception e)
+                {
+                    //Debug.Log(e.ToString());
                 }
             }
         }

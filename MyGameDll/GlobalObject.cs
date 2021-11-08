@@ -56,7 +56,7 @@ namespace MyGameDll
         }
 
 
-        public  List<GameObject> listNode = new List<GameObject>();
+        public  HashSet<GameObject> listNode = new HashSet<GameObject>();
 
 
         public static GameObject CurSelectChess

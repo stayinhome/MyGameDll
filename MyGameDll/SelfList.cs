@@ -12,7 +12,7 @@ namespace MyGameDll
     public delegate void RemoveTeam_Event();
     public delegate void TeamCountChange_Event();
 
-    public class TeamList : List<GameObject>
+    public class TeamList : HashSet<GameObject>
     {
         public AddTeam_Event addTeam_Event;
         public RemoveTeam_Event removeTeam_Event;
@@ -73,10 +73,10 @@ namespace MyGameDll
 
             if (Count > 1)
             {
-                GameObject go1 = this[0];
-                for(int i = 1;i<Count; i++)
+                GameObject go1 = this.First();
+                foreach(GameObject go in this)
                 {
-                    if(go1.GetComponent<AbstractTeam>().Camp != this[i].GetComponent<AbstractTeam>().Camp)
+                    if(go1.GetComponent<AbstractTeam>().Camp != go.GetComponent<AbstractTeam>().Camp)
                     {
                         return true;
                     }

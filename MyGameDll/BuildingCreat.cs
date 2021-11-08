@@ -79,9 +79,10 @@ namespace MyGameDll
                     }
             }
 
-            Vector3 newposition = new Vector3(Node.transform.position.x, Node.transform.position.y, -5);
+            Vector3 newposition = new Vector3(Node.transform.position.x, Node.transform.position.y, -4);
             go.transform.position = newposition;
             go.GetComponent<AbstractBuilding>().Camp = Camp;
+            go.GetComponent<AbstractBuilding>().CurNode = Node;
             Node.GetComponent<AbstractNode>().OtherObject = go;
 
         }
