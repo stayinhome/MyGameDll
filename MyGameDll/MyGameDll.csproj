@@ -59,6 +59,7 @@
     <Compile Include="Button\FireSupportButton.cs" />
     <Compile Include="Interface\ISupport.cs" />
     <Compile Include="MaterialScript.cs" />
+    <Compile Include="Model\Abstract\AbstractBuff.cs" />
     <Compile Include="Model\Abstract\AbstractBuilding.cs" />
     <Compile Include="Model\Building\Roadblocks.cs" />
     <Compile Include="Model\Building\Trap.cs" />
