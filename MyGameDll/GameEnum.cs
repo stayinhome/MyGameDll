@@ -93,7 +93,6 @@ namespace MyGameDll
 
     }
 
-
     public enum NodeEnum
     {
         Normol = 0,
@@ -233,6 +232,11 @@ namespace MyGameDll
         GamePanleControl = 4,
 
         Building = 5,
+
+    }
+
+    public enum CardType
+    {
 
     }
 }

@@ -1,8 +1,10 @@
 ﻿using InformationManagement;
 using MyGameDll.Abstract;
+using MyGameDll.Interface;
 using MyGameDll.Model.Building;
 using MyGameDll.Model.Dto;
 using MyGameDll.MyEventManager;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +20,26 @@ namespace MyGameDll
         /// 类型
         /// </summary>
         public TeamEnum TeamType = TeamEnum.None;
+
+        private int _IniBaseNumber = -1;
+
+        public int IniBaseNumber
+        {
+            get
+            {
+                if(_IniBaseNumber == -1)
+                {
+                    int Teamp = 0;
+                    foreach(GameObject go in Member)
+                    {
+                        Teamp += go.GetComponent<AbstractRole>().BaseValue;
+                    }
+                    _IniBaseNumber = Teamp;
+                }
+
+                return _IniBaseNumber;
+            }
+        }
 
 
         private int _BaseNumber = 0;
@@ -139,6 +161,11 @@ namespace MyGameDll
         /// </summary>
         public List<GameObject> Member = new List<GameObject>();
 
+        /// <summary>
+        /// 增减益效果
+        /// </summary>
+        public ArrayList Buffs = new ArrayList();
+
 
         public virtual void RefreshMe()
         {
@@ -170,7 +197,14 @@ namespace MyGameDll
         /// <returns></returns>
         protected virtual int CalAttack()
         {
-            return _BaseNumber;
+
+            int result = _BaseNumber;
+            foreach (var item in Buffs)
+            {
+                ITeamBuff teamBuff = item as ITeamBuff;
+                result = teamBuff.BuffAttack(this.gameObject, result);
+            }
+            return result;
         }
 
         /// <summary>
@@ -179,7 +213,13 @@ namespace MyGameDll
         /// <returns></returns>
         protected virtual int CalDefent()
         {
-            return _BaseNumber;
+            int result = _BaseNumber;
+            foreach (var item in Buffs)
+            {
+                ITeamBuff teamBuff = item as ITeamBuff;
+                result = teamBuff.BuffDefent(this.gameObject, result);
+            }
+            return result;
         }
 
         /// <summary>
@@ -194,6 +234,11 @@ namespace MyGameDll
             {
                 view += PropertyValue.HighPointsAddView;
             }
+            foreach (var item in Buffs)
+            {
+                ITeamBuff teamBuff = item as ITeamBuff;
+                view = teamBuff.BuffView(this.gameObject, view);
+            }
 
             return view;
 
@@ -201,7 +246,15 @@ namespace MyGameDll
 
         protected virtual int CalOperater()
         {
-            return _Operater;
+
+            int result = _Operater;
+            foreach (var item in Buffs)
+            {
+                ITeamBuff teamBuff = item as ITeamBuff;
+                result = teamBuff.BuffOperater(this.gameObject, result);
+            }
+            return result;
+
         }
 
         public virtual void DoMoveTo(GameObject Node)

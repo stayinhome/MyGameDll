@@ -235,6 +235,12 @@ namespace MyGameDll
                     }
                     else
                     {
+                        double dif = 0;
+                        dif = SupportObjectProperty.FireSupport / (double)DefentCount;
+                        foreach (GameObject Team in CurTeam)
+                        {
+                            Team.GetComponent<AbstractTeam>().BaseNumber = (int)(Team.GetComponent<AbstractTeam>().BaseNumber * (1 - dif));
+                        }
                         //Golist.AddRange(CurTeam.Remove(CureCamp));
                     }
                 }

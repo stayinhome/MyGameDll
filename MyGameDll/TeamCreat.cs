@@ -25,6 +25,8 @@ namespace MyGameDll
         public string ButtonText = "";
         public int TeamIndex = 0;
 
+        public bool IsReBulide = false;
+
 
         private Dictionary<int, GameObject> TeamContainer = new Dictionary<int, GameObject>();
         private List<GameObject> SelectRole = new List<GameObject>();
