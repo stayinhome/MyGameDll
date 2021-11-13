@@ -30,6 +30,11 @@ namespace MyGameDll.Model.Abstract
 
     public class TeamBuffCard : AbstractCard ,ITeamBuff
     {
+        public TeamBuffCard()
+        {
+            NeedTarget = true;
+        }
+
 
         public virtual int BuffAttack(GameObject gameObject, int AttackNumber)
         {
