@@ -441,6 +441,9 @@ namespace MyGameDll
 
         }
 
-
+        public void LoadTeam(GameObject Team)
+        {
+            TempTeam = Team;
+        }
     }
 }

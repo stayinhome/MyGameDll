@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuildingCreat.cs" />
+    <Compile Include="TeamBulidng\AddTeamButton.cs" />
+    <Compile Include="TeamBulidng\TeamButton.cs" />
     <Compile Include="Button\BuildingButton.cs" />
     <Compile Include="Button\DeployArtilleryButton.cs" />
     <Compile Include="Button\FireSupportButton.cs" />
@@ -67,7 +69,7 @@
     <Compile Include="Model\Building\Turret.cs" />
     <Compile Include="MoveScript.cs" />
     <Compile Include="TargetScript.cs" />
-    <Compile Include="TeamCreat.cs" />
+    <Compile Include="TeamBulidng\TeamCreat.cs" />
     <Compile Include="ExitButton.cs" />
     <Compile Include="GlobalObject.cs" />
     <Compile Include="MarkScript.cs" />
