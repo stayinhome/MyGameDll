@@ -18,12 +18,28 @@ namespace MyGameDll.Interface
         int BuffAttack(GameObject gameObject, int AttackNumber);
 
         /// <summary>
+        /// 最终伤害影响
+        /// </summary>
+        /// <param name="gameObject"></param>
+        /// <param name="AttackNumber"></param>
+        /// <returns></returns>
+        int BuffFinalAttack(GameObject gameObject, int AttackNumber);
+     
+        /// <summary>
         /// 防御力影响
         /// </summary>
         /// <param name="gameObject"></param>
         /// <param name="DefentNumber"></param>
         /// <returns></returns>
         int BuffDefent(GameObject gameObject, int DefentNumber);
+
+        /// <summary>
+        /// 最终防御力影响
+        /// </summary>
+        /// <param name="gameObject"></param>
+        /// <param name="DefentNumber"></param>
+        /// <returns></returns>
+        int BuffFinalDefent(GameObject gameObject, int DefentNumber);
 
 
         /// <summary>

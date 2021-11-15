@@ -8,12 +8,12 @@ using UnityEngine;
 
 namespace MyGameDll.Model.Abstract
 {
-    public class AbstractCard
+    public class AbstractCard : MonoBehaviour
     {
         /// <summary>
-        /// 生效次数
+        /// 生效次数,-10代表永久
         /// </summary>
-        public int Count = 0;
+        public int Count = -10;
 
         /// <summary>
         /// 使用目标
@@ -24,6 +24,14 @@ namespace MyGameDll.Model.Abstract
         /// 是否需要目标
         /// </summary>
         public bool NeedTarget = false;
+
+        /// <summary>
+        /// 立即生效
+        /// </summary>
+        public virtual void BuffImmediately()
+        {
+
+        }
 
 
     }
@@ -47,6 +55,15 @@ namespace MyGameDll.Model.Abstract
             return DefentNumber;
         }
 
+        public int BuffFinalAttack(GameObject gameObject, int AttackNumber)
+        {
+            return AttackNumber;
+        }
+
+        public int BuffFinalDefent(GameObject gameObject, int DefentNumber)
+        {
+            return DefentNumber;
+        }
 
         public virtual int BuffOperater(GameObject gameObject, int OperaterNumber)
         {
@@ -54,7 +71,7 @@ namespace MyGameDll.Model.Abstract
         }
 
 
-        public int BuffView(GameObject gameObject, int ViewNumber)
+        public virtual int BuffView(GameObject gameObject, int ViewNumber)
         {
             return ViewNumber;
         }

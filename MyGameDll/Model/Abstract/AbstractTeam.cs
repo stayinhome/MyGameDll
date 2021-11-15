@@ -4,6 +4,7 @@ using MyGameDll.Interface;
 using MyGameDll.Model.Building;
 using MyGameDll.Model.Dto;
 using MyGameDll.MyEventManager;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,12 +57,20 @@ namespace MyGameDll
 
             set
             {
-                _BaseNumber = value;
-                if(gameObject != null)
+                if(_BaseNumber <= 0)
                 {
-                    gameObject.BroadcastMessage("RefreshAttack", Attack);
-                    gameObject.BroadcastMessage("RefreshDefent", Defent);
+                    Destroy(gameObject);
                 }
+                else
+                {
+                    _BaseNumber = value;
+                    if (gameObject != null)
+                    {
+                        gameObject.BroadcastMessage("RefreshAttack", Attack);
+                        gameObject.BroadcastMessage("RefreshDefent", Defent);
+                    }
+                }
+
 
             }
         }
@@ -204,6 +213,11 @@ namespace MyGameDll
                 ITeamBuff teamBuff = item as ITeamBuff;
                 result = teamBuff.BuffAttack(this.gameObject, result);
             }
+            foreach (var item in Buffs)
+            {
+                ITeamBuff teamBuff = item as ITeamBuff;
+                result = teamBuff.BuffFinalAttack(this.gameObject, result);
+            }
             return result;
         }
 
@@ -218,6 +232,11 @@ namespace MyGameDll
             {
                 ITeamBuff teamBuff = item as ITeamBuff;
                 result = teamBuff.BuffDefent(this.gameObject, result);
+            }
+            foreach (var item in Buffs)
+            {
+                ITeamBuff teamBuff = item as ITeamBuff;
+                result = teamBuff.BuffFinalDefent(this.gameObject, result);
             }
             return result;
         }
@@ -303,6 +322,26 @@ namespace MyGameDll
 
 
             return true;
+        }
+
+
+        void OnDestroy()
+        {
+            if(CurNode != null)
+            {
+                AbstractNode abstractNode = CurNode.GetComponent<AbstractNode>();
+                if(abstractNode != null)
+                {
+                    try
+                    {
+                        abstractNode.CurTeam.Remove(this.gameObject);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Log("移除对象异常：" + e.ToString());
+                    }
+                }
+            }
         }
 
         public virtual void AfterMove()

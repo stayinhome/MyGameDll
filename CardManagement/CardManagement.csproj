@@ -46,8 +46,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DamageCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TeamBuffType\DoubleDamage.cs" />
+    <Compile Include="TeamBuffType\AddOperationCard.cs" />
+    <Compile Include="TeamBuffType\AddViewCard.cs" />
+    <Compile Include="TeamBuffType\DoubleDamageCard.cs" />
+    <Compile Include="TeamBuffType\DoubleDefentCard.cs" />
+    <Compile Include="TeamBuffType\RecoverCard.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

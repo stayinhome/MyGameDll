@@ -23,6 +23,11 @@ namespace MyGameDll.Abstract
         public int BaseValue { get; set; }
 
         /// <summary>
+        /// 当前数值
+        /// </summary>
+        public int CurrValue { get; set; }
+
+        /// <summary>
         /// 携带物资
         /// </summary>
         public int Material = 0;

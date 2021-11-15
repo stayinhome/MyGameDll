@@ -33,6 +33,8 @@ namespace MyGameDll
         private int NeedMat = 0;
         private TeamData team = new TeamData();
 
+        public List<GameObject> TeamList = new List<GameObject>();
+        public List<GameObject> RoleList = new List<GameObject>();
 
         public void Creat()
         {
@@ -133,16 +135,17 @@ namespace MyGameDll
             return ans;
         }
 
-        public void AddTeam(int RoleType)
+        public void AddRole(int RoleType)
         {
+            #region 应废弃，改为按照角色选择
             RoleTypeEnum roleType = (RoleTypeEnum)RoleType;
 
             GameObject go = new GameObject();
             go.name = roleType.ToString();
             go.transform.parent = GameObject.Find("Roles").transform;
-            go.AddComponent<AbstractRole>();
-            AbstractRole role = go.GetComponent<AbstractRole>();
+            AbstractRole role = go.AddComponent<AbstractRole>();
             role.RoleType = roleType;
+            
             switch (roleType)
             {
                 case RoleTypeEnum.Air:
@@ -198,6 +201,8 @@ namespace MyGameDll
                         break;
                     }
             }
+
+            #endregion
 
             if (this.TeamContainer.ContainsKey(TeamIndex))
             {
@@ -444,6 +449,49 @@ namespace MyGameDll
         public void LoadTeam(GameObject Team)
         {
             TempTeam = Team;
+
+
+
+        }
+
+
+        public void AddTeam()
+        {
+            GameObject ConTent = GameObject.Find("TeamList")?.transform.Find("Content")?.gameObject;
+            if (ConTent != null)
+            {
+                GameObject layerPrefab = Resources.Load("Prefab/TeamButton") as GameObject;
+                GameObject go = Instantiate(layerPrefab, ConTent.transform, true);
+
+                if(go != null)
+                {
+                    TeamButton teamButton = go.GetComponent<TeamButton>();
+                    if(teamButton != null)
+                    {
+                        TeamList.Add(teamButton.TempTeam);
+                    }
+                }
+
+
+            }
+
+
+        }
+
+        public void RemoveTeam()
+        {
+            if(TempTeam != null)
+            {
+                TeamList.Remove(TempTeam);
+
+
+                GameObject go = TempTeam.transform.parent.gameObject;
+                if(go != null)
+                {
+                    Destroy(go);
+                }
+            }
+
         }
     }
 }

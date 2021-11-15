@@ -8,16 +8,7 @@ namespace MyGameDll.TeamBulidng
 {
     public class AddTeamButton: MonoBehaviour
     {
-        public void AddTeam()
-        {
-            GameObject ConTent = GameObject.Find("TeamList")?.transform.Find("Content")?.gameObject;
-            if(ConTent != null)
-            {
 
-            }
-
-
-        }
 
 
     }

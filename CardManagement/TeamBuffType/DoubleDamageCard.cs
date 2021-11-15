@@ -8,9 +8,9 @@ using UnityEngine;
 
 namespace CardManagement.TeamBuffType
 {
-    public class DoubleDamage :TeamBuffCard
+    public class DoubleDamageCard :TeamBuffCard
     {
-        public DoubleDamage()
+        public DoubleDamageCard()
         {
             Count = 3;
         }
