@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGameDll", "MyGameDll\MyGa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardManagement", "CardManagement\CardManagement.csproj", "{AA0C5354-9A26-4403-9262-25D0E7774CE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{1007CAFD-820E-410E-A747-C07DCBCD9A10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseHelper", "DataBaseHelper\DataBaseHelper.csproj", "{1CDEB88F-99D1-4199-A86E-3E978710CBC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{AA0C5354-9A26-4403-9262-25D0E7774CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA0C5354-9A26-4403-9262-25D0E7774CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA0C5354-9A26-4403-9262-25D0E7774CE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1007CAFD-820E-410E-A747-C07DCBCD9A10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1007CAFD-820E-410E-A747-C07DCBCD9A10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1007CAFD-820E-410E-A747-C07DCBCD9A10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1007CAFD-820E-410E-A747-C07DCBCD9A10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CDEB88F-99D1-4199-A86E-3E978710CBC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CDEB88F-99D1-4199-A86E-3E978710CBC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CDEB88F-99D1-4199-A86E-3E978710CBC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CDEB88F-99D1-4199-A86E-3E978710CBC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
