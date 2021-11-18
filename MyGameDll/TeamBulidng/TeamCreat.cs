@@ -221,6 +221,32 @@ namespace MyGameDll
 
         }
 
+        public void AddRole(GameObject Role)
+        {
+            AbstractRole role = Role.GetComponent<AbstractRole>();
+
+            RoleTypeEnum roleType = role.RoleType;
+            role.RoleType = roleType;
+
+            if (this.TeamContainer.ContainsKey(TeamIndex))
+            {
+                //Destroy(this.TeamContainer[TeamIndex]);
+                this.TeamContainer[TeamIndex] = Role;
+            }
+            else
+            {
+                this.TeamContainer.Add(TeamIndex, Role);
+            }
+            if (Button != null)
+            {
+                Button.BroadcastMessage("SetUIText", role.Name);
+            }
+            CalTeamPanel();
+
+        }
+
+
+
         public void SetButton(GameObject go)
         {
             switch (go.name)
@@ -277,7 +303,6 @@ namespace MyGameDll
                 return;
             }
 
-            this.team = new TeamData();
             this.team.Member = SelectRole;
             this.team.TeamType = GetTeamType(SelectRole);
 
@@ -449,7 +474,11 @@ namespace MyGameDll
         public void LoadTeam(GameObject Team)
         {
             TempTeam = Team;
-
+            AbstractTeam abstractTeam = Team.GetComponent<AbstractTeam>();
+            foreach(GameObject go in abstractTeam.Member)
+            {
+                AddRole(go);
+            }
 
 
         }
@@ -465,6 +494,13 @@ namespace MyGameDll
 
                 if(go != null)
                 {
+                    if (TeamList.Count > 0)
+                    {
+                        GameObject Golast = TeamList[TeamList.Count - 1];
+                        Vector3 NewLocaltion = new Vector3(Golast.transform.position.x, Golast.transform.position.y + 10, Golast.transform.position.z);
+                        go.transform.position = NewLocaltion;
+                    }
+
                     TeamButton teamButton = go.GetComponent<TeamButton>();
                     if(teamButton != null)
                     {
@@ -483,7 +519,6 @@ namespace MyGameDll
             if(TempTeam != null)
             {
                 TeamList.Remove(TempTeam);
-
 
                 GameObject go = TempTeam.transform.parent.gameObject;
                 if(go != null)

@@ -50,26 +50,37 @@ namespace DataBaseHelper
 
         public DataTable GetDataTable(string sql)
         {
-            DataTable dataTable = new DataTable();
+            DataTable dataTable = GetDataSet(sql).Tables[0];
+
+            return dataTable;
+
+
+        }
+
+        public DataSet GetDataSet(string sql)
+        {
+            DataSet ds = new DataSet();
+
             try
             {
                 OpenDatabase();
                 SqlCommand cmd = new SqlCommand(sql, this._sqlConnection);
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
                 da.Fill(ds);
-                dataTable = ds.Tables[0];
 
-                CloseDatabase();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
 
             }
+            finally
+            {
+                CloseDatabase();
 
-            return dataTable;
+            }
 
-
+            return ds;
         }
 
 
