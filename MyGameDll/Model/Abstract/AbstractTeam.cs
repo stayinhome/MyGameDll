@@ -16,7 +16,6 @@ namespace MyGameDll
 
         public int TeamID = 0;
 
-
         /// <summary>
         /// 类型
         /// </summary>
@@ -57,13 +56,13 @@ namespace MyGameDll
 
             set
             {
-                if(_BaseNumber <= 0)
+                _BaseNumber = value;
+                if (_BaseNumber <= 0)
                 {
                     Destroy(gameObject);
                 }
                 else
                 {
-                    _BaseNumber = value;
                     if (gameObject != null)
                     {
                         gameObject.BroadcastMessage("RefreshAttack", Attack);

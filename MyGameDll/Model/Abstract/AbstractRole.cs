@@ -15,7 +15,7 @@ namespace MyGameDll.Abstract
         /// <summary>
         /// 名字
         /// </summary>
-        public string Name { get; }
+        public string Name { get; set; } = "Null";
 
         /// <summary>
         /// 基础数值

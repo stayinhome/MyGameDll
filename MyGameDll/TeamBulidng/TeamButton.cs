@@ -9,23 +9,33 @@ namespace MyGameDll
     public class TeamButton : MonoBehaviour
     {
 
-        public GameObject TempTeam = new GameObject();
+        public GameObject TempTeam = null;
 
-        void Start()
+        //void Start()
+        //{
+        //    //try
+        //    //{
+        //    //    AbstractTeam TeamProperty = TempTeam.GetComponent<AbstractTeam>();
+        //    //    if (TeamProperty != null)
+        //    //    {
+        //    //        Destroy(TeamProperty);
+        //    //    }
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    Debug.Log(ex.ToString());
+        //    //}
+        //    //TempTeam.AddComponent<AbstractTeam>();
+
+        //}
+
+        public void LoadTeam()
         {
-            try
+            GameObject TeamPanel = GameObject.Find("TeamCanvas").transform.Find("TeamPanel").gameObject;
+            if(TeamPanel != null)
             {
-                AbstractTeam TeamProperty = TempTeam.GetComponent<AbstractTeam>();
-                if (TeamProperty != null)
-                {
-                    Destroy(TeamProperty);
-                }
+                TeamPanel.SendMessage("LoadTeam", TempTeam);
             }
-            catch (Exception ex)
-            {
-                Debug.Log(ex.ToString());
-            }
-            TempTeam.AddComponent<AbstractTeam>();
 
         }
 

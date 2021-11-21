@@ -22,7 +22,6 @@ namespace MyGameDll
         public GameObject TempTeam = null;
 
         public GameObject Button = null;
-        public string ButtonText = "";
         public int TeamIndex = 0;
 
         public bool IsReBulide = false;
@@ -40,22 +39,35 @@ namespace MyGameDll
         {
             GlobalObject.CurOperation = OperationType.GamePanleControl;
 
-            if (SelectRole.Count <= 0)
+            if (TeamList.Count <= 0)
             {
                 return;
             }
 
-            if(GlobalObject.MaterialCount  < NeedMat)
+            if (!IsReBulide)
             {
-                Debug.Log("No Material");
-                return;
+                if (GlobalObject.MaterialCount < NeedMat)
+                {
+                    Debug.Log("No Material");
+                    return;
+                }
             }
 
-            GlobalObject.MaterialCount -= NeedMat;
-            this.team.Camp = CampEnum.Player;
-            this.team.Material = NeedMat;
 
-            TeamCreat.CreatTeam(GlobalObject.CurSelectNode, team);
+            foreach(GameObject item in TeamList)
+            {
+                AbstractTeam abstractTeam = item.GetComponent<AbstractTeam>();
+
+                TeamData teamData = new TeamData();
+                teamData.Camp = CampEnum.Player;
+                teamData.Material = NeedMat;
+                teamData.Member = abstractTeam.Member;
+                //GlobalObject.MaterialCount -= NeedMat;
+
+
+                TeamCreat.CreatTeam(GlobalObject.CurSelectNode, teamData);
+            }
+
 
         }
 
@@ -153,7 +165,7 @@ namespace MyGameDll
                         role.Material = 0;
                         role.BaseValue = 5;
                         role.NeedMat = 4;
-                        this.ButtonText = "Air";
+                        role.Name = "Air";
                         break;
                     }
                 case RoleTypeEnum.Armor:
@@ -161,7 +173,8 @@ namespace MyGameDll
                         role.Material = 5;
                         role.BaseValue = 2;
                         role.NeedMat = 3;
-                        this.ButtonText = "Armor";
+                        role.Name = "Armor";
+
                         break;
                     }
                 case RoleTypeEnum.Rifle:
@@ -169,7 +182,8 @@ namespace MyGameDll
                         role.Material = 2;
                         role.BaseValue = 2;
                         role.NeedMat = 2;
-                        this.ButtonText = "Rifle";
+                        role.Name = "Rifle";
+
 
                         break;
                     }
@@ -178,7 +192,8 @@ namespace MyGameDll
                         role.Material = 0;
                         role.BaseValue = 4;
                         role.NeedMat = 4;
-                        this.ButtonText = "Artillery";
+                        role.Name = "Artillery";
+
 
                         break;
                     }
@@ -187,7 +202,8 @@ namespace MyGameDll
                         role.Material = 0;
                         role.BaseValue = 3;
                         role.NeedMat = 2;
-                        this.ButtonText = "Sniper";
+                        role.Name = "Sniper";
+
 
                         break;
                     }
@@ -196,7 +212,7 @@ namespace MyGameDll
                         role.Material = 0;
                         role.BaseValue = 3;
                         role.NeedMat = 3;
-                        this.ButtonText = "Maneuver";
+                        role.Name = "Maneuver";
 
                         break;
                     }
@@ -215,37 +231,66 @@ namespace MyGameDll
             }
             if(Button != null)
             {
-                Button.BroadcastMessage("SetUIText", ButtonText);
-            }
-            CalTeamPanel();
-
-        }
-
-        public void AddRole(GameObject Role)
-        {
-            AbstractRole role = Role.GetComponent<AbstractRole>();
-
-            RoleTypeEnum roleType = role.RoleType;
-            role.RoleType = roleType;
-
-            if (this.TeamContainer.ContainsKey(TeamIndex))
-            {
-                //Destroy(this.TeamContainer[TeamIndex]);
-                this.TeamContainer[TeamIndex] = Role;
-            }
-            else
-            {
-                this.TeamContainer.Add(TeamIndex, Role);
-            }
-            if (Button != null)
-            {
                 Button.BroadcastMessage("SetUIText", role.Name);
             }
             CalTeamPanel();
 
         }
 
+        public void AddRole(GameObject Role,int ContainerIndex)
+        {
+            AbstractRole role = Role.GetComponent<AbstractRole>();
+            GameObject Button = GetTeamContainer(ContainerIndex);
+            if (this.TeamContainer.ContainsKey(ContainerIndex))
+            {
+                this.TeamContainer[ContainerIndex] = Role;
+            }
+            else
+            {
+                this.TeamContainer.Add(ContainerIndex, Role);
+            }
+            if (Button != null)
+            {
+                Button.BroadcastMessage("SetUIText", role.Name);
+            }
+        }
 
+        private GameObject GetTeamContainer(int containerIndex)
+        {
+            string containerName = "Container1";
+
+            switch (containerIndex)
+            {
+                case 1:
+                    {
+                        containerName = "Container1";
+                        break;
+                    }
+                case 2:
+                    {
+                        containerName = "Container2";
+                        break;
+                    }
+                case 3:
+                    {
+                        containerName = "Container3";
+                        break;
+                    }
+                case 4:
+                    {
+                        containerName = "Container4";
+                        break;
+                    }
+                case 5:
+                    {
+                        containerName = "Container5";
+                        break;
+                    }
+            }
+            GameObject container = GameObject.Find("TeamCanvas").transform.Find("TeamPanel").Find("TeamContainer").Find(containerName).gameObject;
+            return container;
+
+        }
 
         public void SetButton(GameObject go)
         {
@@ -253,27 +298,27 @@ namespace MyGameDll
             {
                 case "Container1":
                     {
-                        TeamIndex = 1;
+                        this.TeamIndex = 1;
                         break;
                     }
                 case "Container2":
                     {
-                        TeamIndex = 2;
+                        this.TeamIndex = 2;
                         break;
                     }
                 case "Container3":
                     {
-                        TeamIndex = 3;
+                        this.TeamIndex = 3;
                         break;
                     }
                 case "Container4":
                     {
-                        TeamIndex = 4;
+                        this.TeamIndex = 4;
                         break;
                     }
                 case "Container5":
                     {
-                        TeamIndex = 5;
+                        this.TeamIndex = 5;
                         break;
                     }
             }
@@ -283,7 +328,6 @@ namespace MyGameDll
         void OnDisable()
         {
             TeamContainer = new Dictionary<int, GameObject>();
-            ButtonText = "";
             Button = null;
         }
 
@@ -473,20 +517,47 @@ namespace MyGameDll
 
         public void LoadTeam(GameObject Team)
         {
-            TempTeam = Team;
+            IniPanel();
+
+            this.TempTeam = Team;
             AbstractTeam abstractTeam = Team.GetComponent<AbstractTeam>();
-            foreach(GameObject go in abstractTeam.Member)
+            int i = 1;
+            foreach(GameObject Role in abstractTeam.Member)
             {
-                AddRole(go);
+                AddRole(Role,i);
+                i++;
+            }
+            CalTeamPanel();
+        }
+
+        private void IniPanel()
+        {
+            this.TeamContainer = new Dictionary<int, GameObject>();
+            Button = null;
+
+            txtTeamType.SendMessage("SetUIText", string.Format("TeamType : {0}", "null"));
+            txtAttack.SendMessage("SetUIText", string.Format("Attack : {0}", 0));
+            txtDefent.SendMessage("SetUIText", string.Format("Defent : {0}", 0));
+            txtView.SendMessage("SetUIText", string.Format("View : {0}", 0));
+            txtOperater.SendMessage("SetUIText", string.Format("Operater : {0}", 0));
+            txtMaxMat.SendMessage("SetUIText", string.Format("MaxMat : {0}", 0));
+            txtNeedMat.SendMessage("SetUIText", string.Format("NeedMat : {0}", 0));
+
+            for(int i = 1;i<=5; i++)
+            {
+                GameObject Button = GetTeamContainer(i);
+                if (Button != null)
+                {
+                    Button.BroadcastMessage("SetUIText", "Null");
+                }
             }
 
 
         }
 
-
         public void AddTeam()
         {
-            GameObject ConTent = GameObject.Find("TeamList")?.transform.Find("Content")?.gameObject;
+            GameObject ConTent = GameObject.Find("TeamList").transform.Find("Viewport").Find("Content").gameObject;
             if (ConTent != null)
             {
                 GameObject layerPrefab = Resources.Load("Prefab/TeamButton") as GameObject;
@@ -497,7 +568,7 @@ namespace MyGameDll
                     if (TeamList.Count > 0)
                     {
                         GameObject Golast = TeamList[TeamList.Count - 1];
-                        Vector3 NewLocaltion = new Vector3(Golast.transform.position.x, Golast.transform.position.y + 10, Golast.transform.position.z);
+                        Vector3 NewLocaltion = new Vector3(Golast.transform.position.x, Golast.transform.position.y - 40, Golast.transform.position.z);
                         go.transform.position = NewLocaltion;
                     }
 
