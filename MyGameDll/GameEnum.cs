@@ -221,9 +221,9 @@ namespace MyGameDll
 
     public enum OperationType
     {
-        Null = 0,        
+        Null = 0,
 
-        TeamCreat = 1,
+        TeamReBuilding = 1,
 
         TeamDeploy = 2,
 

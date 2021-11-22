@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuildingCreat.cs" />
+    <Compile Include="Button\ReBuildingButton.cs" />
     <Compile Include="TeamBulidng\AddTeamButton.cs" />
     <Compile Include="TeamBulidng\TeamButton.cs" />
     <Compile Include="Button\BuildingButton.cs" />

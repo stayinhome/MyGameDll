@@ -29,7 +29,7 @@ namespace MyGameDll
 
         private Dictionary<int, GameObject> TeamContainer = new Dictionary<int, GameObject>();
         private List<GameObject> SelectRole = new List<GameObject>();
-        private int NeedMat = 0;
+        //private int NeedMat = 0;
         private TeamData team = new TeamData();
 
         public List<GameObject> TeamList = new List<GameObject>();
@@ -43,6 +43,22 @@ namespace MyGameDll
             {
                 return;
             }
+            List<TeamData> listtd = new List<TeamData>();
+            int NeedMat = 0;
+
+            foreach(GameObject item in TeamList)
+            {
+                AbstractTeam abstractTeam = item.GetComponent<AbstractTeam>();
+
+                TeamData teamData = new TeamData();
+                teamData.Camp = CampEnum.Player;
+                teamData.Material = abstractTeam.Material;
+                teamData.Member = abstractTeam.Member;
+                listtd.Add(teamData);
+
+                NeedMat += abstractTeam.Material;
+
+            }
 
             if (!IsReBulide)
             {
@@ -53,21 +69,10 @@ namespace MyGameDll
                 }
             }
 
-
-            foreach(GameObject item in TeamList)
+            foreach(TeamData teamData in listtd)
             {
-                AbstractTeam abstractTeam = item.GetComponent<AbstractTeam>();
-
-                TeamData teamData = new TeamData();
-                teamData.Camp = CampEnum.Player;
-                teamData.Material = NeedMat;
-                teamData.Member = abstractTeam.Member;
-                //GlobalObject.MaterialCount -= NeedMat;
-
-
                 TeamCreat.CreatTeam(GlobalObject.CurSelectNode, teamData);
             }
-
 
         }
 
@@ -335,11 +340,11 @@ namespace MyGameDll
         {
             AbstractTeam TeamProperty = null;
             this.SelectRole = new List<GameObject>();
-            this.NeedMat = 0;
+            int NeedMat = 0;
             foreach (var item in TeamContainer)
             {
                 this.SelectRole.Add(item.Value);
-                this.NeedMat += item.Value.GetComponent<AbstractRole>().NeedMat;
+                NeedMat += item.Value.GetComponent<AbstractRole>().NeedMat;
             }
 
             if (SelectRole.Count <= 0)
@@ -404,7 +409,7 @@ namespace MyGameDll
 
             }
             TeamProperty.DoInit(team);
-
+            TeamProperty.Material = NeedMat;
             txtTeamType.SendMessage("SetUIText", string.Format("TeamType : {0}", team.TeamType.ToString()));
             txtAttack.SendMessage("SetUIText", string.Format("Attack : {0}", TeamProperty.Attack));
             txtDefent.SendMessage("SetUIText", string.Format("Defent : {0}", TeamProperty.Defent));
@@ -596,8 +601,38 @@ namespace MyGameDll
                 {
                     Destroy(go);
                 }
+
+                if(TeamList.Count > 0)
+                {
+                    LoadTeam(TeamList[0]);
+                }
+                else
+                {
+                    IniPanel();
+                }
+
+
             }
 
         }
+
+        public void ReBulide(List<GameObject> NodeTeamList)
+        {
+            IniPanel();
+            IsReBulide = true;
+            foreach (GameObject item in NodeTeamList)
+            {
+                AbstractTeam abstractTeam = item.GetComponent<AbstractTeam>();
+                if(abstractTeam != null)
+                {
+                    foreach(GameObject role in abstractTeam.Member)
+                    {
+                        RoleList.Add(role);
+                    }
+                }
+
+            }
+        }
+
     }
 }
