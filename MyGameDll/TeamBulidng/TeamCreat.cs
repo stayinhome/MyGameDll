@@ -22,12 +22,11 @@ namespace MyGameDll
         public GameObject TempTeam = null;
 
         public GameObject Button = null;
-        public int TeamIndex = 0;
 
         public bool IsReBulide = false;
 
 
-        private Dictionary<int, GameObject> TeamContainer = new Dictionary<int, GameObject>();
+        private Dictionary<GameObject, GameObject> TeamContainer = new Dictionary<int, GameObject>();
         private List<GameObject> SelectRole = new List<GameObject>();
         //private int NeedMat = 0;
         private TeamData team = new TeamData();
@@ -225,14 +224,15 @@ namespace MyGameDll
 
             #endregion
 
-            if (this.TeamContainer.ContainsKey(TeamIndex))
+
+            if (this.TeamContainer.ContainsKey(Button))
             {
-                Destroy(this.TeamContainer[TeamIndex]);
-                this.TeamContainer[TeamIndex] = go;
+                Destroy(this.TeamContainer[Button]);
+                this.TeamContainer[Button] = go;
             }
             else
             {
-                this.TeamContainer.Add(TeamIndex, go);
+                this.TeamContainer.Add(Button, go);
             }
             if(Button != null)
             {
@@ -242,21 +242,31 @@ namespace MyGameDll
 
         }
 
+        public void AddRole(GameObject Role)
+        {
+            AddRole(Role, Button);
+        }
+
         public void AddRole(GameObject Role,int ContainerIndex)
         {
+            GameObject ContainerButton = GetTeamContainer(ContainerIndex);
+            AddRole(Role, ContainerButton);
+        }
+
+        public void AddRole(GameObject Role, GameObject ContainerButton)
+        {
             AbstractRole role = Role.GetComponent<AbstractRole>();
-            GameObject Button = GetTeamContainer(ContainerIndex);
-            if (this.TeamContainer.ContainsKey(ContainerIndex))
+            if (this.TeamContainer.ContainsKey(ContainerButton))
             {
-                this.TeamContainer[ContainerIndex] = Role;
+                this.TeamContainer[ContainerButton] = Role;
             }
             else
             {
-                this.TeamContainer.Add(ContainerIndex, Role);
+                this.TeamContainer.Add(ContainerButton, Role);
             }
-            if (Button != null)
+            if (ContainerButton != null)
             {
-                Button.BroadcastMessage("SetUIText", role.Name);
+                ContainerButton.BroadcastMessage("SetUIText", role.Name);
             }
         }
 
@@ -299,40 +309,12 @@ namespace MyGameDll
 
         public void SetButton(GameObject go)
         {
-            switch (go.name)
-            {
-                case "Container1":
-                    {
-                        this.TeamIndex = 1;
-                        break;
-                    }
-                case "Container2":
-                    {
-                        this.TeamIndex = 2;
-                        break;
-                    }
-                case "Container3":
-                    {
-                        this.TeamIndex = 3;
-                        break;
-                    }
-                case "Container4":
-                    {
-                        this.TeamIndex = 4;
-                        break;
-                    }
-                case "Container5":
-                    {
-                        this.TeamIndex = 5;
-                        break;
-                    }
-            }
             Button = go;
         }
 
         void OnDisable()
         {
-            TeamContainer = new Dictionary<int, GameObject>();
+            TeamContainer = new Dictionary<GameObject, GameObject>();
             Button = null;
         }
 
@@ -537,7 +519,7 @@ namespace MyGameDll
 
         private void IniPanel()
         {
-            this.TeamContainer = new Dictionary<int, GameObject>();
+            this.TeamContainer = new Dictionary<GameObject, GameObject>();
             Button = null;
 
             txtTeamType.SendMessage("SetUIText", string.Format("TeamType : {0}", "null"));
@@ -562,7 +544,7 @@ namespace MyGameDll
 
         public void AddTeam()
         {
-            GameObject ConTent = GameObject.Find("TeamList").transform.Find("Viewport").Find("Content").gameObject;
+            GameObject ConTent = gameObject.transform.Find("TeamList").transform.Find("Viewport").Find("Content").gameObject;
             if (ConTent != null)
             {
                 GameObject layerPrefab = Resources.Load("Prefab/TeamButton") as GameObject;
