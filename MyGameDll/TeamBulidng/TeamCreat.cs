@@ -26,13 +26,13 @@ namespace MyGameDll
         public bool IsReBulide = false;
 
 
-        private Dictionary<GameObject, GameObject> TeamContainer = new Dictionary<int, GameObject>();
+        private Dictionary<GameObject, GameObject> TeamContainer = new Dictionary<GameObject, GameObject>();
         private List<GameObject> SelectRole = new List<GameObject>();
         //private int NeedMat = 0;
         private TeamData team = new TeamData();
 
         public List<GameObject> TeamList = new List<GameObject>();
-        public List<GameObject> RoleList = new List<GameObject>();
+        public HashSet<GameObject> RoleList = new HashSet<GameObject>();
 
         public void Creat()
         {
@@ -53,6 +53,7 @@ namespace MyGameDll
                 teamData.Camp = CampEnum.Player;
                 teamData.Material = abstractTeam.Material;
                 teamData.Member = abstractTeam.Member;
+                teamData.TeamType = GetTeamType(abstractTeam.Member);
                 listtd.Add(teamData);
 
                 NeedMat += abstractTeam.Material;
@@ -227,14 +228,18 @@ namespace MyGameDll
 
             if (this.TeamContainer.ContainsKey(Button))
             {
-                Destroy(this.TeamContainer[Button]);
+                GameObject TempRole = this.TeamContainer[Button];
+                RoleList.Remove(TempRole);
+                Destroy(TempRole);
                 this.TeamContainer[Button] = go;
             }
             else
             {
                 this.TeamContainer.Add(Button, go);
             }
-            if(Button != null)
+            RoleList.Add(go);
+
+            if (Button != null)
             {
                 Button.BroadcastMessage("SetUIText", role.Name);
             }
@@ -264,6 +269,8 @@ namespace MyGameDll
             {
                 this.TeamContainer.Add(ContainerButton, Role);
             }
+            RoleList.Add(Role);
+
             if (ContainerButton != null)
             {
                 ContainerButton.BroadcastMessage("SetUIText", role.Name);
@@ -316,6 +323,9 @@ namespace MyGameDll
         {
             TeamContainer = new Dictionary<GameObject, GameObject>();
             Button = null;
+            TeamList.Clear();
+            ClearTeamButton();
+            AddTeam();
         }
 
         private void CalTeamPanel()
@@ -542,6 +552,19 @@ namespace MyGameDll
 
         }
 
+        private void ClearTeamButton()
+        {
+            GameObject ConTent = gameObject.transform.Find("TeamList").transform.Find("Viewport").Find("Content").gameObject;
+            if(ConTent != null)
+            {
+                foreach(Transform go in ConTent.transform)
+                {
+                    Destroy(go.gameObject);
+                }
+            }
+
+        }
+
         public void AddTeam()
         {
             GameObject ConTent = gameObject.transform.Find("TeamList").transform.Find("Viewport").Find("Content").gameObject;
@@ -557,6 +580,11 @@ namespace MyGameDll
                         GameObject Golast = TeamList[TeamList.Count - 1];
                         Vector3 NewLocaltion = new Vector3(Golast.transform.position.x, Golast.transform.position.y - 40, Golast.transform.position.z);
                         go.transform.position = NewLocaltion;
+                    }
+                    else
+                    {
+                        Vector3 NewLocaltion = new Vector3(0, 0, 0);
+                        go.transform.localPosition = NewLocaltion;
                     }
 
                     TeamButton teamButton = go.GetComponent<TeamButton>();
@@ -614,6 +642,17 @@ namespace MyGameDll
                 }
 
             }
+        }
+
+        public void ShowSelectPanel()
+        {
+            GameObject TeamSelect = GameObject.Find("TeamCanvas").transform.Find("TeamSelect").gameObject;
+            if(TeamSelect != null)
+            {
+                TeamSelect.SendMessage("LoadRoleSet", RoleList);
+
+            }
+
         }
 
     }
