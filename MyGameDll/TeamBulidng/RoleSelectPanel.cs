@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyGameDll.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,22 +9,35 @@ namespace MyGameDll.TeamBulidng
 {
     public class RoleSelectPanel : MonoBehaviour
     {
-        public HashSet<GameObject> RoleSet = new HashSet<GameObject>();
+        public Dictionary<int, GameObject> RoleSet = new Dictionary<int, GameObject>();
+
+        public List<GameObject> ButtonList = new List<GameObject>();
+
 
         void OnEnable()
         {
-            RoleSet = new HashSet<GameObject>();
+            LoadRoleSet();
         }
 
 
-        public void LoadRoleSet(HashSet<GameObject> RoleSet)
+        public void LoadRoleSet()
         {
-            this.RoleSet = RoleSet;
+            RoleSet = new Dictionary<int, GameObject>();
 
-            foreach(GameObject item in RoleSet)
+            GameObject RoleList = GameObject.Find("Roles");
+            foreach (Transform child in RoleList.transform)
             {
-                CreatButton(item);
+                GameObject RoleGo = child.gameObject;
+                AbstractRole RoleProperty = RoleGo.GetComponent<AbstractRole>();
+                if (!RoleProperty.isDeploy)
+                {
+                    RoleSet.Add(RoleProperty.RoleID, RoleGo);
+                    CreatButton(RoleGo);
+                }
+
+
             }
+
 
         }
 
@@ -40,11 +54,21 @@ namespace MyGameDll.TeamBulidng
                     Vector3 NewLocaltion = new Vector3(ConTent.transform.position.x, ConTent.transform.position.y - 40, ConTent.transform.position.z);
                     go.transform.position = NewLocaltion;
                     go.GetComponent<RoleButton>().Role = Role;
-
+                    ButtonList.Add(go);
                 }
 
 
             }
+        }
+
+        private void OnDisable()
+        {
+            foreach(GameObject bt in ButtonList)
+            {
+                bt.GetComponent<RoleButton>().Role = null;
+                Destroy(bt);
+            }
+            ButtonList.Clear();
         }
     }
 }

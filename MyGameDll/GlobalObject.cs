@@ -1,5 +1,6 @@
 ﻿using MyGameDll.Abstract;
 using MyGameDll.MyEventManager;
+using MyGameDll.Roles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,8 @@ namespace MyGameDll
 
             }
         }
-        
+
+        public static Dictionary<int, GameObject> Roles = new Dictionary<int, GameObject>();
 
         public static int _MaterialCount = 20;
 
@@ -87,6 +89,19 @@ namespace MyGameDll
         {
             MEventManager.Instance.AddListener(MyEventType.SelectNodeChange, SelectNode_Change);
             MEventManager.Instance.AddListener(MyEventType.SelectChessChange, SelectChess_Change);
+            LoadRole();
+        }
+
+        private void LoadRole()
+        {
+            GameObject RoleList = GameObject.Find("Roles");
+            foreach(Transform child in RoleList.transform)
+            {
+                GameObject RoleGo = child.gameObject;
+                AbstractRole RoleProperty = RoleGo.GetComponent<AbstractRole>();
+                Roles.Add(RoleProperty.RoleID, RoleGo);
+
+            }
 
         }
 

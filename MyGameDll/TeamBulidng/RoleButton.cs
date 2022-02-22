@@ -8,16 +8,21 @@ namespace MyGameDll.TeamBulidng
 {
     public class RoleButton : MonoBehaviour
     {
-        public GameObject Role = new GameObject();
+        public GameObject Role = null;
 
 
         public void SelectRole()
         {
-            GameObject TeamPanel = GameObject.Find("TeamCanvas").transform.Find("TeamPanel").gameObject;
+            GameObject TeamCanvas = GameObject.Find("TeamCanvas");
+            GameObject TeamPanel = TeamCanvas.transform.Find("TeamPanel").gameObject;
+            GameObject TeamSelect = TeamCanvas.transform.Find("TeamSelect").gameObject;
+
             if (TeamPanel != null)
             {
                 TeamPanel.SendMessage("AddRole", Role);
             }
+            TeamSelect.SetActive(false);
+
         }
 
 
